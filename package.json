@@ -1,0 +1,33 @@
+{
+  "name": "chek",
+  "version": "0.1.0",
+  "description": "Minimal tools for build NodeJS and Web Apps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --opts ./src/mocha.opts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/origin1tech/chek.git"
+  },
+  "keywords": [
+    "Helpers",
+    "Utils",
+    "Lodash",
+    "Underscore"
+  ],
+  "author": "Origin1 Technologies <origin1tech@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/origin1tech/chek/issues"
+  },
+  "homepage": "https://github.com/origin1tech/chek#readme",
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.7",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "typescript": "^2.4.1"
+  }
+}
