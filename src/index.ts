@@ -1,5 +1,6 @@
 
-import { } from './interfaces';
+
+import * as _clone from 'clone';
 const EOL = isNode() ? require('os').EOL : '\n';
 
 declare var v8debug;
@@ -67,9 +68,10 @@ export function isString(obj: any): boolean {
 export function isEmpty(obj: any): boolean {
   return obj === undefined ||
     obj === null ||
+    obj === '' ||
     obj === {} ||
-    keys(obj).length > 0 ||
-    obj === '';
+    isPlainObject(obj) && !keys(obj).length ||
+    isArray(obj) && !obj.length;
 }
 
 /**
@@ -234,9 +236,7 @@ export function isInstance(obj: any, Type: any): boolean {
  * @param value the value to be matched.
  */
 export function isUnique(arr: any[], value: any): boolean {
-
-  return duplicates(arr, value, true) === 0;
-
+  return duplicates(arr, value) === 1;
 }
 
 /**
@@ -352,7 +352,7 @@ export function get(obj: any, key: string | string[]) {
     return obj;
 
   let _clone = clone(obj);
-  let props: string[] = split(key);
+  let props: string[] = isArray(key) ? <string[]>key : split(key);
 
   while (props.length && _clone) {
 
@@ -439,15 +439,13 @@ export function duplicates(arr: any[], value: any, breakable?: boolean): number 
   let dupes = 0;
 
   while (i--) {
-    if (breakable && dupes > 1)
+    if (breakable && dupes > 0)
       break;
     if (isEqual(arr[i], value))
       dupes += 1;
   }
 
-  dupes -= 1;
-
-  return dupes < 0 ? 0 : dupes;
+  return dupes;
 
 }
 
@@ -604,19 +602,12 @@ export function extend<T>(obj: any, ...args: any[]): T {
  * Performs deep cloning of objects.
  *
  * @param obj object to be cloned.
+ * @param json performs quick shallow clone using JSON.
  */
-export function clone<T>(obj: any): T {
-  return <T>extend({}, obj);
-}
-
-/**
- * Shallow Clone
- * Clones object using JSON.
- *
- * @param obj the object to clone.
- */
-export function shallowClone<T>(obj: any): T {
-  return JSON.parse(JSON.stringify(obj));
+export function clone<T>(obj: any, json?: boolean): T {
+  if (json)
+    return JSON.parse(JSON.stringify(obj));
+  return _clone<T>(obj);
 }
 
 // STRING HELPERS
@@ -635,26 +626,19 @@ export function split(str: string | string[], char?: string): string[] {
     return str as string[];
 
   // default characters.
-  let defChars = ['/', '.', ',', '|'];
+  let defChars = ['/', '.', ',', ';', '|'];
   let arr;
 
   // if no char iterate defaults.
-  if (!char) {
-    while (!char && defChars.length) {
-      const tmpChar = defChars.shift();
-      const exp = new RegExp(tmpChar, 'g');
-      if (exp.test(str as string))
-        char = tmpChar;
-    }
+  let i = defChars.length;
+  while (i-- && !char) {
+    const tmpChar = defChars[i];
+    if (str.indexOf(tmpChar) !== -1)
+      char = tmpChar;
   }
 
-  // Set the default arr.
-  let tmp = str as string;
-  arr = [str];
-
-  // If char split.
-  if (char)
-    arr = tmp.split(char);
+  char = char || '.';
+  arr = (str as string).split(char);
 
   // If empty remove first element.
   // this happens when splitting on

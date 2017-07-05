@@ -24,10 +24,16 @@
   "homepage": "https://github.com/origin1tech/chek#readme",
   "devDependencies": {
     "@types/chai": "^4.0.1",
+    "@types/clone": "^0.1.30",
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.7",
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
+    "ts-node": "^3.1.0",
+    "tslint": "^5.4.3",
     "typescript": "^2.4.1"
+  },
+  "dependencies": {
+    "clone": "^2.1.1"
   }
 }
