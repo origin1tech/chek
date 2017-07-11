@@ -436,7 +436,7 @@ describe('Chek', () => {
     assert.equal(ck.toArray(null), null);
     assert.deepEqual(ck.toArray('test'), ['test']);
     assert.deepEqual(ck.toArray(obj), objArr);
-    assert.deepEqual(ck.toArray({ 100: 'one' }), [{ 100: 'one' }]);
+    assert.deepEqual(ck.toArray({ 100: 'one' }), <any[]>[{ 100: 'one' }]);
   });
 
   it('should convert To Boolean.', () => {
@@ -496,12 +496,12 @@ describe('Chek', () => {
 
   it('should convert object To Map.', () => {
     assert.equal(ck.toMap(empty), null);
-    assert.deepEqual(ck.toMap('one'), { 0: 'one' });
-    assert.deepEqual(ck.toMap('one,two'), { 0: 'one', 1: 'two' });
-    assert.deepEqual(ck.toMap([{ key: '123', name: 'Joe' }], 'key'), { '123': { name: 'Joe' } });
-    assert.deepEqual(ck.toMap([{ name: 'Joe' }, { name: 'Amy' }]), { '0': { name: 'Joe' }, '1': { name: 'Amy' } });
+    assert.deepEqual(ck.toMap('one'), <any>{ 0: 'one' });
+    assert.deepEqual(ck.toMap('one,two'), <any>{ 0: 'one', 1: 'two' });
+    assert.deepEqual(ck.toMap([{ key: '123', name: 'Joe' }], 'key'), <any>{ '123': { name: 'Joe' } });
+    assert.deepEqual(ck.toMap([{ name: 'Joe' }, { name: 'Amy' }]), <any>{ '0': { name: 'Joe' }, '1': { name: 'Amy' } });
     assert.deepEqual(ck.toMap({}, {}), {});
-    assert.deepEqual(ck.toMap(['one', 'two']), { 0: 'one', 1: 'two' });
+    assert.deepEqual(ck.toMap(['one', 'two']), <any>{ 0: 'one', 1: 'two' });
   });
 
   it('should convert object to Nested.', () => {
@@ -595,7 +595,9 @@ describe('Chek', () => {
   });
 
   it('should should Cast Type.', () => {
-    //
+    assert.isBoolean(ck.castType('boolean', 1));
+    // assert.isBoolean(ck.castType('array', [0, 1, true]));
+    assert.isBoolean(ck.castType('function', function t() { });
   });
 
 });

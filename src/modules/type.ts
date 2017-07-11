@@ -1,7 +1,8 @@
 
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isRegExp, isDate, isError, isNull, isValue, isFunction, isFloat, isInteger, isNumber } from './is';
-import { toDate, toNumber, toArray, toFloat, toInteger, toBoolean, toString } from './to';
+import { toDate, toNumber, toArray, toFloat, toInteger, toBoolean, toString, toDefault } from './to';
 import { tryWrap } from './try';
+import { push } from './array';
 
 
 
@@ -9,23 +10,26 @@ import { tryWrap } from './try';
  * Cast Type
  * Attempts to cast a type to another type.
  *
- * @param val the value to be cast.
  * @param type the type to cast to.
+ * @param val the value to be cast.
+ * @param def optional default value to return on null.
+ * @param args optional args to pass when casting function.
  */
-export function castType<T>(val: any, type: any): T | T[] {
+export function castType<T>(type: any, val?: any, def?: any, ...args: any[]): T | T[] {
 
   function cast() {
 
     if (!isValue(val))
-      return null;
+      return toDefault(null, def);
 
     if (isArray(type)) {
       return toArray(val)
-        .map((v) => { return <T>castType(v, type[0]); });
+        .map(v => <T>castType(type, val));
     }
 
     else if (isFunction(type)) {
-      return type(val);
+      args = push(args, val).result;
+      return type(...args);
     }
 
     else if (isString(type)) {
@@ -44,8 +48,8 @@ export function castType<T>(val: any, type: any): T | T[] {
 
       if (map)
         return map(val);
-      else
-        throw new Error(`Unknown type could not be cast.`);
+
+      return toDefault(null, def);
 
     }
 
@@ -55,7 +59,7 @@ export function castType<T>(val: any, type: any): T | T[] {
 
   }
 
-  return tryWrap(cast)(val);
+  return tryWrap(cast)(def);
 
 }
 
