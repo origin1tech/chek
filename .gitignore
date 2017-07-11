@@ -59,3 +59,6 @@ typings/
 
 .tmp
 test.js
+temp.js
+test.ts
+temp.ts

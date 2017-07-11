@@ -1,7 +1,9 @@
-docs/
-docs_assets/
 .tmp/
 .vscode/
 src/
 tslint.json
 typedoc.json
+test.js
+temp.js
+test.ts
+temp.ts

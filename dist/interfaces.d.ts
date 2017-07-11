@@ -1,13 +1,10 @@
-
 export interface IMap<T> {
-  [key: string]: T;
+    [key: string]: T;
 }
-
 export interface IMetadata {
-  [key: string]: any;
+    [key: string]: any;
 }
-
 export interface IArrayResult {
-  result: any[];
-  val: any;
+    result: any[];
+    val: any;
 }

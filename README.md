@@ -6,4 +6,4 @@ If that is what's needed it is strongly suggested you use one of the afore menti
 
 ## When to Use
 
-This library is best suited when you are perhaps creating a simple micro service in node and just need a way to perhaps extend some options or check if a variable is an object, plainObject, array etc. Really its purpose is to limit bloat not much more.
+This library is best suited when you are perhaps creating a simple micro service in node and just need a way to to check if a variable is an object, plainObject, array etc. Really its purpose is to limit bloat not much more.

@@ -6,6 +6,9 @@ const should = chai.should;
 const assert = chai.assert;
 
 import * as ck from './';
+import * as moment from 'moment';
+import * as freeze from 'deep-freeze';
+
 
 const testObj = {
   name: 'Bob Smith',
@@ -21,10 +24,36 @@ const extObj = {
   age: 35,
   phone: {
     mobile: '8885551212',
-    // home: '3335551212' note removed above in test.
+    home: '7775551212'
   },
   active: true
 };
+
+const qsObj = {
+  person: {
+    name: 'james',
+    nickname: 'jimmy',
+    langs: ['c', 'java', 'go', 'node']
+  }
+};
+
+const nested = {
+  name: 'Julie',
+  posts: {
+    101: { title: 'How to make an omelette.', category: 'Breakfast' },
+    102: { title: 'How to make corn chowder.', category: 'Lunch' }
+  }
+};
+
+const unnested = {
+  name: 'Julie',
+  'posts.101.title': 'How to make an omelette.',
+  'posts.101.category': 'Breakfast',
+  'posts.102.title': 'How to make corn chowder.',
+  'posts.102.category': 'Lunch',
+};
+
+let empty;
 
 describe('Chek', () => {
 
@@ -32,11 +61,100 @@ describe('Chek', () => {
     done();
   });
 
-  // IS CHEKS
+  // ARRAY CHEKS
 
-  it('should check if is NodeJS', () => {
-    assert.equal(ck.isNode(), true);
+  it('should count the number of Duplicates in array.', () => {
+    assert.equal(ck.duplicates(['Mary', 'Jim', 'John', 'Anthony', 'John'], 'John'), 2);
+    assert.equal(ck.duplicates(['Mary', 'Jim', 'John', 'Anthony', 'John'], 'John', true), 1);
   });
+
+  it('should check if array Contains value.', () => {
+    let arr;
+    assert.equal(ck.contains([1, 2, 3], 3), true);
+    assert.equal(ck.contains([1, 2, 3], 6), false);
+    assert.equal(ck.contains(arr, null), false);
+  });
+
+  it('should check if source array Contains Any value in inspected array.', () => {
+    const arr: any = 'test';
+    assert.equal(ck.containsAny([1, 2, 3], [8, 6, 3]), true);
+    assert.equal(ck.containsAny([1, 2, 3], [8, 6, 5]), false);
+    assert.equal(ck.containsAny([1, 2, 3], arr), false);
+  });
+
+  it('should get array of Keys from object.', () => {
+    let obj;
+    assert.equal(ck.keys(testObj).length, 3);
+    assert.equal(ck.keys(obj).length, 0);
+  });
+
+  it('should Flatten nested array.', () => {
+    assert.deepEqual(ck.flatten([1, 2, [3, 4, [5]]]), [1, 2, 3, 4, 5]);
+  });
+
+  it('should get the First value in array.', () => {
+    assert.equal(ck.first([1, 2, 3]), 1);
+  });
+
+  it('should get the Last value in array.', () => {
+    assert.equal(ck.last([1, 2, 3]), 3);
+  });
+
+  it('should Pop the last value in array.', () => {
+    assert.equal(ck.pop([1, 2, 3]).val, 3);
+  });
+
+  it('should Push value to array.', () => {
+    assert.deepEqual(ck.push([1, 2, 3], 4).result, [1, 2, 3, 4]);
+    assert.deepEqual(ck.push([1, 2, 3], 4, 5, 6).result, [1, 2, 3, 4, 5, 6]);
+  });
+
+  it('should Shift value from array.', () => {
+    const shiftArr = [1, 2, 3];
+    const shiftVal = ck.shift(shiftArr);
+    assert.equal(ck.shift([1, 2, 3]).val, 1);
+    assert.deepEqual(ck.shift([1, 2, 3]).result, [2, 3]);
+  });
+
+  it('should Splice value from array.', () => {
+    assert.deepEqual(ck.splice([1, 2, 3, 4, 5], 1).val, [2, 3, 4, 5]);
+    assert.deepEqual(ck.splice([1, 2, 3, 4, 5], 2, 1).val, [3]);
+    assert.deepEqual(ck.splice([1, 2, 4, 5], 2, 0, 3).result, [1, 2, 3, 4, 5]);
+  });
+
+  it('should Unshift value from array.', () => {
+    assert.equal(ck.unshift([2, 3], 1).val, 3);
+  });
+
+
+  // FROM CHEKS
+
+  it('should get date from Epoch.', () => {
+    const epoch = Date.now();
+    assert.equal(ck.fromEpoch(epoch).getTime(), (new Date(epoch)).getTime());
+    assert.equal(ck.fromEpoch(empty), null);
+  });
+
+  it('should get object from JSON.', () => {
+    const obj = { name: 'CNN', lies: true };
+    const json = JSON.stringify(obj);
+    assert.deepEqual(ck.fromJSON(json), obj);
+  });
+
+  // FUNCTION CHEKS
+
+  it('should return a noop Function.', () => {
+    assert.isFunction(ck.noop);
+  });
+
+  it('should return a noopIf Function.', () => {
+    const myFunc = function () { };
+    assert.equal(ck.noopIf(myFunc), myFunc);
+    assert.equal(ck.noopIf(), ck.noop);
+  });
+
+
+  // IS CHEKS
 
   it('should check if is Array.', () => {
     assert.equal(ck.isArray([]), true);
@@ -46,35 +164,78 @@ describe('Chek', () => {
     assert.equal(ck.isBoolean(false), true);
   });
 
+  it('should check if is Browser.', () => {
+    assert.equal(ck.isBrowser(), false);
+    process.env.BROWSER = 'true';
+    assert.equal(ck.isBrowser('BROWSER'), true);
+    delete process.env.BROWSER;
+  });
+
   it('should check if is Date', () => {
+
+    // Standard date.
     assert.equal(ck.isDate(new Date()), true);
+
+    // Epochs not supported for parsing should fail.
+    assert.equal(ck.isDate(12345780), false);
+
+    // Should fail shouldn't try to parse strings
+    // that look like epochs. Too difficult to
+    // determine if number or date.
+    assert.equal(ck.isDate(ck.toDate('12345780')), false);
+
+    // Should parse string but fail as not valid date.
+    assert.equal(ck.isDate(ck.toDate('12:345:780')), false);
+
+    // Should parse string and result in valid date.
+    assert.equal(ck.isDate(ck.toDate('01/01/2017 12:34:26')), true);
+
+  });
+
+  it('should check if is Node Debug.', () => {
+    assert.equal(ck.isDebug(), false);
+    assert.equal(ck.isDebug(true), true);
   });
 
   it('should check is Empty', () => {
+    let x;
     assert.equal(ck.isEmpty({}), true);
     assert.equal(ck.isEmpty([]), true);
+    assert.equal(ck.isEmpty(''), true);
+    assert.equal(ck.isEmpty(0), false);
   });
 
   it('should check if is Equal', () => {
     assert.equal(ck.isEqual('test', 'test'), true);
+    assert.equal(ck.isEqual('test', 'test', true), true);
+    const date = new Date();
+    const date2 = new Date(date.getTime());
+    assert.equal(ck.isEqual(date, date2), true);
   });
 
   it('should check if is Error.', () => {
     assert.equal(ck.isError(new Error()), true);
+    assert.equal(ck.isError({ __custom_prop__: true }, '__custom_prop__'), true);
+  });
+
+  it('should check if is Float.', () => {
+    assert.equal(ck.isFloat(123.50), true);
   });
 
   it('should check if is Function.', () => {
     assert.equal(ck.isFunction(ck.noop), true);
   });
 
-  it('should check if is Instance.', () => {
-    class MyClass { };
-    const myClass = new MyClass();
-    assert.equal(ck.isInstance(myClass, MyClass), true);
+  it('should check if is Infinite.', () => {
+    assert.equal(ck.isInfinite(Math.pow(10, 1000)), true);
   });
 
-  it('should check if is Function', () => {
-    assert.equal(ck.isNan('test'), true);
+  it('should check if is Integer.', () => {
+    assert.equal(ck.isInteger(123), true);
+  });
+
+  it('should check if is NodeJS', () => {
+    assert.equal(ck.isNode(), true);
   });
 
   it('should check if is Null.', () => {
@@ -85,19 +246,58 @@ describe('Chek', () => {
     assert.equal(ck.isNumber(12), true);
   });
 
+  it('should check if is Moment.', () => {
+    assert.equal(ck.isMoment(moment()), true);
+  });
+
   it('should check if is Object.', () => {
     assert.equal(ck.isObject({}), true);
     assert.equal(ck.isObject([]), true);
+    assert.equal(ck.isObject('not an object'), false);
     assert.equal(ck.isObject(new (class MyClass { })), true);
   });
 
-  it('should check if is Plain Object.', () => {
+  it('should check if is PlainObject.', () => {
     assert.equal(ck.isPlainObject({}), true);
     assert.equal(ck.isPlainObject(new (class MyClass { })), false);
   });
 
+  it('should check if is Promise', () => {
+    const prom = new Promise((resolve, reject) => {
+      resolve();
+    });
+    assert.equal(ck.isPromise(prom), true);
+  });
+
   it('should check if is RegExp.', () => {
     assert.equal(ck.isRegExp(/test/), true);
+  });
+
+  it('should check if is String.', () => {
+    assert.equal(ck.isString('test'), true);
+  });
+
+  it('should check if is Symbol', () => {
+    assert.equal(ck.isSymbol('symbol'), false);
+  });
+
+  it('should check if is Truthy.', () => {
+    assert.equal(ck.isTruthy('true'), true);
+    assert.equal(ck.isTruthy(0), false);
+    assert.equal(ck.isTruthy('false'), false);
+    assert.equal(ck.isTruthy(null), false);
+    assert.equal(ck.isTruthy(undefined), false);
+    assert.equal(ck.isTruthy(['false']), true);
+  });
+
+  it('should check if is Type.', () => {
+    class MyClass { }
+    const myClass = new MyClass();
+    assert.equal(ck.isType(myClass, MyClass), true);
+  });
+
+  it('should check if is Undefined.', () => {
+    assert.equal(ck.isUndefined(undefined), true);
   });
 
   it('should check if is Unique.', () => {
@@ -105,66 +305,297 @@ describe('Chek', () => {
     assert.equal(ck.isUnique([1, 4, 2, 3, 4, 5], 4), false);
   });
 
+  it('should check if is Value.', () => {
+    assert.equal(ck.isValue({}), true);
+  });
+
   // OBJECT CHEKS
 
-  it('should get phone.mobile from object literal.', () => {
+  it('should Get value by dot notated property.', () => {
+    let prop;
+    assert.equal(ck.get({}, prop), null);
     assert.equal(ck.get(testObj, 'phone.mobile'), '8885551212');
   });
 
-  it('should set phone.mobile in object literal.', () => {
-    ck.set(testObj, 'phone.home', '3335551212');
-    assert.equal(ck.get(testObj, 'phone.home'), '3335551212');
+  it('should clone object.', () => {
+
+    // Object literal test.
+    const clone: any = ck.clone(extObj);
+    clone.age = 25;
+    assert.notEqual(clone.age, extObj.age);
+
+    // Error clone test.
+    const err = new Error('test clone error.');
+    const errClone: any = ck.clone(err);
+    assert.equal(errClone.message, 'test clone error.');
+
+    // Class clone test.
+    class MyClass {
+      test() {
+        return 'cloned';
+      }
+    }
+    const myClass = new MyClass();
+    const myClassClone = ck.clone<MyClass>(myClass);
+    assert.equal(myClassClone.test(), 'cloned');
+    const jsonSrc: any = { name: 'bob' };
+    const jsonClone: any = ck.clone(jsonSrc, true);
+    assert.deepEqual(jsonSrc, jsonClone);
+    // jsonClone.nickname = 'bobby';
+    // assert.notEqual(jsonSrc.nickname, jsonClone.nickname);
+
   });
 
-  it('should remove phone.home from object literal.', () => {
+  it('should Extend objects from objects.', () => {
+    testObj['tags'] = ['red', 'green', 'blue'];
+    extObj['tags'] = ['red', 'cyan', 'blue'];
+    assert.deepEqual(ck.extend({}, testObj, { active: true, tags: ['red', 'cyan', 'blue'] }), extObj);
+    assert.deepEqual(ck.extend(testObj), testObj);
+    assert.deepEqual(ck.extend(true), {});
+    assert.deepEqual(ck.extend(true, { name: 'bob' }, { age: 31 }, 'not an object'), { name: 'bob', age: 31 });
+    assert.deepEqual(ck.extend(true, 'not an object'), null);
+  });
+
+  it('should Set value by dot notated property.', () => {
+    const movies = {
+      startrek: {
+        beyond: { title: 'Star Trek Beyond' },
+        darkness: { title: 'Star Trek Into Darkness' }
+      }
+    };
+    ck.set(testObj, 'phone.home', '3335551212');
+    assert.equal(ck.get(testObj, 'phone.home'), '3335551212');
+    const setMovie = ck.set(movies, 'startrek.beyond.year', 2016);
+    assert.deepEqual(ck.get(movies, 'startrek.beyond.year'), 2016);
+  });
+
+  it('should Remove value by dot notated property.', () => {
+    let prop;
+    assert.equal(ck.del({}, prop), null);
     ck.del(testObj, 'phone.home');
     assert.equal(ck.get(testObj, 'phone.home'), undefined);
   });
 
-  it('should count the number of duplicates in array.', () => {
-    assert.equal(ck.duplicates(['Mary', 'Jim', 'John', 'Anthony', 'John'], 'John'), 2);
+  it('should should Reverse the object keys and values.', () => {
+    const result = ck.reverse({ error: 'red', warn: 'yellow', enabled: true, level: 2, func: function () { } });
+    assert.deepEqual(result, { red: 'error', yellow: 'warn', true: 'enabled', 2: 'level' });
+    assert.equal(ck.reverse('1234'), '4321');
+    assert.deepEqual(ck.reverse([5, 4, 3, 2, 1]), [1, 2, 3, 4, 5]);
+    assert.deepEqual(ck.reverse(empty), null);
   });
 
-  it('should check if array contains value.', () => {
-    assert.equal(ck.contains([1, 2, 3], 3), true);
-    assert.equal(ck.contains([1, 2, 3], 6), false);
+  // STRING CHEKS
+
+  it('should Split a string by custom or common chars.', () => {
+    const str = 'user.posts.1234';
+    const str2 = str.replace(/\./g, '|');
+    const invalid: any = {};
+    // split should figure this out
+    // result in duplicate arrays.
+    assert.deepEqual(ck.split(str), ck.split(str2));
+    assert.deepEqual(ck.split('.' + str), ck.split(str2));
+    assert.equal(ck.split(invalid), null);
   });
 
-  it('should check if source array contains any value in inspected array.', () => {
-    assert.equal(ck.containsAny([1, 2, 3], [8, 6, 3]), true);
-    assert.equal(ck.containsAny([1, 2, 3], [8, 6, 5]), false);
+  it('should generate a UUID.', () => {
+    const uuidExp = /^[\da-z]{8}-[\da-z]{4}-4[\da-z]{3}-[\da-z]{4}-[\da-z]{12}$/i;
+    const uuid = ck.uuid();
+    assert.equal(uuidExp.test(uuid), true);
   });
 
-  it('should get array of keys from object.', () => {
-    assert.equal(ck.keys(testObj).length, 3);
+  it('should Pad a string to the Left 5 spaces.', () => {
+    assert.equal(ck.padLeft('padded', 5), '     padded');
+    assert.equal(ck.padLeft('padded', 5, 'four'), '         padded');
   });
 
-  it('should flatten nested array.', () => {
-    assert.deepEqual(ck.flatten([1, 2, [3, 4, 5]]), [1, 2, 3, 4, 5]);
+  it('should Pad a string to the right 5 spaces.', () => {
+    assert.equal(ck.padRight('padded', 5), 'padded     ');
+    assert.equal(ck.padRight('padded', 5, 'four'), 'padded         ');
   });
 
-  it('should get the first value in array.', () => {
-    assert.equal(ck.first([1, 2, 3]), 1);
+  it('should Pad an array of values by the Widest length.', () => {
+    assert.deepEqual(ck.padValues(['error', 'warn', 'info', 'verbose'], 'left'), ['  error', '   warn', '   info', 'verbose']);
+    assert.deepEqual(ck.padValues(['error', 'warn', 'info', 'verbose'], 'left', 'four'), ['      error', '       warn', '       info', '    verbose']);
+    assert.deepEqual(ck.padValues(['error', 'warn', 'info', 'verbose'], 'none'), ['error', 'warn', 'info', 'verbose']);
   });
 
-  it('should get the last value in array.', () => {
-    assert.equal(ck.last([1, 2, 3]), 3);
+  // TO CHEKS
+
+  it('should convert To Array.', () => {
+    const obj = {
+      '100': { name: 'Jane', age: 22 },
+      '101': { name: 'Lauren', age: 27 },
+      '102': { name: 'Frank', age: 23 }
+    };
+    const objArr = [
+      { $id: '100', name: 'Jane', age: 22 },
+      { $id: '101', name: 'Lauren', age: 27 },
+      { $id: '102', name: 'Frank', age: 23 }
+    ];
+    assert.equal(ck.toArray([]).length, 0);
+    assert.equal(ck.toArray(null), null);
+    assert.deepEqual(ck.toArray('test'), ['test']);
+    assert.deepEqual(ck.toArray(obj), objArr);
+    assert.deepEqual(ck.toArray({ 100: 'one' }), [{ 100: 'one' }]);
   });
 
-  it('should get extend object with property.', () => {
-    assert.deepEqual(ck.extend({}, testObj, { active: true }), extObj);
+  it('should convert To Boolean.', () => {
+    assert.equal(ck.toBoolean(true), true);
+    assert.equal(ck.toBoolean(null), null);
+    assert.equal(ck.toBoolean('true'), true);
+    assert.equal(ck.toBoolean(1), true);
+    assert.equal(ck.toBoolean(0), false);
+    assert.equal(ck.toBoolean('yes'), true);
+    assert.equal(ck.toBoolean('-'), false);
   });
 
-  it('should clone object', () => {
-    const clone: any = ck.clone(extObj);
-    clone.age = 25;
-    assert.notEqual(clone.age, extObj.age);
-    class CloneClass { test() { return 'cloned'; } }
-    const uncloned = new CloneClass();
-    const copy = uncloned;
-    const cloned = ck.clone<CloneClass>(uncloned, true);
-    console.log(cloned.test());
+  it('should convert To Date.', () => {
+    const date = new Date();
+    const date2 = ck.toDate(Date.parse('01/01/2017 12:34:26'));
+    assert.equal(ck.toDate(date), date);
+    assert.equal(ck.toDate('01/01/2017 12:34:26').getTime(), 1483302866000);
+    assert.equal(ck.toDate('123:4447:22'), null);
   });
 
+  it('should convert object To Default.', () => {
+    assert.equal(ck.toDefault(null, 'test'), 'test');
+  });
+
+  it('should convert object To Epoch.', () => {
+    const date = new Date();
+    assert.equal(ck.toEpoch(date), date.getTime());
+  });
+
+  it('should convert object To Float.', () => {
+
+    assert.equal(ck.toFloat(123.50), 123.50);
+    assert.equal(ck.toFloat('123.50'), 123.50);
+    assert.equal(ck.toFloat('123.50a'), 123.50);
+    assert.equal(ck.toFloat(empty), null);
+    assert.equal(ck.toFloat('yes'), 1);
+    assert.equal(ck.toFloat('no'), 0);
+  });
+
+  it('should convert object To JSON.', () => {
+    const obj = { name: 'Beth', age: 33 };
+    const defStr = '{"name": "bob"}';
+    assert.equal(ck.toJSON(obj), JSON.stringify(obj));
+    assert.equal(ck.toJSON(empty), null);
+    assert.equal(ck.toJSON(empty, defStr), defStr);
+    assert.equal(ck.toJSON(obj, true), JSON.stringify(obj, null, 2));
+  });
+
+  it('should convert object To Integer.', () => {
+    assert.equal(ck.toInteger(123), 123);
+    assert.equal(ck.toInteger(empty), null);
+    assert.equal(ck.toInteger('123.50'), 123);
+    assert.equal(ck.toInteger('123.50a'), 123);
+    assert.equal(ck.toInteger('yes'), 1);
+    assert.equal(ck.toInteger('no'), 0);
+  });
+
+  it('should convert object To Map.', () => {
+    assert.equal(ck.toMap(empty), null);
+    assert.deepEqual(ck.toMap('one'), { 0: 'one' });
+    assert.deepEqual(ck.toMap('one,two'), { 0: 'one', 1: 'two' });
+    assert.deepEqual(ck.toMap([{ key: '123', name: 'Joe' }], 'key'), { '123': { name: 'Joe' } });
+    assert.deepEqual(ck.toMap([{ name: 'Joe' }, { name: 'Amy' }]), { '0': { name: 'Joe' }, '1': { name: 'Amy' } });
+    assert.deepEqual(ck.toMap({}, {}), {});
+    assert.deepEqual(ck.toMap(['one', 'two']), { 0: 'one', 1: 'two' });
+  });
+
+  it('should convert object to Nested.', () => {
+    assert.deepEqual(ck.toNested(unnested), nested);
+  });
+
+  it('should convert object To Number.', () => {
+    assert.equal(ck.toNumber('123.50'), 123.50);
+    assert.equal(ck.toNumber('123.50a'), 123.50);
+  });
+
+  it('should convert object To RegExp.', () => {
+    const exp = new RegExp('test');
+    const exp2 = ck.toRegExp(exp.toString());
+    const exp3 = new RegExp('just some string');
+    assert.equal(ck.toRegExp(exp), exp);
+    assert.equal(exp2.test('test'), exp.test('test'));
+    assert.equal(ck.toRegExp(null), null);
+    assert.equal(ck.toRegExp('just some string').toString(), exp3.toString());
+    assert.instanceOf(ck.toRegExp('just some string'), RegExp);
+    assert.instanceOf(ck.toRegExp('/^test$/gi'), RegExp);
+  });
+
+  it('should convert object To String.', () => {
+    assert.equal(ck.toString('test'), 'test');
+    assert.equal(ck.toString(123), '123');
+    assert.equal(ck.toString(null), null);
+  });
+
+  it('should convert object to Unnested.', () => {
+    assert.deepEqual(ck.toUnnested(nested, nested), unnested);
+    // this should be null since disabling
+    // key prefixing would result in dupes.
+    assert.equal(ck.toUnnested(nested, false), null);
+  });
+
+  it('should add to Window.', () => {
+    // Fake window object set env.BROWSER to true
+    // then disable when test is done.
+    const helpers = {
+      sayhi: () => { /* just a placeholder */ },
+      alert: () => { /* just a placeholder */ }
+    };
+    global['window'] = {};
+    process.env['BROWSER'] = 'true';
+    ck.toWindow('helpers', helpers);
+    assert.deepEqual(global['window'], { helpers: helpers });
+    delete process.env['BROWSER'];
+    delete global['window'];
+  });
+
+  // TRY CHEKS
+
+  it('should Try to Wrap method safely.', () => {
+    const msg = 'whoops you can\'t do that!';
+    function test() {
+      return {}['pop']();
+    }
+    assert.equal(ck.tryWrap(test)(), null);
+    assert.equal(ck.tryWrap(test)(msg), msg);
+    assert.equal(ck.tryWrap(test)(() => { return msg; }), msg);
+  });
+
+  it('should Try to Require a module safely.', () => {
+    assert.equal(ck.tryRequire('unknown'), null);
+    assert.deepEqual(ck.tryRequire('unknown', true), {});
+    assert.isFunction(ck.tryRequire('path').resolve);
+  });
+
+
+  // Type CHEKS
+
+  it('should get the value\'s Type.', () => {
+    class TypeClass { }
+    assert.equal(ck.getType(new Date()), 'date');
+    assert.equal(ck.getType(new RegExp(/test/)), 'regexp');
+    assert.equal(ck.getType(12), 'integer');
+    assert.equal(ck.getType(12.5), 'float');
+    assert.equal(ck.getType(12.5, true), 'number');
+    assert.equal(ck.getType('test'), 'string');
+    assert.equal(ck.getType([]), 'array');
+    assert.equal(ck.getType({}), 'literal');
+    assert.equal(ck.getType({}, true), 'object');
+    assert.equal(ck.getType(new Error()), 'error');
+    assert.equal(ck.getType(null), 'null');
+    assert.equal(ck.getType(true, false, 'any'), 'boolean');
+    assert.equal(ck.getType(false, 'any'), 'boolean');
+    assert.equal(ck.getType(function () { }), 'function');
+    assert.equal(ck.getType(new TypeClass(), true), 'object');
+    assert.equal(ck.getType(new TypeClass()), 'TypeClass');
+  });
+
+  it('should should Cast Type.', () => {
+    //
+  });
 
 });

@@ -2,9 +2,13 @@
   "name": "chek",
   "version": "0.1.0",
   "description": "Minimal tools for build NodeJS and Web Apps.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha --opts ./src/mocha.opts"
+    "compile": "node ./node_modules/typescript/bin/tsc -p ./src/tsconfig.json",
+    "browserify": "BROWSER=true node ./node_modules/browserify/bin/cmd  ./dist/index.js -o ./dist/browser.js",
+    "docs": "node ./node_modules/typedoc/bin/typedoc --out ./docs ./src --options ./typedoc.json",
+    "test": "nyc mocha --opts ./src/mocha.opts"
   },
   "repository": {
     "type": "git",
@@ -27,13 +31,40 @@
     "@types/clone": "^0.1.30",
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.7",
+    "browserify": "^14.4.0",
     "chai": "^4.0.2",
+    "deep-freeze": "0.0.1",
     "mocha": "^3.4.2",
-    "ts-node": "^3.1.0",
+    "moment": "^2.18.1",
+    "nyc": "^11.0.3",
+    "ts-node": "^3.2.0",
     "tslint": "^5.4.3",
+    "typedoc": "^0.7.1",
     "typescript": "^2.4.1"
   },
   "dependencies": {
     "clone": "^2.1.1"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "exclude": [
+      "src/**/*.spec.ts"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "./build/spec"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
   }
 }
