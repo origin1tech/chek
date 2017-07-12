@@ -391,7 +391,7 @@ If you know TypeScript you already know this. The below params and return result
   </thead>
   <tbody>
     <tr>
-      <td>castType</td><td>type: any, val: any, def?: any, ...args: any[]</td><td>T</td><td>Casts a type to specified type.</td>
+      <td>castType</td><td>val: any, type: any, def?: any</td><td>T</td><td>Casts a type to specified type.</td>
     </tr>
     <tr>
       <td>getType</td><td>val: any, strict?: boolean | string, def?: string</td><td>T</td><td>Detects the type of the provided value.</td>
