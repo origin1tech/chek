@@ -419,8 +419,8 @@ export function toWindow(key: any, val?: any, exclude?: string | string[]): void
   if (!isBrowser())
     return;
 
-  let obj = key;
-  exclude = toArray(exclude);
+  let obj: any = key;
+  exclude = toArray<string>(exclude);
 
   if (!isPlainObject(obj)) {
     obj = {};

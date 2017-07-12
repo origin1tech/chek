@@ -1,5 +1,5 @@
 <p align="left">
-  <a href="http://github.com/origin1tech/chek"><img width="120" src="https://raw.githubusercontent.com/origin1tech/check/master/assets/img/logo-120w.png"></a>
+  <a href="http://github.com/origin1tech/chek"><img width="120" src="https://raw.githubusercontent.com/origin1tech/chek/master/assets/img/logo-120w.png"></a>
 </p>
 
 What is Chek? Well we have a guy we call Chekov, as in "I can do zat Captain I can do zat". So we shortened it to "Chek". Hey there's a logger named after "Winston" right.

@@ -1,6 +1,6 @@
 {
   "name": "chek",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Minimal tools for build NodeJS and Web Apps.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
