@@ -274,7 +274,7 @@ export function uppercase(val: string): string {
  * UUID
  * Generates a UUID.
  */
-export function uuid() {
+export function uuid(): string {
 
   let d = Date.now();
 

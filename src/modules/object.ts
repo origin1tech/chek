@@ -27,7 +27,7 @@ function matchIndex(prop) {
  * @param obj the object whose keys should be deleted.
  * @param props the property keys that should be deleted.
  */
-export function del(obj: any, key: string | string[]): any {
+export function del<T>(obj: any, key: string | string[]): T {
 
   if (arguments.length !== 2 || (!isArray(key) && !isString(key)))
     return null;
@@ -200,33 +200,33 @@ export function extend<T>(obj: any, ...args: any[]): T {
  * Only numbers, strings or booleans are supported
  * when reverse mapping objects.
  *
- * @param val the object to reverse.
+ * @param obj the object to reverse.
  */
-export function reverse(val: any, deep?: boolean) {
+export function reverse<T>(obj: any): T {
 
-  if (!isValue(val))
+  if (!isValue(obj))
     return null;
 
   // Reverse an array.
-  if (isArray(val))
-    return val.reverse();
+  if (isArray(obj))
+    return obj.reverse();
 
   // Reverse a string.
-  if (isString(val)) {
-    let i = val.toString().length;
+  if (isString(obj)) {
+    let i = obj.toString().length;
     let tmpStr = '';
     while (i--) {
-      tmpStr += val[i];
+      tmpStr += obj[i];
     }
     return tmpStr;
   }
 
   // Reverse an object.
   let result = {};
-  for (let p in val) {
-    if (isObject(val[p]))
+  for (let p in obj) {
+    if (isObject(obj[p]))
       continue;
-    result[val[p]] = p;
+    result[obj[p]] = p;
   }
 
   return result;
@@ -244,7 +244,7 @@ export function reverse(val: any, deep?: boolean) {
  * @param value the value used for updating the property.
  * @param dynamic when NOT false objects are dynamically created if required.
  */
-export function set(obj: any, key: string | string[], val: any, dynamic?: boolean) {
+export function set<T>(obj: any, key: string | string[], val: any, dynamic?: boolean): T {
 
   /* istanbul ignore next  */
   if (arguments.length !== 3 || (!isArray(key) && !isString(key)))

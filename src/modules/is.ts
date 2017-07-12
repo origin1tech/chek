@@ -34,7 +34,7 @@ export function isBoolean(val: any): boolean {
  *
  * @param override an optional key to inspect on process.env.
  */
-export function isBrowser(override?: string) {
+export function isBrowser(override?: string): boolean {
 
   // Enables checking a proces.env key while
   // in Node. Good for multi-environment builds.
@@ -243,7 +243,7 @@ export function isObject(val: any): boolean {
  *
  * @param val the value to inspect
  */
-export function isPlainObject(val: any) {
+export function isPlainObject(val: any): boolean {
   return val && val.constructor && val.constructor === {}.constructor;
 }
 
@@ -254,7 +254,7 @@ export function isPlainObject(val: any) {
  * @param val the value to inspect.
  * @param name optional constructor name for promise defaults to Promise.
  */
-export function isPromise(val: any, name?: string) {
+export function isPromise(val: any, name?: string): boolean {
   name = name || 'Promise';
   return (
     !isEmpty(val) &&
@@ -344,7 +344,7 @@ export function isUnique(arr: any[], value: any): boolean {
  *
  * @param val the value to inspect.
  */
-export function isValue(val: any) {
+export function isValue(val: any): boolean {
   return (
     !isUndefined(val)
     && !isNull(val) && !(isNumber(val) && isNaN(val))

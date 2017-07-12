@@ -190,7 +190,7 @@ export function toJSON(obj: any, pretty?: number | boolean | string, def?: strin
  * @param val the value to convert to integer.
  * @param def optional default value on null or error.
  */
-export function toInteger(val: any, def?: any): number {
+export function toInteger(val: any, def?: number): number {
 
   if (isInteger(val))
     return val;
@@ -359,7 +359,7 @@ export function toString(val: any, def?: string): string {
 /**
  * To Unnested
  * Takes a nested object and flattens it
- * to a single leve safely. To disable key
+ * to a single level safely. To disable key
  * prefixing set prefix to false.
  *
  * @param val the object to be unnested.

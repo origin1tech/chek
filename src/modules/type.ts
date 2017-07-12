@@ -86,9 +86,9 @@ export function castType<T>(type: any, val: any, def?: any, ...args: any[]): T {
  *
  * @param val the object to get type from.
  * @param strict when true returns the strict type see examples.
- * @param unknown the string name for unknown types.
+ * @param def the optional string name for unknown types.
  */
-export function getType(val: any, strict?: boolean | string, unknown?: string): any {
+export function getType(val: any, strict?: boolean | string, def?: string): any {
 
   if (isString(strict)) {
     unknown = <string>strict;
@@ -166,6 +166,6 @@ export function getType(val: any, strict?: boolean | string, unknown?: string): 
   }
 
   /* istanbul ignore next */
-  return unknown || 'any';
+  return def || 'any';
 
 }
