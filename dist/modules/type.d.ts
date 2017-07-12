@@ -2,12 +2,11 @@
  * Cast Type
  * Attempts to cast to specified type.
  *
- * @param type the type to cast to.
  * @param val the value to be cast.
+ * @param type the type to cast to.
  * @param def optional default value to return on null.
- * @param args optional args to pass when casting function.
  */
-export declare function castType<T>(type: any, val: any, def?: any, ...args: any[]): T;
+export declare function castType<T>(val: any, type: any, def?: any): T;
 /**
  * Get Type
  * Gets the type of an object.

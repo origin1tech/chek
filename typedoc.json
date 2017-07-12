@@ -3,7 +3,7 @@
   "mode": "modules",
   "theme": "default",
   "readme": "README.md",
-  "media": "./docs_assets",
+  "media": "./assets",
   "module": "commonjs",
   "ignoreCompilerErrors": "true",
   "experimentalDecorators": "true",

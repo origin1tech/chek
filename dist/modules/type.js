@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
 var to_1 = require("./to");
 var function_1 = require("./function");
-var array_1 = require("./array");
 var toMap = {
     'boolean': to_1.toBoolean,
     'date': to_1.toDate,
@@ -18,26 +17,23 @@ var toMap = {
  * Cast Type
  * Attempts to cast to specified type.
  *
- * @param type the type to cast to.
  * @param val the value to be cast.
+ * @param type the type to cast to.
  * @param def optional default value to return on null.
- * @param args optional args to pass when casting function.
  */
-function castType(type, val, def) {
-    var args = [];
-    for (var _i = 3; _i < arguments.length; _i++) {
-        args[_i - 3] = arguments[_i];
-    }
+function castType(val, type, def) {
     function cast() {
         if (!is_1.isValue(val))
             return to_1.toDefault(null, def);
+        // If no type specified try to get automatically.
+        type = type || getType(val);
         if (is_1.isArray(type)) {
             return to_1.toArray(val)
-                .map(function (v, i) { return castType(type[i] || type[0], v); });
+                .map(function (v, i) { return castType(v, type[i] || type[0]); });
         }
         else if (is_1.isFunction(type)) {
-            args = array_1.push(args, val).result;
-            return type.apply(void 0, args);
+            val = to_1.toArray(val);
+            return type.apply(void 0, val);
         }
         else if (is_1.isString(type)) {
             type = type.toLowerCase();

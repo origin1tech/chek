@@ -636,20 +636,18 @@ describe('Chek', () => {
   });
 
   it('should should Cast Type.', () => {
-    assert.isBoolean(ck.castType('boolean', 1));
-    assert.equal(ck.castType(function (v) { return v; }, 'test'), 'test');
-    assert.deepEqual(ck.castType(['boolean'], [1, 0]), [true, false]);
-    assert.equal(ck.castType('string', null), null);
+    assert.isBoolean(ck.castType(1, 'boolean'));
+    assert.equal(ck.castType('test', function (v) { return v; }), 'test');
+    assert.deepEqual(ck.castType([1, 0], ['boolean']), [true, false]);
+    assert.equal(ck.castType(null, 'string'), null);
     assert.deepEqual(ck.castType({}, {}), {});
-    assert.equal(ck.castType('any', 'test'), 'test');
-    assert.equal(ck.castType('integer', 123.25), 123);
-    assert.equal(ck.castType('float', '123.25'), 123.25);
-    assert.equal(ck.castType('number', '123.25'), 123.25);
-    assert.equal(ck.castType<RegExp>('regexp', '/test/').toString(), (new RegExp('test')).toString());
-    assert.equal(ck.castType<Date>('date', '01/01/2017 12:30:22').getTime(), (new Date('01/01/2017 12:30:22').getTime()));
-    assert.equal(ck.castType('other', 'test', 'default'), 'default');
-    // assert.isBoolean(ck.castType('array', [0, 1, true]));
-    // assert.isBoolean(ck.castType('function', function t() { }, );
+    assert.equal(ck.castType('test', 'any'), 'test');
+    assert.equal(ck.castType(123.25, 'integer'), 123);
+    assert.equal(ck.castType('123.25', 'float'), 123.25);
+    assert.equal(ck.castType('123.25', 'number'), 123.25);
+    assert.equal(ck.castType<RegExp>('/test/', 'regexp').toString(), (new RegExp('test')).toString());
+    assert.equal(ck.castType<Date>('01/01/2017 12:30:22', 'date').getTime(), (new Date('01/01/2017 12:30:22').getTime()));
+    assert.equal(ck.castType('test', 'other', 'default'), 'default');
   });
 
 });

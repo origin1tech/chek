@@ -19,26 +19,28 @@ const toMap = {
  * Cast Type
  * Attempts to cast to specified type.
  *
- * @param type the type to cast to.
  * @param val the value to be cast.
+ * @param type the type to cast to.
  * @param def optional default value to return on null.
- * @param args optional args to pass when casting function.
  */
-export function castType<T>(type: any, val: any, def?: any, ...args: any[]): T {
+export function castType<T>(val: any, type: any, def?: any): T {
 
   function cast() {
 
     if (!isValue(val))
       return toDefault(null, def);
 
+    // If no type specified try to get automatically.
+    type = type || getType(val);
+
     if (isArray(type)) {
       return toArray(val)
-        .map((v, i) => <T>castType(type[i] || type[0], v));
+        .map((v, i) => <T>castType(v, type[i] || type[0]));
     }
 
     else if (isFunction(type)) {
-      args = push(args, val).result;
-      return type(...args);
+      val = toArray(val);
+      return type(...val);
     }
 
     else if (isString(type)) {
