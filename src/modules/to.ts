@@ -402,7 +402,7 @@ export function toUnnested<T>(obj: IMap<any>, prefix?: boolean | IMap<any>, def?
     return dest;
   }
 
-  return tryWrap(unnest, obj)(def);
+  return tryWrap(unnest, clone(obj))(def);
 
 }
 
@@ -415,6 +415,7 @@ export function toUnnested<T>(obj: IMap<any>, prefix?: boolean | IMap<any>, def?
  */
 export function toWindow(key: any, val?: any): void {
 
+  /* istanbul ignore if */
   if (!isBrowser())
     return;
 

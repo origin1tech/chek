@@ -13,7 +13,6 @@ import { split } from './string';
 function matchIndex(prop) {
   // expression for matching arrays.
   const match = new RegExp('(.+)\\[([0-9]*)\\]', 'i').exec(prop);
-  /* istanbul ignore if  */
   if (match && match.length === 3) {
     return { name: match[1], index: match[2] };
   }
@@ -22,12 +21,9 @@ function matchIndex(prop) {
 
 /**
  * Del
- * Deletes keys in an object.
- *
- * @param obj the object whose keys should be deleted.
- * @param props the property keys that should be deleted.
+ * @private
  */
-export function del<T>(obj: any, key: string | string[]): T {
+function _del<T>(obj: any, key: string | string[]): T {
 
   if (arguments.length !== 2 || (!isArray(key) && !isString(key)))
     return null;
@@ -38,17 +34,15 @@ export function del<T>(obj: any, key: string | string[]): T {
 
   let next = obj[prop];
 
-  /* istanbul ignore if  */
   if (match)
     next = obj[match.name][match.index];
 
   if (props.length > 0) {
-    del(next, props);
+    _del(next, props);
   }
 
   else {
     if (match) {
-      /* istanbul ignore next  */
       obj[match.name].splice(match.index, 1);
     }
     else {
@@ -63,20 +57,16 @@ export function del<T>(obj: any, key: string | string[]): T {
 
 /**
  * Get
- * Gets a property within the supplied object.
- *
- * @param obj the object to inspect.
- * @param prop
+ * @private
  */
-export function get<T>(obj: any, key: string | string[]): T {
+function _get<T>(obj: any, key: string | string[]): T {
 
   if (arguments.length !== 2 || (!isArray(key) && !isString(key)))
     return null;
 
-  let _clone = clone<T>(obj);
   let props: string[] = isArray(key) ? <string[]>key : split(key);
 
-  while (props.length && _clone) {
+  while (props.length && obj) {
 
     let prop = props.shift(),
       match;
@@ -86,19 +76,88 @@ export function get<T>(obj: any, key: string | string[]): T {
     if (match) {
 
       /* istanbul ignore next  */
-      if (!isUndefined(_clone[match.name]))
-        _clone = _clone[match.name][match.index];
+      if (!isUndefined(obj[match.name]))
+        obj = obj[match.name][match.index];
 
     }
 
     else {
-      _clone = _clone[prop];
+      obj = obj[prop];
 
     }
 
   }
 
-  return _clone;
+  return obj as T;
+
+}
+
+/**
+ * Set
+ * @private
+ */
+function _set<T>(obj: any, key: string | string[], val: any): T {
+
+
+  if (arguments.length !== 3 || (!isArray(key) && !isString(key)))
+    return null;
+
+  let props: string[] = split(key);
+
+  /* istanbul ignore if */
+  if (!isValue(val))
+    val = {};
+
+  const prop = props.shift();
+  const match = matchIndex(prop);
+  let next = obj[prop];
+
+  if (!isValue(next))
+    next = obj[prop] = {};
+
+  if (match)
+    next = obj[match.name][match.index];
+
+  if (props.length > 0) {
+    _set(next, props, val);
+  }
+
+  else {
+
+    if (match)
+      obj[match.name][match.index] = val;
+    else
+      obj[prop] = val;
+
+  }
+
+  return obj;
+
+}
+
+/**
+ * Del
+ * Removes a property within the supplied object.
+ *
+ * @param obj the object to inspect.
+ * @param key the dot notated key or array of keys.
+ * @param immutable when true original object NOT mutated.
+ */
+export function del<T>(obj: any, key: string | string[], immutable?: boolean): T {
+  if (immutable)
+    return _del(clone(obj), key);
+  return _del(obj, key);
+}
+
+/**
+ * Get
+ * Gets a property within the supplied object.
+ *
+ * @param obj the object to inspect.
+ * @param key the dot notated key or array of keys.
+ */
+export function get<T>(obj: any, key: string | string[]): T {
+  return _get(clone(obj), key);
 }
 
 /**
@@ -214,22 +273,22 @@ export function reverse<T>(obj: any): T {
   // Reverse a string.
   if (isString(obj)) {
     let i = obj.toString().length;
-    let tmpStr = '';
+    let tmpStr: any = '';
     while (i--) {
       tmpStr += obj[i];
     }
-    return tmpStr;
+    return tmpStr as T;
   }
 
   // Reverse an object.
-  let result = {};
+  let result: any = {};
   for (let p in obj) {
     if (isObject(obj[p]))
       continue;
     result[obj[p]] = p;
   }
 
-  return result;
+  return result as T;
 
 }
 
@@ -242,45 +301,14 @@ export function reverse<T>(obj: any): T {
  * @param obj the object to set the value on.
  * @param key the property used for setting the value.
  * @param value the value used for updating the property.
- * @param dynamic when NOT false objects are dynamically created if required.
+ * @param immutable when true the original object is NOT mutated.
+ *
  */
-export function set<T>(obj: any, key: string | string[], val: any, dynamic?: boolean): T {
-
-  /* istanbul ignore next  */
-  if (arguments.length !== 3 || (!isArray(key) && !isString(key)))
-    return null;
-
-  let props: string[] = split(key);
-
-  /* istanbul ignore next  */
-  if (!isValue(val) && dynamic !== false)
-    val = {};
-
-  const prop = props.shift();
-  const match = matchIndex(prop);
-  let next = obj[prop];
-
-  /* istanbul ignore next  */
-  if (!isValue(next) && dynamic !== false)
-    next = obj[prop] = {};
-
-  /* istanbul ignore next  */
-  if (match)
-    next = obj[match.name][match.index];
-
-  if (props.length > 0) {
-    set(next, props, val);
-  }
-
-  else {
-    /* istanbul ignore next  */
-    if (match)
-      obj[match.name][match.index] = val;
-    else
-      obj[prop] = val;
-
-  }
-
-  return obj;
-
+export function set<T>(obj: any, key: string | string[], val: any, immutable?: boolean): T {
+  if (immutable)
+    return _set(clone(obj), key, val);
+  return _set(obj, key, val);
 }
+
+
+

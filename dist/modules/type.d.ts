@@ -30,6 +30,6 @@ export declare function castType<T>(type: any, val: any, def?: any, ...args: any
  *
  * @param val the object to get type from.
  * @param strict when true returns the strict type see examples.
- * @param unknown the string name for unknown types.
+ * @param def the optional string name for unknown types.
  */
-export declare function getType(val: any, strict?: boolean | string, unknown?: string): any;
+export declare function getType(val: any, strict?: boolean | string, def?: string): any;

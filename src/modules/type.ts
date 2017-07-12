@@ -91,7 +91,7 @@ export function castType<T>(type: any, val: any, def?: any, ...args: any[]): T {
 export function getType(val: any, strict?: boolean | string, def?: string): any {
 
   if (isString(strict)) {
-    unknown = <string>strict;
+    def = <string>strict;
     strict = undefined;
   }
 

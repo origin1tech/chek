@@ -10,7 +10,7 @@ import * as moment from 'moment';
 import * as freeze from 'deep-freeze';
 
 
-const testObj = {
+let testObj: any = {
   name: 'Bob Smith',
   age: 35,
   phone: {
@@ -311,6 +311,9 @@ describe('Chek', () => {
     let prop;
     assert.equal(ck.get({}, prop), null);
     assert.equal(ck.get(testObj, 'phone.mobile'), '8885551212');
+    testObj.langs = ['java', 'c', 'erlang'];
+    assert.equal(ck.get(testObj, 'langs[1]'), 'c');
+    delete testObj.langs;
   });
 
   it('should clone object.', () => {
@@ -353,23 +356,28 @@ describe('Chek', () => {
   });
 
   it('should Set value by dot notated property.', () => {
-    const movies = {
+    const movies: any = {
       startrek: {
         beyond: { title: 'Star Trek Beyond' },
         darkness: { title: 'Star Trek Into Darkness' }
       }
     };
     ck.set(testObj, 'phone.home', '3335551212');
+    testObj = ck.set(testObj, 'phone.home', '3335551212', true); // immutable test.
     assert.equal(ck.get(testObj, 'phone.home'), '3335551212');
     const setMovie = ck.set(movies, 'startrek.beyond.year', 2016);
     assert.deepEqual(ck.get(movies, 'startrek.beyond.year'), 2016);
+    let empty;
+    ck.set(testObj, null, null);
+    ck.set(testObj, 'tags[0]', 'orange');
+    assert.equal(ck.get(testObj, 'tags[0]'), 'orange');
   });
 
   it('should Remove value by dot notated property.', () => {
-    let prop;
-    assert.equal(ck.del({}, prop), null);
-    ck.del(testObj, 'phone.home');
+    assert.equal(ck.del({}, null), null);
+    testObj = ck.del(testObj, 'phone.home', true);
     assert.equal(ck.get(testObj, 'phone.home'), undefined);
+    ck.del(testObj, 'tags[0]', true); // don't mutate obj.
   });
 
   it('should should Reverse the object keys and values.', () => {
@@ -600,7 +608,7 @@ describe('Chek', () => {
 
   it('should Try to Require a module safely.', () => {
     assert.equal(ck.tryRequire('unknown'), null);
-    assert.deepEqual(ck.tryRequire('unknown', true), {});
+    assert.deepEqual(ck.tryRequire('unknown', {}), {});
     assert.isFunction(ck.tryRequire('path').resolve);
   });
 

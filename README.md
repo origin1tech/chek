@@ -56,6 +56,8 @@ If you know TypeScript you already know this. The below params and return result
 + **[]**        - means an array of some type like string[].
 + **...**       - indicates a spread operator.
 + **T**         - indicates generic type (if not using TypeScript you can ignore).
++ **IArrayResult** - used for immutable array methods which return the new array and rel. value.
++ **IMap<T>**   - simple type which basically represents an object literal.
 
 **Please Note the following tables are here for convenience you should ALWAYS reference the "docs" folder in the project for updated method signatues, there's only so much time in the day.**
 
@@ -252,10 +254,10 @@ If you know TypeScript you already know this. The below params and return result
   </thead>
   <tbody>
     <tr>
-      <td>del</td><td>obj: any, key: string | string[]</td><td>T</td><td>Removes properties from object using dot notation.</td>
+      <td>del</td><td>obj: any, key: string | string[], immutable?: boolean</td><td>T</td><td>Removes properties from object using dot notation optional immutable result.</td>
     </tr>
     <tr>
-      <td>get</td><td>obj: any, key: string | string[]</td><td>T</td><td>Gets properties from object using dot notation.</td>
+      <td>get</td><td>obj: any, key: string</td><td>T</td><td>Gets properties from object using dot notation.</td>
     </tr>
     <tr>
       <td>clone</td><td>obj: any, shallow?: boolean</td><td>T</td><td>Clones an object with shallow option.</td>
@@ -267,7 +269,7 @@ If you know TypeScript you already know this. The below params and return result
       <td>reverse</td><td>obj: any</td><td>T</td><td>Reverses an object { error: 0 } becomes { 0: 'error' }.</td>
     </tr>
     <tr>
-      <td>set</td><td>obj: any, key: string | string[], val: any, dynamic?: boolean</td><td>T</td><td>Sets object value using dot notation.</td>
+      <td>set</td><td>obj: any, key: string | string[], val: any, immutable?: boolean</td><td>T</td><td>Sets object value using dot notation optional immutable result.</td>
     </tr>
   </tbody>
 </table>

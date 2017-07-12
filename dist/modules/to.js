@@ -317,7 +317,7 @@ exports.toString = toString;
 /**
  * To Unnested
  * Takes a nested object and flattens it
- * to a single leve safely. To disable key
+ * to a single level safely. To disable key
  * prefixing set prefix to false.
  *
  * @param val the object to be unnested.
@@ -357,7 +357,7 @@ function toUnnested(obj, prefix, def) {
             return null;
         return dest;
     }
-    return function_1.tryWrap(unnest, obj)(def);
+    return function_1.tryWrap(unnest, object_1.clone(obj))(def);
 }
 exports.toUnnested = toUnnested;
 /**
@@ -368,6 +368,7 @@ exports.toUnnested = toUnnested;
  * @param val the corresponding value to add to window object.
  */
 function toWindow(key, val) {
+    /* istanbul ignore if */
     if (!is_1.isBrowser())
         return;
     var obj = key;

@@ -1,17 +1,18 @@
 /**
  * Del
- * Deletes keys in an object.
+ * Removes a property within the supplied object.
  *
- * @param obj the object whose keys should be deleted.
- * @param props the property keys that should be deleted.
+ * @param obj the object to inspect.
+ * @param key the dot notated key or array of keys.
+ * @param immutable when true original object NOT mutated.
  */
-export declare function del(obj: any, key: string | string[]): any;
+export declare function del<T>(obj: any, key: string | string[], immutable?: boolean): T;
 /**
  * Get
  * Gets a property within the supplied object.
  *
  * @param obj the object to inspect.
- * @param prop
+ * @param key the dot notated key or array of keys.
  */
 export declare function get<T>(obj: any, key: string | string[]): T;
 /**
@@ -42,9 +43,9 @@ export declare function extend<T>(obj: any, ...args: any[]): T;
  * Only numbers, strings or booleans are supported
  * when reverse mapping objects.
  *
- * @param val the object to reverse.
+ * @param obj the object to reverse.
  */
-export declare function reverse(val: any, deep?: boolean): any;
+export declare function reverse<T>(obj: any): T;
 /**
  * Set
  * Sets a value on an object using dot notation or url path.
@@ -54,6 +55,7 @@ export declare function reverse(val: any, deep?: boolean): any;
  * @param obj the object to set the value on.
  * @param key the property used for setting the value.
  * @param value the value used for updating the property.
- * @param dynamic when NOT false objects are dynamically created if required.
+ * @param immutable when true the original object is NOT mutated.
+ *
  */
-export declare function set(obj: any, key: string | string[], val: any, dynamic?: boolean): any;
+export declare function set<T>(obj: any, key: string | string[], val: any, immutable?: boolean): T;

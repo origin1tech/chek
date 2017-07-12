@@ -116,6 +116,8 @@ export function last(arr: any[]): any {
   return arr[arr.length - 1];
 }
 
+// NOTE: the following are immutable methods.
+
 /**
  * Pop
  * Pops/removes last element in array.

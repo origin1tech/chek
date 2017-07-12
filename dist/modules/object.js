@@ -12,7 +12,6 @@ var string_1 = require("./string");
 function matchIndex(prop) {
     // expression for matching arrays.
     var match = new RegExp('(.+)\\[([0-9]*)\\]', 'i').exec(prop);
-    /* istanbul ignore if  */
     if (match && match.length === 3) {
         return { name: match[1], index: match[2] };
     }
@@ -20,27 +19,22 @@ function matchIndex(prop) {
 }
 /**
  * Del
- * Deletes keys in an object.
- *
- * @param obj the object whose keys should be deleted.
- * @param props the property keys that should be deleted.
+ * @private
  */
-function del(obj, key) {
+function _del(obj, key) {
     if (arguments.length !== 2 || (!is_1.isArray(key) && !is_1.isString(key)))
         return null;
     var props = string_1.split(key);
     var prop = props.shift();
     var match = matchIndex(prop);
     var next = obj[prop];
-    /* istanbul ignore if  */
     if (match)
         next = obj[match.name][match.index];
     if (props.length > 0) {
-        del(next, props);
+        _del(next, props);
     }
     else {
         if (match) {
-            /* istanbul ignore next  */
             obj[match.name].splice(match.index, 1);
         }
         else {
@@ -49,32 +43,80 @@ function del(obj, key) {
     }
     return obj;
 }
+/**
+ * Get
+ * @private
+ */
+function _get(obj, key) {
+    if (arguments.length !== 2 || (!is_1.isArray(key) && !is_1.isString(key)))
+        return null;
+    var props = is_1.isArray(key) ? key : string_1.split(key);
+    while (props.length && obj) {
+        var prop = props.shift(), match = void 0;
+        match = matchIndex(prop);
+        if (match) {
+            /* istanbul ignore next  */
+            if (!is_1.isUndefined(obj[match.name]))
+                obj = obj[match.name][match.index];
+        }
+        else {
+            obj = obj[prop];
+        }
+    }
+    return obj;
+}
+/**
+ * Set
+ * @private
+ */
+function _set(obj, key, val) {
+    if (arguments.length !== 3 || (!is_1.isArray(key) && !is_1.isString(key)))
+        return null;
+    var props = string_1.split(key);
+    /* istanbul ignore if */
+    if (!is_1.isValue(val))
+        val = {};
+    var prop = props.shift();
+    var match = matchIndex(prop);
+    var next = obj[prop];
+    if (!is_1.isValue(next))
+        next = obj[prop] = {};
+    if (match)
+        next = obj[match.name][match.index];
+    if (props.length > 0) {
+        _set(next, props, val);
+    }
+    else {
+        if (match)
+            obj[match.name][match.index] = val;
+        else
+            obj[prop] = val;
+    }
+    return obj;
+}
+/**
+ * Del
+ * Removes a property within the supplied object.
+ *
+ * @param obj the object to inspect.
+ * @param key the dot notated key or array of keys.
+ * @param immutable when true original object NOT mutated.
+ */
+function del(obj, key, immutable) {
+    if (immutable)
+        return _del(clone(obj), key);
+    return _del(obj, key);
+}
 exports.del = del;
 /**
  * Get
  * Gets a property within the supplied object.
  *
  * @param obj the object to inspect.
- * @param prop
+ * @param key the dot notated key or array of keys.
  */
 function get(obj, key) {
-    if (arguments.length !== 2 || (!is_1.isArray(key) && !is_1.isString(key)))
-        return null;
-    var _clone = clone(obj);
-    var props = is_1.isArray(key) ? key : string_1.split(key);
-    while (props.length && _clone) {
-        var prop = props.shift(), match = void 0;
-        match = matchIndex(prop);
-        if (match) {
-            /* istanbul ignore next  */
-            if (!is_1.isUndefined(_clone[match.name]))
-                _clone = _clone[match.name][match.index];
-        }
-        else {
-            _clone = _clone[prop];
-        }
-    }
-    return _clone;
+    return _get(clone(obj), key);
 }
 exports.get = get;
 /**
@@ -164,29 +206,29 @@ exports.extend = extend;
  * Only numbers, strings or booleans are supported
  * when reverse mapping objects.
  *
- * @param val the object to reverse.
+ * @param obj the object to reverse.
  */
-function reverse(val, deep) {
-    if (!is_1.isValue(val))
+function reverse(obj) {
+    if (!is_1.isValue(obj))
         return null;
     // Reverse an array.
-    if (is_1.isArray(val))
-        return val.reverse();
+    if (is_1.isArray(obj))
+        return obj.reverse();
     // Reverse a string.
-    if (is_1.isString(val)) {
-        var i = val.toString().length;
+    if (is_1.isString(obj)) {
+        var i = obj.toString().length;
         var tmpStr = '';
         while (i--) {
-            tmpStr += val[i];
+            tmpStr += obj[i];
         }
         return tmpStr;
     }
     // Reverse an object.
     var result = {};
-    for (var p in val) {
-        if (is_1.isObject(val[p]))
+    for (var p in obj) {
+        if (is_1.isObject(obj[p]))
             continue;
-        result[val[p]] = p;
+        result[obj[p]] = p;
     }
     return result;
 }
@@ -200,36 +242,13 @@ exports.reverse = reverse;
  * @param obj the object to set the value on.
  * @param key the property used for setting the value.
  * @param value the value used for updating the property.
- * @param dynamic when NOT false objects are dynamically created if required.
+ * @param immutable when true the original object is NOT mutated.
+ *
  */
-function set(obj, key, val, dynamic) {
-    /* istanbul ignore next  */
-    if (arguments.length !== 3 || (!is_1.isArray(key) && !is_1.isString(key)))
-        return null;
-    var props = string_1.split(key);
-    /* istanbul ignore next  */
-    if (!is_1.isValue(val) && dynamic !== false)
-        val = {};
-    var prop = props.shift();
-    var match = matchIndex(prop);
-    var next = obj[prop];
-    /* istanbul ignore next  */
-    if (!is_1.isValue(next) && dynamic !== false)
-        next = obj[prop] = {};
-    /* istanbul ignore next  */
-    if (match)
-        next = obj[match.name][match.index];
-    if (props.length > 0) {
-        set(next, props, val);
-    }
-    else {
-        /* istanbul ignore next  */
-        if (match)
-            obj[match.name][match.index] = val;
-        else
-            obj[prop] = val;
-    }
-    return obj;
+function set(obj, key, val, immutable) {
+    if (immutable)
+        return _set(clone(obj), key, val);
+    return _set(obj, key, val);
 }
 exports.set = set;
 //# sourceMappingURL=object.js.map

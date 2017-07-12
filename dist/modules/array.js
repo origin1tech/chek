@@ -110,6 +110,7 @@ function last(arr) {
     return arr[arr.length - 1];
 }
 exports.last = last;
+// NOTE: the following are immutable methods.
 /**
  * Pop
  * Pops/removes last element in array.

@@ -75,11 +75,11 @@ exports.castType = castType;
  *
  * @param val the object to get type from.
  * @param strict when true returns the strict type see examples.
- * @param unknown the string name for unknown types.
+ * @param def the optional string name for unknown types.
  */
-function getType(val, strict, unknown) {
+function getType(val, strict, def) {
     if (is_1.isString(strict)) {
-        unknown = strict;
+        def = strict;
         strict = undefined;
     }
     var type = typeof val;
@@ -134,7 +134,7 @@ function getType(val, strict, unknown) {
         return val.constructor.name;
     }
     /* istanbul ignore next */
-    return unknown || 'any';
+    return def || 'any';
 }
 exports.getType = getType;
 //# sourceMappingURL=type.js.map
