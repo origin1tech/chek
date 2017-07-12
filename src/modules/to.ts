@@ -1,6 +1,6 @@
 
 import { IMap } from '../interfaces';
-import { keys, push } from './array';
+import { keys, push, contains } from './array';
 import { fromEpoch } from './from';
 import { isValue, isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isNull, isInfinite, isDate, isFloat, isInteger, isRegExp, isBrowser } from './is';
 import { clone, set, extend, del } from './object';
@@ -413,13 +413,14 @@ export function toUnnested<T>(obj: IMap<any>, prefix?: boolean | IMap<any>, def?
  * @param key the key or object to add to the window object.
  * @param val the corresponding value to add to window object.
  */
-export function toWindow(key: any, val?: any): void {
+export function toWindow(key: any, val?: any, exclude?: string | string[]): void {
 
   /* istanbul ignore if */
   if (!isBrowser())
     return;
 
   let obj = key;
+  exclude = toArray(exclude);
 
   if (!isPlainObject(obj)) {
     obj = {};
@@ -430,7 +431,8 @@ export function toWindow(key: any, val?: any): void {
   let i = _keys.length;
 
   while (i--) {
-    window[_keys[i]] = obj[_keys[i]];
+    if (!contains(exclude, _keys[i]))
+      window[_keys[i]] = obj[_keys[i]];
   }
 
 }

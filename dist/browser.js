@@ -4,28 +4,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-var arr = require("./modules/array");
-var frm = require("./modules/from");
-var func = require("./modules/function");
-var is = require("./modules/is");
-var obj = require("./modules/object");
-var str = require("./modules/string");
-var to = require("./modules/to");
-var typ = require("./modules/type");
-// Add Chek to window when
-// process.env.BROWSER is true.
-/* istanbul ignore if */
-if (is.isBrowser('BROWSER')) {
-    to.toWindow(arr);
-    to.toWindow(frm);
-    to.toWindow(func);
-    to.toWindow(is);
-    to.toWindow(obj);
-    to.toWindow(str);
-    to.toWindow(to);
-    to.toWindow('tryWrap', func.tryWrap);
-    to.toWindow(typ);
-}
 __export(require("./modules/array"));
 __export(require("./modules/constant"));
 __export(require("./modules/from"));
@@ -36,7 +14,19 @@ __export(require("./modules/string"));
 __export(require("./modules/to"));
 __export(require("./modules/type"));
 
-},{"./modules/array":2,"./modules/constant":3,"./modules/from":4,"./modules/function":5,"./modules/is":6,"./modules/object":7,"./modules/string":8,"./modules/to":9,"./modules/type":10}],2:[function(require,module,exports){
+},{"./modules/array":3,"./modules/constant":4,"./modules/from":5,"./modules/function":6,"./modules/is":7,"./modules/object":8,"./modules/string":9,"./modules/to":10,"./modules/type":11}],2:[function(require,module,exports){
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+var chek = require("./chek");
+/* istanbul ignore if */
+if (chek.isBrowser())
+    chek.toWindow('chek', chek, ['tryRequire', 'isNode']);
+__export(require("./chek"));
+
+},{"./chek":1}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
@@ -257,12 +247,12 @@ function unshift(arr) {
 }
 exports.unshift = unshift;
 
-},{"./is":6}],3:[function(require,module,exports){
+},{"./is":7}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toStr = Object.prototype.toString;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
@@ -293,7 +283,7 @@ function fromJSON(val, def) {
 }
 exports.fromJSON = fromJSON;
 
-},{"./function":5,"./is":6,"./to":9}],5:[function(require,module,exports){
+},{"./function":6,"./is":7,"./to":10}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
@@ -371,7 +361,7 @@ function tryRequire(name, def) {
 }
 exports.tryRequire = tryRequire;
 
-},{"./is":6,"./to":9}],6:[function(require,module,exports){
+},{"./is":7,"./to":10}],7:[function(require,module,exports){
 (function (process){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -703,7 +693,7 @@ function isValue(val) {
 exports.isValue = isValue;
 
 }).call(this,require('_process'))
-},{"./array":2,"./constant":3,"./function":5,"./to":9,"_process":15}],7:[function(require,module,exports){
+},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":16}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _clone = require("clone");
@@ -958,7 +948,7 @@ function set(obj, key, val, immutable) {
 }
 exports.set = set;
 
-},{"./is":6,"./string":8,"clone":13}],8:[function(require,module,exports){
+},{"./is":7,"./string":9,"clone":14}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
@@ -1209,7 +1199,7 @@ function uuid() {
 }
 exports.uuid = uuid;
 
-},{"./is":6}],9:[function(require,module,exports){
+},{"./is":7}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var array_1 = require("./array");
@@ -1579,11 +1569,12 @@ exports.toUnnested = toUnnested;
  * @param key the key or object to add to the window object.
  * @param val the corresponding value to add to window object.
  */
-function toWindow(key, val) {
+function toWindow(key, val, exclude) {
     /* istanbul ignore if */
     if (!is_1.isBrowser())
         return;
     var obj = key;
+    exclude = toArray(exclude);
     if (!is_1.isPlainObject(obj)) {
         obj = {};
         obj[key] = val;
@@ -1591,12 +1582,13 @@ function toWindow(key, val) {
     var _keys = array_1.keys(obj);
     var i = _keys.length;
     while (i--) {
-        window[_keys[i]] = obj[_keys[i]];
+        if (!array_1.contains(exclude, _keys[i]))
+            window[_keys[i]] = obj[_keys[i]];
     }
 }
 exports.toWindow = toWindow;
 
-},{"./array":2,"./from":4,"./function":5,"./is":6,"./object":7,"./string":8}],10:[function(require,module,exports){
+},{"./array":3,"./from":5,"./function":6,"./is":7,"./object":8,"./string":9}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
@@ -1737,7 +1729,7 @@ function getType(val, strict, def) {
 }
 exports.getType = getType;
 
-},{"./array":2,"./function":5,"./is":6,"./to":9}],11:[function(require,module,exports){
+},{"./array":3,"./function":6,"./is":7,"./to":10}],12:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -1853,7 +1845,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -3561,7 +3553,7 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":11,"ieee754":14}],13:[function(require,module,exports){
+},{"base64-js":12,"ieee754":15}],14:[function(require,module,exports){
 (function (Buffer){
 var clone = (function() {
 'use strict';
@@ -3816,7 +3808,7 @@ if (typeof module === 'object' && module.exports) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":12}],14:[function(require,module,exports){
+},{"buffer":13}],15:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -3902,7 +3894,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -4088,4 +4080,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[1]);
+},{}]},{},[2]);

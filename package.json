@@ -8,6 +8,7 @@
     "clean": "node ./build/clean",
     "compile": "node ./node_modules/typescript/bin/tsc -p ./src/tsconfig.json",
     "browserify": "BROWSER=true node ./node_modules/browserify/bin/cmd  ./dist/index.js -o ./dist/browser.js",
+    "uglify": "node ./node_modules/uglify-js/bin/uglifyjs ./dist/browser.js --output ./dist/browser.min.js --compress --mangle",
     "docs": "node ./node_modules/typedoc/bin/typedoc --out ./docs ./src --options ./typedoc.json --tsconfig ./src/tsconfig.json",
     "bump": "node ./build/bump",
     "build": "npm run clean && npm run compile && npm run browserify && npm run docs",
@@ -46,7 +47,8 @@
     "ts-node": "^3.2.0",
     "tslint": "^5.4.3",
     "typedoc": "^0.7.1",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "uglify-js": "^3.0.24"
   },
   "dependencies": {
     "clone": "^2.1.1"
