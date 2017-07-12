@@ -57,13 +57,14 @@ If you know TypeScript you already know this. The below params and return result
 + ...       - indicates a spread operator.
 + T         - indicates generic type (if not using TypeScript you can ignore).
 
+## Array
+
 <table>
-  <caption>CHEK ARRAY</caption>
-  <th>
+    <thead>
     <tr>
-    <td><strong>Method</strong></td><td><strong>Params</strong></td><td><strong>Returns</strong></td><td><strong>Description</strong></td>
+    <th><strong>Method</strong></th><th><strong>Params</strong></th><th><strong>Returns</strong></th><th><strong>Description</strong></th>
     </tr>
-  </th>
+  </thead>
   <tbody>
     <tr>
       <td>duplicates</td><td>arr: any[], val: any, breakable?: boolean</td><td>number</td><td>Counts duplicates in array.</td>
@@ -104,13 +105,14 @@ If you know TypeScript you already know this. The below params and return result
   </tbody>
 </table>
 
+## From
+
 <table>
-  <caption>CHEK FROM</caption>
-  <th>
+  <thead>
     <tr>
-    <td><strong>Method</strong></td><td><strong>Params</strong></td><td><strong>Returns</strong></td><td><strong>Description</strong></td>
+    <th><strong>Method</strong></th><th><strong>Params</strong></th><th><strong>Returns</strong></th><th><strong>Description</strong></th>
     </tr>
-  </th>
+  </thead>
   <tbody>
     <tr>
       <td>fromEpoch</td><td>val: number, def?: Date</td><td>Date</td><td>Creates date from epoch.</td>
@@ -121,14 +123,15 @@ If you know TypeScript you already know this. The below params and return result
   </tbody>
 </table>
 
+## Function
 
 <table>
   <caption>CHEK FUNCTION</caption>
-  <th>
+  <thead>
     <tr>
-    <td><strong>Method</strong></td><td><strong>Params</strong></td><td><strong>Returns</strong></td><td><strong>Description</strong></td>
+    <th><strong>Method</strong></th><th><strong>Params</strong></th><th><strong>Returns</strong></th><th><strong>Description</strong></th>
     </tr>
-  </th>
+  </thead>
   <tbody>
     <tr>
       <td>noop</td><td>n/a</td><td>n/a</td><td>Non operation function.</td>
