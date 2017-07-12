@@ -1,5 +1,6 @@
 import { isNumber, isValue } from './is';
-import { tryWrap } from './try';
+import { tryWrap } from './function';
+import { toDefault } from './to';
 import { split } from './string';
 import { set } from './object';
 
@@ -9,9 +10,9 @@ import { set } from './object';
  *
  * @param val the epoch value to convert to date.
  */
-export function fromEpoch(val: number): Date {
+export function fromEpoch(val: number, def?: Date): Date {
   if (!isValue(val) || !isNumber(val))
-    return null;
+    return toDefault(null, def);
   return new Date(val);
 }
 
@@ -20,9 +21,9 @@ export function fromEpoch(val: number): Date {
  * Simple wrapper to parse json.
  * @alias tryParseJSON
  *
- * @param str the string to be parsed.
+ * @param val the string to be parsed.
  * @param def a default fallback value on failed parse.
  */
-export function fromJSON(str: string, def?: any) {
-  return tryWrap(JSON.parse, str)(def);
+export function fromJSON<T>(val: string, def?: T): T {
+  return tryWrap(JSON.parse, val)(def);
 }

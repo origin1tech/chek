@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var constant_1 = require("./constant");
 var to_1 = require("./to");
-var try_1 = require("./try");
+var function_1 = require("./function");
 var array_1 = require("./array");
 /**
  * Is Array
@@ -37,7 +37,7 @@ function isBrowser(override) {
     // in Node. Good for multi-environment builds.
     if (override)
         return typeof process !== 'undefined' &&
-            try_1.tryWrap(to_1.toBoolean, process.env &&
+            function_1.tryWrap(to_1.toBoolean, process.env &&
                 process.env[override])(false) === true;
     // Otherwise just return NOT Node.
     return !isNode();
@@ -71,7 +71,7 @@ function isDebug(debugging) {
             eargv.indexOf('--debug-brk') !== -1 ||
             isValue(v8debug));
     }
-    return try_1.tryWrap(chkDebug)(false);
+    return function_1.tryWrap(chkDebug)(false);
 }
 exports.isDebug = isDebug;
 /**

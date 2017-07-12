@@ -1,67 +1,47 @@
 import { isArray, isEmpty, isFunction, isString, isValue } from './is';
+import { toDefault } from './to';
 
 declare var performance;
 
 /**
- * Split
- * Splits a string at character.
- * Default possible chars to match: ['/', '.', ',', ';', '|']
+ * Camelcase
+ * Converts string to camelcase.
  *
- * @param val the string to be split.
- * @param char the character to split at.
+ * @param val the value to be transformed.
  */
-export function split(val: string | string[], char?: string): string[] {
-
-  if (isArray(val))
-    return <string[]>val;
-
-  if (!isValue(val) || !isString(val))
+export function camelcase(val: string): string {
+  if (!isValue(val))
     return null;
-
-  // default characters.
-  let defChars = ['/', '.', ',', ';', '|'];
-  let arr;
-
-  // if no char iterate defaults.
-  let i = defChars.length;
-  while (i-- && !char) {
-    const tmpChar = defChars[i];
-    if (val.indexOf(tmpChar) !== -1)
-      char = tmpChar;
-  }
-
-  char = char || '.';
-  arr = (val as string).split(char);
-
-  // If empty remove first element.
-  // this happens when splitting on
-  // char and is first char in string.
-  if (isEmpty(arr[0]))
-    arr.shift();
-
-  return arr;
-
+  return val.replace(/[^A-Za-z0-9]/g, ' ').replace(/^\w|[A-Z]|\b\w|\s+/g, (m, i) => {
+    if (+m === 0 || /(\.|-|_)/.test(m))
+      return '';
+    return i === 0 ? m.toLowerCase() : m.toUpperCase();
+  });
 }
 
 /**
- * UUID
- * Generates a UUID.
+ * Capitalize
+ * Converts string to capitalize.
+ *
+ * @param val the value to be transformed.
  */
-export function uuid() {
+export function capitalize(val: string): string {
+  if (!isValue(val))
+    return null;
+  val = val.toLowerCase();
+  return `${val.charAt(0).toUpperCase()}${val.slice(1)}`;
+}
 
-  let d = Date.now();
-
-  // Use high perf timer if avail.
-  /* istanbul ignore next */
-  if (typeof performance !== 'undefined' && isFunction(performance.now))
-    d += performance.now();
-
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    const r = (d + Math.random() * 16) % 16 | 0;
-    d = Math.floor(d / 16);
-    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-  });
-
+/**
+ * Lowercase
+ * Converts string to lowercase.
+ *
+ * @param val the value to be transformed.
+ */
+export function lowercase(val: string): string {
+  if (!isValue(val))
+    return null;
+  return val.toLowerCase();
 }
 
 /**
@@ -168,3 +148,150 @@ export function padValues(arr: string[], strategy?: string, offset?: number | st
   return arr;
 
 }
+
+/**
+ * Split
+ * Splits a string at character.
+ * Default possible chars to match: ['/', '.', ',', ';', '|']
+ *
+ * @param val the string to be split.
+ * @param char the character to split at.
+ */
+export function split(val: string | string[], char?: string): string[] {
+
+  if (isArray(val))
+    return <string[]>val;
+
+  if (!isValue(val) || !isString(val))
+    return null;
+
+  // default characters.
+  let defChars = ['/', '.', ',', ';', '|'];
+  let arr;
+
+  // if no char iterate defaults.
+  let i = defChars.length;
+  while (i-- && !char) {
+    const tmpChar = defChars[i];
+    if (val.indexOf(tmpChar) !== -1)
+      char = tmpChar;
+  }
+
+  char = char || '.';
+  arr = (val as string).split(char);
+
+  // If empty remove first element.
+  // this happens when splitting on
+  // char and is first char in string.
+  if (isEmpty(arr[0]))
+    arr.shift();
+
+  return arr;
+
+}
+
+/**
+ * Slugify
+ * Slugifies string.
+ *
+ * @param val the value to be transformed.
+ * @param def optional default value on null.
+ */
+export function slugify(val: string): string {
+
+  if (!isValue(val))
+    return null;
+
+  val = val.replace(/^\s+|\s+$/g, '').toLowerCase();
+
+  // replace accents etc.
+  const from = 'ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;';
+  const to = 'aaaaaeeeeeiiiiooooouuuunc------';
+  for (let i = 0, l = from.length; i < l; i++) {
+    val = val.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+
+  val = val.replace(/[^a-z0-9 -]/g, '') // replace invalid chars.
+    .replace(/\s+/g, '-') // replace whitespace with -
+    .replace(/-+/g, '-'); // replace multiple dashes with single.
+
+  return val;
+
+}
+
+/**
+ * Titlecase
+ * Converts string to titlecase.
+ *
+ * This fine script refactored from:
+ * @see https://github.com/gouch/to-title-case
+ *
+ * @param val the value to be transformed.
+ * @param conjunctions when true words like and, a, but, for are also titlecased.
+ */
+export function titlecase(val: string, conjunctions?: boolean): string {
+
+  if (!isValue(val))
+    return null;
+
+  // conjunctions
+  const conj = /^(a|an|and|as|at|but|by|en|for|if|in|nor|of|on|or|per|the|to|vs?\.?|via)$/i;
+
+  return val.replace(/[A-Za-z0-9\u00C0-\u00FF]+[^\s-]*/g, function (m, i, t) {
+
+    if (i > 0 && i + m.length !== t.length &&
+      m.search(conj) > -1 && t.charAt(i - 2) !== ';' &&
+      (t.charAt(i + m.length) !== '-' || t.charAt(i - 1) === '-') &&
+      t.charAt(i - 1).search(/[^\s-]/) < 0) {
+      if (conjunctions === false)
+        return capitalize(m);
+      return m.toLowerCase();
+    }
+
+    if (m.substr(1).search(/[A-Z]|\../) > -1)
+      /* istanbul ignore next */
+      return m;
+
+    return m.charAt(0).toUpperCase() + m.substr(1);
+
+  });
+
+}
+
+/**
+ * Uppercase
+ * Converts string to uppercase.
+ *
+ * @param val the value to be transformed.
+ */
+export function uppercase(val: string): string {
+  if (!isValue(val))
+    return null;
+  return val.toUpperCase();
+}
+
+/**
+ * UUID
+ * Generates a UUID.
+ */
+export function uuid() {
+
+  let d = Date.now();
+
+  // Use high perf timer if avail.
+  /* istanbul ignore next */
+  if (typeof performance !== 'undefined' && isFunction(performance.now))
+    d += performance.now();
+
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+
+}
+
+
+
+
+

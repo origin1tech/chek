@@ -7,7 +7,7 @@ import { IMap } from '../interfaces';
  * @param val the value to convert to array.
  * @param def optional default value on null or error.
  */
-export declare function toArray<T>(val: any, def?: any): T[];
+export declare function toArray<T>(val: any, id?: string | T[], def?: T[]): T[];
 /**
  * To Boolean
  * Converts value if not boolean to boolean.

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>NBuild</title>
+	<title>Chek</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">NBuild</a>
+					<a href="index.html" class="title">Chek</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> NBuild</h1>
+			<h1> Chek</h1>
 		</div>
 	</div>
 </header>
@@ -65,11 +65,133 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="chek">Chek</h1>
-				<p>Chek is a minimalistic module preventing the need for heavier modules such as Lodash or Underscore.
-					The utility methods are designed for most use cases. They are not intended to handle every scenario.
-				If that is what&#39;s needed it is strongly suggested you use one of the afore mentioned libraries.</p>
-				<h2 id="when-to-use">When to Use</h2>
-				<p>This library is best suited when you are perhaps creating a simple micro service in node and just need a way to to check if a variable is an object, plainObject, array etc. Really its purpose is to limit bloat not much more.</p>
+				<p>What is Chek? Well we have a guy we call Chekov, as in &quot;I can do zat Captain I can do zat&quot;. So we shortened it to &quot;Chek&quot;. Hey there&#39;s a logger named after &quot;Winston&quot; right.</p>
+				<p>Anyway Chek is a slimmed down lib for common tasks like check if &quot;is&quot; a type or convert to a type. There are helpers for dealing with strings, converting objects to arrays and back (handy for Firebase type apis) and so on. Nothing special just a nice little toolkit preventing the need for large libs like Lodash or Underscore (both great of course).</p>
+				<p>The end game is simple. Have about 90% or so coverage for common tasks preventing the need for a larger footprint.</p>
+				<p>Comes with 100% test coverage out of the gate. Some handy methods like push, splice, shift, unshfit and so on that handle immutability as well as other methods where applicable.</p>
+				<h2 id="installation">Installation</h2>
+				<pre><code class="lang-sh">npm install chek -s
+</code></pre>
+				<h2 id="usage">Usage</h2>
+				<p><strong>Using Typescript</strong></p>
+				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> ck <span class="hljs-keyword">from</span> <span class="hljs-string">'chek'</span>; <span class="hljs-comment">// or import { isString, slugify } from 'chek';</span>
+
+<span class="hljs-keyword">let</span> slug = <span class="hljs-string">'i can Do zAT'</span>;
+<span class="hljs-keyword">if</span> (ck.isString(slug))
+  slug = ck.slugify(slug) <span class="hljs-comment">// result: 'i-can-do-zat';</span>
+</code></pre>
+				<p><strong>Using ES5</strong></p>
+				<pre><code class="lang-js"><span class="hljs-keyword">const</span> ck = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chek'</span>);
+
+<span class="hljs-comment">// same as above.</span>
+</code></pre>
+				<h2 id="methods">Methods</h2>
+				<p>Methods are broken into several categories. Some have only a method or two and we&#39;ll likely expand a little on some. Have <strong>any suggestions</strong> be sure to post an issue we&#39;re all ears. Not prideful help out we all win!</p>
+				<ul>
+					<li>array         - things like contains, containsAny, duplicates.</li>
+					<li>from          - things like fromEpoch, fromJSON, tryWrap &amp; tryRequire.</li>
+					<li>functions     - noop and noopIf</li>
+					<li>is            - things like if isString, isBoolean, isFunction.</li>
+					<li>object        - things like get, set, clone, extend.</li>
+					<li>string        - things like lowercase, uppercase, slugify, padding, uuid.</li>
+					<li>to            - handles converting to a type like toBoolean, toRegExp.</li>
+					<li>type          - handles get and casting types.</li>
+				</ul>
+				<p><strong>Legend</strong></p>
+				<p>If you know TypeScript you already know this. The below params and return results are denoted by TypeScript syntax. Here are the basics if there&#39;s somethign that doesn&#39;t make sense pop on over the Microsft&#39;s TypeScript page I&#39;m sure it will clear it up.</p>
+				<ul>
+					<li>any       - means any type</li>
+					<li>?         - means it&#39;s optional.</li>
+					<li>[]        - means an array of some type like string[].</li>
+					<li>...       - indicates a spread operator.</li>
+					<li>T         - indicates generic type (if not using TypeScript you can ignore).</li>
+				</ul>
+				<table>
+					<caption>CHEK ARRAY</caption>
+					<th>
+						<tr>
+							<td><strong>Method</strong></td><td><strong>Params</strong></td><td><strong>Returns</strong></td><td><strong>Description</strong></td>
+						</tr>
+					</th>
+					<tbody>
+						<tr>
+							<td>duplicates</td><td>arr: any[], val: any, breakable?: boolean</td><td>number</td><td>Counts duplicates in array.</td>
+						</tr>
+						<tr>
+							<td>contains</td><td>arr: any[], val: any</td><td>boolean</td><td>Tests if array contains value.</td>
+						</tr>
+						<tr>
+							<td>contains</td><td>arr: any[], compare: any[]</td><td>boolean</td><td>Tests if array contains any value.</td>
+						</tr>
+						<tr>
+							<td>keys</td><td>obj: {}</td><td>string[]</td><td>Returns an array of key names within an object.</td>
+						</tr>
+						<tr>
+							<td>flatten</td><td>...arr: any[]</td><td>any[]</td><td>Flattens nested arrays in immutable way.</td>
+						</tr>
+						<tr>
+							<td>first</td><td>arr: any[]</td><td>any</td><td>Returns first value in array without mutating.</td>
+						</tr>
+						<tr>
+							<td>last</td><td>arr: any[]</td><td>any</td><td>Returns last value in array without mutating.</td>
+						</tr>
+						<tr>
+							<td>pop</td><td>arr: any[]</td><td>IArrayResult</td><td>Pops value returns object w/o mutating w/ new array and val.</td>
+						</tr>
+						<tr>
+							<td>push</td><td>arr: any[], ...args: any[]</td><td>IArrayResult</td><td>Pushes value without mutating returning new array and val.</td>
+						</tr>
+						<tr>
+							<td>shift</td><td>arr: any[]</td><td>IArrayResult</td><td>Shifts value without mutating returning new array and val.</td>
+						</tr>
+						<tr>
+							<td>splice</td><td>arr: any[], start?: number, remove?: number, ...items: any[]</td><td>IArrayResult</td><td>Splices value without mutating returning new array and val and any inserted items.</td>
+						</tr>
+						<tr>
+							<td>unshift</td><td>arr: any[], ...items: any[]</td><td>IArrayResult</td><td>Unshifts inserting value returning new array and val.</td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<caption>CHEK FROM</caption>
+					<th>
+						<tr>
+							<td><strong>Method</strong></td><td><strong>Params</strong></td><td><strong>Returns</strong></td><td><strong>Description</strong></td>
+						</tr>
+					</th>
+					<tbody>
+						<tr>
+							<td>fromEpoch</td><td>val: number, def?: Date</td><td>Date</td><td>Creates date from epoch.</td>
+						</tr>
+						<tr>
+							<td>fromJSON</td><td>val: string, def? T</td><td>T</td><td>Safely parses JSON.</td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<caption>CHEK FUNCTION</caption>
+					<th>
+						<tr>
+							<td><strong>Method</strong></td><td><strong>Params</strong></td><td><strong>Returns</strong></td><td><strong>Description</strong></td>
+						</tr>
+					</th>
+					<tbody>
+						<tr>
+							<td>noop</td><td>n/a</td><td>n/a</td><td>Non operation function.</td>
+						</tr>
+						<tr>
+							<td>noopIf</td><td>fn?: Function</td><td>Function</td><td>Returns non-operation function or provided function.</td>
+						</tr>
+						<tr>
+							<td>tryWrap</td><td>fn: Function, ...args: any[]</td><td>Function</td><td>Returns safely wrapped function.</td>
+						</tr>
+						<tr>
+							<td>tryRequire</td><td>name: string, def?: any</td><td>T</td><td>Safely requires node module.</td>
+						</tr>
+					</tbody>
+				</table>
+				<h2 id="license">License</h2>
+				<p>See <a href="License">LICENSE</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -85,7 +207,31 @@
 						<a href="modules/_interfaces_.html">"interfaces"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_test_spec_.html">"test.spec"</a>
+						<a href="modules/_modules_array_.html">"modules/array"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modules_constant_.html">"modules/constant"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modules_from_.html">"modules/from"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modules_function_.html">"modules/function"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modules_is_.html">"modules/is"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modules_object_.html">"modules/object"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modules_string_.html">"modules/string"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modules_to_.html">"modules/to"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_modules_type_.html">"modules/type"</a>
 					</li>
 				</ul>
 			</nav>

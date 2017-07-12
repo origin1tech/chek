@@ -37,6 +37,15 @@ export declare function clone<T>(obj: any, json?: boolean): T;
  */
 export declare function extend<T>(obj: any, ...args: any[]): T;
 /**
+ * Reverse
+ * Reverses arrays, strings or objects.
+ * Only numbers, strings or booleans are supported
+ * when reverse mapping objects.
+ *
+ * @param val the object to reverse.
+ */
+export declare function reverse(val: any, deep?: boolean): any;
+/**
  * Set
  * Sets a value on an object using dot notation or url path.
  *

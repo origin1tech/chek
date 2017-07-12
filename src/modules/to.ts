@@ -4,7 +4,7 @@ import { keys, push } from './array';
 import { fromEpoch } from './from';
 import { isValue, isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isNull, isInfinite, isDate, isFloat, isInteger, isRegExp, isBrowser } from './is';
 import { clone, set, extend, del } from './object';
-import { tryWrap } from './try';
+import { tryWrap } from './function';
 import { split } from './string';
 
 declare var window;
@@ -17,7 +17,7 @@ declare var window;
  * @param val the value to convert to array.
  * @param def optional default value on null or error.
  */
-export function toArray<T>(val: any, def?: any): T[] {
+export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
 
   if (!isValue(val))
     return toDefault(null, def);
@@ -25,19 +25,28 @@ export function toArray<T>(val: any, def?: any): T[] {
   if (isArray(val))
     return val;
 
+  if (isArray(id)) {
+    def = <any>id;
+    id = undefined;
+  }
+
+  id = id || '$id';
+
   if (isPlainObject(val)) {
 
     let arr = [];
 
     for (let p in val) {
       if (val.hasOwnProperty(p)) {
-        const obj = val[p];
-        if (isPlainObject(obj)) {
-          const newObj = Object.assign({}, obj, { $id: p });
-          arr = push(arr, newObj).result;
+        const cur = val[p];
+        if (isPlainObject(cur)) {
+          const tmp = {};
+          tmp[(id as string)] = p;
+          const obj = Object.assign({}, cur, tmp);
+          arr.push(obj);
         }
         else {
-          arr = push(arr, val).result;
+          arr.push(val);
         }
       }
     }

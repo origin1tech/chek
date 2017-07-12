@@ -1,6 +1,6 @@
 import { toStr } from './constant';
 import { toDate, toBoolean, toEpoch } from './to';
-import { tryWrap } from './try';
+import { tryWrap } from './function';
 import { keys, duplicates } from './array';
 
 declare var v8debug;

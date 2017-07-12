@@ -1,16 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
-var try_1 = require("./try");
+var function_1 = require("./function");
+var to_1 = require("./to");
 /**
  * From Epoch
  * Converts to a Date from an epoch.
  *
  * @param val the epoch value to convert to date.
  */
-function fromEpoch(val) {
+function fromEpoch(val, def) {
     if (!is_1.isValue(val) || !is_1.isNumber(val))
-        return null;
+        return to_1.toDefault(null, def);
     return new Date(val);
 }
 exports.fromEpoch = fromEpoch;
@@ -19,11 +20,11 @@ exports.fromEpoch = fromEpoch;
  * Simple wrapper to parse json.
  * @alias tryParseJSON
  *
- * @param str the string to be parsed.
+ * @param val the string to be parsed.
  * @param def a default fallback value on failed parse.
  */
-function fromJSON(str, def) {
-    return try_1.tryWrap(JSON.parse, str)(def);
+function fromJSON(val, def) {
+    return function_1.tryWrap(JSON.parse, val)(def);
 }
 exports.fromJSON = fromJSON;
 //# sourceMappingURL=from.js.map

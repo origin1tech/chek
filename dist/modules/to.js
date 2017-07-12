@@ -4,7 +4,7 @@ var array_1 = require("./array");
 var from_1 = require("./from");
 var is_1 = require("./is");
 var object_1 = require("./object");
-var try_1 = require("./try");
+var function_1 = require("./function");
 var string_1 = require("./string");
 /**
  * To Array
@@ -14,22 +14,29 @@ var string_1 = require("./string");
  * @param val the value to convert to array.
  * @param def optional default value on null or error.
  */
-function toArray(val, def) {
+function toArray(val, id, def) {
     if (!is_1.isValue(val))
         return toDefault(null, def);
     if (is_1.isArray(val))
         return val;
+    if (is_1.isArray(id)) {
+        def = id;
+        id = undefined;
+    }
+    id = id || '$id';
     if (is_1.isPlainObject(val)) {
         var arr = [];
         for (var p in val) {
             if (val.hasOwnProperty(p)) {
-                var obj = val[p];
-                if (is_1.isPlainObject(obj)) {
-                    var newObj = Object.assign({}, obj, { $id: p });
-                    arr = array_1.push(arr, newObj).result;
+                var cur = val[p];
+                if (is_1.isPlainObject(cur)) {
+                    var tmp = {};
+                    tmp[id] = p;
+                    var obj = Object.assign({}, cur, tmp);
+                    arr.push(obj);
                 }
                 else {
-                    arr = array_1.push(arr, val).result;
+                    arr.push(val);
                 }
             }
         }
@@ -86,7 +93,7 @@ function toDate(val, def) {
         return val;
     if (!canParse())
         return toDefault(null, def);
-    return try_1.tryWrap(parseDate)(def);
+    return function_1.tryWrap(parseDate)(def);
 }
 exports.toDate = toDate;
 /**
@@ -126,7 +133,7 @@ function toFloat(val, def) {
         return val;
     if (!is_1.isValue(val))
         return toDefault(null, def);
-    var parsed = try_1.tryWrap(parseFloat, val.toString())(def);
+    var parsed = function_1.tryWrap(parseFloat, val.toString())(def);
     if (is_1.isFloat(parsed))
         return parsed;
     if (toBoolean(val))
@@ -152,7 +159,7 @@ function toJSON(obj, pretty, def) {
     tabs = pretty ? pretty : tabs;
     if (!is_1.isObject(obj))
         return toDefault(null, def);
-    return try_1.tryWrap(JSON.stringify, obj, null, tabs)(def);
+    return function_1.tryWrap(JSON.stringify, obj, null, tabs)(def);
 }
 exports.toJSON = toJSON;
 /**
@@ -167,7 +174,7 @@ function toInteger(val, def) {
         return val;
     if (!is_1.isValue(val))
         return toDefault(null, def);
-    var parsed = try_1.tryWrap(parseInt, val.toString())(def);
+    var parsed = function_1.tryWrap(parseInt, val.toString())(def);
     if (is_1.isInteger(parsed))
         return parsed;
     if (toBoolean(val))
@@ -249,7 +256,7 @@ function toNested(val, def) {
         }
         return dest;
     }
-    return try_1.tryWrap(nest, val)(def);
+    return function_1.tryWrap(nest, val)(def);
 }
 exports.toNested = toNested;
 /**
@@ -286,7 +293,7 @@ function toRegExp(val, def) {
         }
         return new RegExp(val, opts);
     }
-    return try_1.tryWrap(regExpFromStr)(def);
+    return function_1.tryWrap(regExpFromStr)(def);
 }
 exports.toRegExp = toRegExp;
 /**
@@ -304,7 +311,7 @@ function toString(val, def) {
     function _toString() {
         return val.toString();
     }
-    return try_1.tryWrap(_toString)(def);
+    return function_1.tryWrap(_toString)(def);
 }
 exports.toString = toString;
 /**
@@ -350,7 +357,7 @@ function toUnnested(obj, prefix, def) {
             return null;
         return dest;
     }
-    return try_1.tryWrap(unnest, obj)(def);
+    return function_1.tryWrap(unnest, obj)(def);
 }
 exports.toUnnested = toUnnested;
 /**

@@ -5,9 +5,14 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
+    "clean": "node ./build/clean",
     "compile": "node ./node_modules/typescript/bin/tsc -p ./src/tsconfig.json",
     "browserify": "BROWSER=true node ./node_modules/browserify/bin/cmd  ./dist/index.js -o ./dist/browser.js",
-    "docs": "node ./node_modules/typedoc/bin/typedoc --out ./docs ./src --options ./typedoc.json",
+    "docs": "node ./node_modules/typedoc/bin/typedoc --out ./docs ./src --options ./typedoc.json --tsconfig ./src/tsconfig.json",
+    "bump": "node ./build/bump",
+    "build": "npm run clean && npm run compile && npm run browserify && npm run docs",
+    "commit": "git add . && git commit -am 'auto commit' && git push",
+    "release": "npm run build && npm run bump && npm run commit && npm publish",
     "test": "nyc mocha --opts ./src/mocha.opts"
   },
   "repository": {
@@ -34,6 +39,7 @@
     "browserify": "^14.4.0",
     "chai": "^4.0.2",
     "deep-freeze": "0.0.1",
+    "del": "^3.0.0",
     "mocha": "^3.4.2",
     "moment": "^2.18.1",
     "nyc": "^11.0.3",

@@ -53,8 +53,6 @@ const unnested = {
   'posts.102.category': 'Lunch',
 };
 
-let empty;
-
 describe('Chek', () => {
 
   before((done) => {
@@ -126,13 +124,12 @@ describe('Chek', () => {
     assert.equal(ck.unshift([2, 3], 1).val, 3);
   });
 
-
   // FROM CHEKS
 
   it('should get date from Epoch.', () => {
     const epoch = Date.now();
     assert.equal(ck.fromEpoch(epoch).getTime(), (new Date(epoch)).getTime());
-    assert.equal(ck.fromEpoch(empty), null);
+    assert.equal(ck.fromEpoch(null), null);
   });
 
   it('should get object from JSON.', () => {
@@ -152,7 +149,6 @@ describe('Chek', () => {
     assert.equal(ck.noopIf(myFunc), myFunc);
     assert.equal(ck.noopIf(), ck.noop);
   });
-
 
   // IS CHEKS
 
@@ -381,10 +377,39 @@ describe('Chek', () => {
     assert.deepEqual(result, { red: 'error', yellow: 'warn', true: 'enabled', 2: 'level' });
     assert.equal(ck.reverse('1234'), '4321');
     assert.deepEqual(ck.reverse([5, 4, 3, 2, 1]), [1, 2, 3, 4, 5]);
-    assert.deepEqual(ck.reverse(empty), null);
+    assert.deepEqual(ck.reverse(null), null);
   });
 
   // STRING CHEKS
+
+  it('should convert string to Camelcase.', () => {
+    assert.equal(ck.camelcase('CamelCase'), 'camelCase');
+    assert.equal(ck.camelcase('Camel.Case'), 'camelCase');
+    assert.equal(ck.camelcase('Camel_case'), 'camelCase');
+    assert.equal(ck.camelcase(null), null);
+  });
+
+  it('should convert string to Capitalize.', () => {
+    assert.equal(ck.capitalize('capitalize'), 'Capitalize');
+    assert.equal(ck.capitalize(null), null);
+  });
+
+  it('should convert string to Lowercase.', () => {
+    assert.equal(ck.lowercase('LOWERCASE'), 'lowercase');
+    assert.equal(ck.lowercase(null), null);
+  });
+
+  it('should convert string to Titlecase.', () => {
+    assert.equal(ck.titlecase('luke i am your father.'), 'Luke I Am Your Father.');
+    assert.equal(ck.titlecase('red White AND blue'), 'Red White and Blue');
+    assert.equal(ck.titlecase('red White AND blue', false), 'Red White And Blue');
+    assert.equal(ck.titlecase(null), null);
+  });
+
+  it('should convert string to Uppercase.', () => {
+    assert.equal(ck.uppercase('uppercase'), 'UPPERCASE');
+    assert.equal(ck.uppercase(null), null);
+  });
 
   it('should Split a string by custom or common chars.', () => {
     const str = 'user.posts.1234';
@@ -395,6 +420,11 @@ describe('Chek', () => {
     assert.deepEqual(ck.split(str), ck.split(str2));
     assert.deepEqual(ck.split('.' + str), ck.split(str2));
     assert.equal(ck.split(invalid), null);
+  });
+
+  it('should convert string to Slug.', () => {
+    assert.equal(ck.slugify('luke I-am your father'), 'luke-i-am-your-father');
+    assert.equal(ck.slugify(null), null);
   });
 
   it('should generate a UUID.', () => {
@@ -436,7 +466,10 @@ describe('Chek', () => {
     assert.equal(ck.toArray(null), null);
     assert.deepEqual(ck.toArray('test'), ['test']);
     assert.deepEqual(ck.toArray(obj), objArr);
+    assert.deepEqual(ck.toArray(obj, []), objArr);
     assert.deepEqual(ck.toArray({ 100: 'one' }), <any[]>[{ 100: 'one' }]);
+    assert.deepEqual(ck.toArray({ 100: { name: 'jeff' } }), <any[]>[{ $id: '100', name: 'jeff' }]);
+    assert.deepEqual(ck.toArray({ 100: { name: 'jeff' } }, 'key'), <any[]>[{ key: '100', name: 'jeff' }]);
   });
 
   it('should convert To Boolean.', () => {
@@ -457,45 +490,45 @@ describe('Chek', () => {
     assert.equal(ck.toDate('123:4447:22'), null);
   });
 
-  it('should convert object To Default.', () => {
+  it('should convert To Default.', () => {
     assert.equal(ck.toDefault(null, 'test'), 'test');
   });
 
-  it('should convert object To Epoch.', () => {
+  it('should convert To Epoch.', () => {
     const date = new Date();
     assert.equal(ck.toEpoch(date), date.getTime());
   });
 
-  it('should convert object To Float.', () => {
+  it('should convert To Float.', () => {
 
     assert.equal(ck.toFloat(123.50), 123.50);
     assert.equal(ck.toFloat('123.50'), 123.50);
     assert.equal(ck.toFloat('123.50a'), 123.50);
-    assert.equal(ck.toFloat(empty), null);
+    assert.equal(ck.toFloat(null), null);
     assert.equal(ck.toFloat('yes'), 1);
     assert.equal(ck.toFloat('no'), 0);
   });
 
-  it('should convert object To JSON.', () => {
+  it('should convert To JSON.', () => {
     const obj = { name: 'Beth', age: 33 };
     const defStr = '{"name": "bob"}';
     assert.equal(ck.toJSON(obj), JSON.stringify(obj));
-    assert.equal(ck.toJSON(empty), null);
-    assert.equal(ck.toJSON(empty, defStr), defStr);
+    assert.equal(ck.toJSON(null), null);
+    assert.equal(ck.toJSON(null, defStr), defStr);
     assert.equal(ck.toJSON(obj, true), JSON.stringify(obj, null, 2));
   });
 
-  it('should convert object To Integer.', () => {
+  it('should convert To Integer.', () => {
     assert.equal(ck.toInteger(123), 123);
-    assert.equal(ck.toInteger(empty), null);
+    assert.equal(ck.toInteger(null), null);
     assert.equal(ck.toInteger('123.50'), 123);
     assert.equal(ck.toInteger('123.50a'), 123);
     assert.equal(ck.toInteger('yes'), 1);
     assert.equal(ck.toInteger('no'), 0);
   });
 
-  it('should convert object To Map.', () => {
-    assert.equal(ck.toMap(empty), null);
+  it('should convert To Map.', () => {
+    assert.equal(ck.toMap(null), null);
     assert.deepEqual(ck.toMap('one'), <any>{ 0: 'one' });
     assert.deepEqual(ck.toMap('one,two'), <any>{ 0: 'one', 1: 'two' });
     assert.deepEqual(ck.toMap([{ key: '123', name: 'Joe' }], 'key'), <any>{ '123': { name: 'Joe' } });
@@ -504,16 +537,16 @@ describe('Chek', () => {
     assert.deepEqual(ck.toMap(['one', 'two']), <any>{ 0: 'one', 1: 'two' });
   });
 
-  it('should convert object to Nested.', () => {
+  it('should convert to Nested.', () => {
     assert.deepEqual(ck.toNested(unnested), nested);
   });
 
-  it('should convert object To Number.', () => {
+  it('should convert To Number.', () => {
     assert.equal(ck.toNumber('123.50'), 123.50);
     assert.equal(ck.toNumber('123.50a'), 123.50);
   });
 
-  it('should convert object To RegExp.', () => {
+  it('should convert To RegExp.', () => {
     const exp = new RegExp('test');
     const exp2 = ck.toRegExp(exp.toString());
     const exp3 = new RegExp('just some string');
@@ -525,13 +558,13 @@ describe('Chek', () => {
     assert.instanceOf(ck.toRegExp('/^test$/gi'), RegExp);
   });
 
-  it('should convert object To String.', () => {
+  it('should convert To String.', () => {
     assert.equal(ck.toString('test'), 'test');
     assert.equal(ck.toString(123), '123');
     assert.equal(ck.toString(null), null);
   });
 
-  it('should convert object to Unnested.', () => {
+  it('should convert to Unnested.', () => {
     assert.deepEqual(ck.toUnnested(nested, nested), unnested);
     // this should be null since disabling
     // key prefixing would result in dupes.
@@ -596,8 +629,19 @@ describe('Chek', () => {
 
   it('should should Cast Type.', () => {
     assert.isBoolean(ck.castType('boolean', 1));
+    assert.equal(ck.castType(function (v) { return v; }, 'test'), 'test');
+    assert.deepEqual(ck.castType(['boolean'], [1, 0]), [true, false]);
+    assert.equal(ck.castType('string', null), null);
+    assert.deepEqual(ck.castType({}, {}), {});
+    assert.equal(ck.castType('any', 'test'), 'test');
+    assert.equal(ck.castType('integer', 123.25), 123);
+    assert.equal(ck.castType('float', '123.25'), 123.25);
+    assert.equal(ck.castType('number', '123.25'), 123.25);
+    assert.equal(ck.castType<RegExp>('regexp', '/test/').toString(), (new RegExp('test')).toString());
+    assert.equal(ck.castType<Date>('date', '01/01/2017 12:30:22').getTime(), (new Date('01/01/2017 12:30:22').getTime()));
+    assert.equal(ck.castType('other', 'test', 'default'), 'default');
     // assert.isBoolean(ck.castType('array', [0, 1, true]));
-    assert.isBoolean(ck.castType('function', function t() { });
+    // assert.isBoolean(ck.castType('function', function t() { }, );
   });
 
 });

@@ -1,21 +1,30 @@
 
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isRegExp, isDate, isError, isNull, isValue, isFunction, isFloat, isInteger, isNumber } from './is';
-import { toDate, toNumber, toArray, toFloat, toInteger, toBoolean, toString, toDefault } from './to';
-import { tryWrap } from './try';
+import { toDate, toNumber, toArray, toFloat, toInteger, toBoolean, toString, toDefault, toRegExp } from './to';
+import { tryWrap } from './function';
 import { push } from './array';
 
-
+const toMap = {
+  'boolean': toBoolean,
+  'date': toDate,
+  'float': toFloat,
+  'integer': toInteger,
+  'number': toNumber,
+  'regexp': toRegExp,
+  'string': toString,
+  'any': (v) => v
+};
 
 /**
  * Cast Type
- * Attempts to cast a type to another type.
+ * Attempts to cast to specified type.
  *
  * @param type the type to cast to.
  * @param val the value to be cast.
  * @param def optional default value to return on null.
  * @param args optional args to pass when casting function.
  */
-export function castType<T>(type: any, val?: any, def?: any, ...args: any[]): T | T[] {
+export function castType<T>(type: any, val: any, def?: any, ...args: any[]): T {
 
   function cast() {
 
@@ -24,7 +33,7 @@ export function castType<T>(type: any, val?: any, def?: any, ...args: any[]): T 
 
     if (isArray(type)) {
       return toArray(val)
-        .map(v => <T>castType(type, val));
+        .map((v, i) => <T>castType(type[i] || type[0], v));
     }
 
     else if (isFunction(type)) {
@@ -34,20 +43,12 @@ export function castType<T>(type: any, val?: any, def?: any, ...args: any[]): T 
 
     else if (isString(type)) {
 
-      type = (type || getType(val)).toLowerCase();
+      type = type.toLowerCase();
 
-      let map = {
-        'string': toString,
-        'boolean': toBoolean,
-        'integer': toInteger,
-        'float': toFloat,
-        'number': toNumber,
-        'date': toDate,
-        'any': (v) => val
-      }[type];
+      let func = toMap[type];
 
-      if (map)
-        return map(val);
+      if (func)
+        return func(val);
 
       return toDefault(null, def);
 

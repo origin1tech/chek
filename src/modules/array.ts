@@ -1,7 +1,7 @@
 
 import { IMap, IArrayResult } from '../interfaces';
 import { isArray, isEqual, isPlainObject, isValue } from './is';
-import { tryWrap } from './try';
+import { tryWrap } from './function';
 
 /**
  * Duplicates

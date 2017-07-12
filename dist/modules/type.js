@@ -2,46 +2,55 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
 var to_1 = require("./to");
-var try_1 = require("./try");
+var function_1 = require("./function");
+var array_1 = require("./array");
+var toMap = {
+    'boolean': to_1.toBoolean,
+    'date': to_1.toDate,
+    'float': to_1.toFloat,
+    'integer': to_1.toInteger,
+    'number': to_1.toNumber,
+    'regexp': to_1.toRegExp,
+    'string': to_1.toString,
+    'any': function (v) { return v; }
+};
 /**
  * Cast Type
- * Attempts to cast a type to another type.
+ * Attempts to cast to specified type.
  *
- * @param val the value to be cast.
  * @param type the type to cast to.
+ * @param val the value to be cast.
+ * @param def optional default value to return on null.
+ * @param args optional args to pass when casting function.
  */
-function castType(val, type) {
+function castType(type, val, def) {
+    var args = [];
+    for (var _i = 3; _i < arguments.length; _i++) {
+        args[_i - 3] = arguments[_i];
+    }
     function cast() {
         if (!is_1.isValue(val))
-            return null;
+            return to_1.toDefault(null, def);
         if (is_1.isArray(type)) {
             return to_1.toArray(val)
-                .map(function (v) { return castType(v, type[0]); });
+                .map(function (v, i) { return castType(type[i] || type[0], v); });
         }
         else if (is_1.isFunction(type)) {
-            return type(val);
+            args = array_1.push(args, val).result;
+            return type.apply(void 0, args);
         }
         else if (is_1.isString(type)) {
-            type = (type || getType(val)).toLowerCase();
-            var map = {
-                'string': to_1.toString,
-                'boolean': to_1.toBoolean,
-                'integer': to_1.toInteger,
-                'float': to_1.toFloat,
-                'number': to_1.toNumber,
-                'date': to_1.toDate,
-                'any': function (v) { return val; }
-            }[type];
-            if (map)
-                return map(val);
-            else
-                throw new Error("Unknown type could not be cast.");
+            type = type.toLowerCase();
+            var func = toMap[type];
+            if (func)
+                return func(val);
+            return to_1.toDefault(null, def);
         }
         else {
             return val;
         }
     }
-    return try_1.tryWrap(cast)(val);
+    return function_1.tryWrap(cast)(def);
 }
 exports.castType = castType;
 /**
