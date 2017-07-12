@@ -136,5 +136,6 @@ export declare function toUnnested<T>(obj: IMap<any>, prefix?: boolean | IMap<an
  *
  * @param key the key or object to add to the window object.
  * @param val the corresponding value to add to window object.
+ * @param exclude string or array of keys to exclude.
  */
 export declare function toWindow(key: any, val?: any, exclude?: string | string[]): void;

@@ -366,22 +366,35 @@ exports.toUnnested = toUnnested;
  *
  * @param key the key or object to add to the window object.
  * @param val the corresponding value to add to window object.
+ * @param exclude string or array of keys to exclude.
  */
 function toWindow(key, val, exclude) {
     /* istanbul ignore if */
     if (!is_1.isBrowser())
         return;
-    var obj = key;
     exclude = toArray(exclude);
-    if (!is_1.isPlainObject(obj)) {
-        obj = {};
-        obj[key] = val;
+    var _keys, i;
+    // key/val was passed.
+    if (is_1.isString(key)) {
+        if (!is_1.isPlainObject(val)) {
+            window[key] = val;
+        }
+        var obj = {};
+        _keys = array_1.keys(val);
+        i = _keys.length;
+        while (i--) {
+            if (!array_1.contains(exclude, _keys[i]))
+                obj[_keys[i]] = val[_keys[i]];
+        }
+        window[key] = obj;
     }
-    var _keys = array_1.keys(obj);
-    var i = _keys.length;
-    while (i--) {
-        if (!array_1.contains(exclude, _keys[i]))
-            window[_keys[i]] = obj[_keys[i]];
+    else if (is_1.isPlainObject(key)) {
+        _keys = array_1.keys(key);
+        i = _keys.length;
+        while (i--) {
+            if (!array_1.contains(exclude, _keys[i]))
+                window[_keys[i]] = key[_keys[i]];
+        }
     }
 }
 exports.toWindow = toWindow;

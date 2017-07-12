@@ -412,6 +412,7 @@ export function toUnnested<T>(obj: IMap<any>, prefix?: boolean | IMap<any>, def?
  *
  * @param key the key or object to add to the window object.
  * @param val the corresponding value to add to window object.
+ * @param exclude string or array of keys to exclude.
  */
 export function toWindow(key: any, val?: any, exclude?: string | string[]): void {
 
@@ -419,20 +420,33 @@ export function toWindow(key: any, val?: any, exclude?: string | string[]): void
   if (!isBrowser())
     return;
 
-  let obj: any = key;
   exclude = toArray<string>(exclude);
 
-  if (!isPlainObject(obj)) {
-    obj = {};
-    obj[key] = val;
+  let _keys, i;
+
+  // key/val was passed.
+  if (isString(key)) {
+    if (!isPlainObject(val)) {
+      window[key] = val;
+    }
+    const obj: any = {};
+    _keys = keys(val);
+    i = _keys.length;
+    while (i--) {
+      if (!contains(exclude, _keys[i]))
+        obj[_keys[i]] = val[_keys[i]];
+    }
+    window[key] = obj;
   }
 
-  let _keys = keys(obj);
-  let i = _keys.length;
-
-  while (i--) {
-    if (!contains(exclude, _keys[i]))
-      window[_keys[i]] = obj[_keys[i]];
+  // object passed to key.
+  else if (isPlainObject(key)) {
+    _keys = keys(key);
+    i = _keys.length;
+    while (i--) {
+      if (!contains(exclude, _keys[i]))
+        window[_keys[i]] = key[_keys[i]];
+    }
   }
 
 }
