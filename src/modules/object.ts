@@ -145,8 +145,8 @@ function _set<T>(obj: any, key: string | string[], val: any): T {
  */
 export function del<T>(obj: any, key: string | string[], immutable?: boolean): T {
   if (immutable)
-    return _del(clone(obj), key);
-  return _del(obj, key);
+    return _del<T>(clone(obj), key);
+  return _del<T>(obj, key);
 }
 
 /**
@@ -157,7 +157,7 @@ export function del<T>(obj: any, key: string | string[], immutable?: boolean): T
  * @param key the dot notated key or array of keys.
  */
 export function get<T>(obj: any, key: string | string[]): T {
-  return _get(clone(obj), key);
+  return _get<T>(clone(obj), key);
 }
 
 /**
@@ -306,8 +306,8 @@ export function reverse<T>(obj: any): T {
  */
 export function set<T>(obj: any, key: string | string[], val: any, immutable?: boolean): T {
   if (immutable)
-    return _set(clone(obj), key, val);
-  return _set(obj, key, val);
+    return _set<T>(clone(obj), key, val);
+  return _set<T>(obj, key, val);
 }
 
 
