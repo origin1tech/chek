@@ -280,7 +280,8 @@ describe('Chek', () => {
   it('should check if is Truthy.', () => {
     assert.equal(ck.isTruthy('true'), true);
     assert.equal(ck.isTruthy(0), false);
-    assert.equal(ck.isTruthy('false'), false);
+    assert.equal(ck.isTruthy('false'), true);
+    assert.equal(ck.isTruthy(''), false);
     assert.equal(ck.isTruthy(null), false);
     assert.equal(ck.isTruthy(undefined), false);
     assert.equal(ck.isTruthy(['false']), true);
@@ -589,7 +590,11 @@ describe('Chek', () => {
     global['window'] = {};
     process.env['BROWSER'] = 'true';
     ck.toWindow('helpers', helpers);
-    assert.deepEqual(global['window'], { helpers: helpers });
+    ck.toWindow('key', 'value');
+    assert.deepEqual(global['window'], { helpers: helpers, key: 'value' });
+    global['window'] = {};
+    ck.toWindow(helpers);
+    assert.deepEqual(global['window'], helpers);
     delete process.env['BROWSER'];
     delete global['window'];
   });

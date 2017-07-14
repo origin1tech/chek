@@ -399,6 +399,10 @@ If you know TypeScript you already know this. The below params and return result
   </tbody>
 </table>
 
+## Changes
+
+See [CHANGE.md](CHANGE.md)
+
 ## License
 
 See [LICENSE](License)

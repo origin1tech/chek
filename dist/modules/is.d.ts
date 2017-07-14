@@ -159,6 +159,10 @@ export declare function isSymbol(val: any): boolean;
  * Checks if value is truthy e.g. not false, 0,
  * null, undefined, empty.
  *
+ * Strings such as 'false', '0',  '-' or 'no'
+ * will return true. If NOT desired call toBoolean
+ * on the value then pass to isTruthy.
+ *
  * @param val the value to inspect.
  */
 export declare function isTruthy(val: any): boolean;

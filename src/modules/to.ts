@@ -429,14 +429,16 @@ export function toWindow(key: any, val?: any, exclude?: string | string[]): void
     if (!isPlainObject(val)) {
       window[key] = val;
     }
-    const obj: any = {};
-    _keys = keys(val);
-    i = _keys.length;
-    while (i--) {
-      if (!contains(exclude, _keys[i]))
-        obj[_keys[i]] = val[_keys[i]];
+    else {
+      const obj: any = {};
+      _keys = keys(val);
+      i = _keys.length;
+      while (i--) {
+        if (!contains(exclude, _keys[i]))
+          obj[_keys[i]] = val[_keys[i]];
+      }
+      window[key] = obj;
     }
-    window[key] = obj;
   }
 
   // object passed to key.

@@ -297,12 +297,23 @@ export function isSymbol(val: any): boolean {
  * Checks if value is truthy e.g. not false, 0,
  * null, undefined, empty.
  *
+ * Strings such as 'false', '0',  '-' or 'no'
+ * will return true. If NOT desired call toBoolean
+ * on the value then pass to isTruthy.
+ *
  * @param val the value to inspect.
  */
 export function isTruthy(val: any): boolean {
-  if (!isValue(val) || val === 0 || val === 'false')
+  if (!isValue(val))
     return false;
-  return true;
+  if (typeof val === 'number')
+    return val > 0;
+  if (isString(val) && !val.length)
+    return false;
+  return (
+    val !== false &&
+    val !== isNaN(val)
+  );
 }
 
 /**
