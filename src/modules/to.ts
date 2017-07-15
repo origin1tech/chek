@@ -192,13 +192,10 @@ export function toJSON(obj: any, pretty?: number | boolean | string, def?: strin
  */
 export function toInteger(val: any, def?: number): number {
 
-  if (isInteger(val))
-    return val;
-
   if (!isValue(val))
     return toDefault(null, def);
 
-  const parsed = tryWrap(parseInt, val.toString())(def);
+  const parsed = tryWrap(parseInt, val)(def);
 
   if (isInteger(parsed))
     return parsed;

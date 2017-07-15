@@ -644,6 +644,8 @@ describe('Chek', () => {
     assert.isBoolean(ck.castType(1, 'boolean'));
     assert.equal(ck.castType('test', function (v) { return v; }), 'test');
     assert.deepEqual(ck.castType([1, 0], ['boolean']), [true, false]);
+    assert.deepEqual(ck.castType(['1', '0'], ['integer']), [1, 0]);
+    assert.deepEqual(ck.castType(['1', '0'], ['float']), [1, 0]);
     assert.equal(ck.castType(null, 'string'), null);
     assert.deepEqual(ck.castType({}, {}), {});
     assert.equal(ck.castType('test', 'any'), 'test');

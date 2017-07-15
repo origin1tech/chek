@@ -170,11 +170,9 @@ exports.toJSON = toJSON;
  * @param def optional default value on null or error.
  */
 function toInteger(val, def) {
-    if (is_1.isInteger(val))
-        return val;
     if (!is_1.isValue(val))
         return toDefault(null, def);
-    var parsed = function_1.tryWrap(parseInt, val.toString())(def);
+    var parsed = function_1.tryWrap(parseInt, val)(def);
     if (is_1.isInteger(parsed))
         return parsed;
     if (toBoolean(val))
