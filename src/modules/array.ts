@@ -63,7 +63,7 @@ export function containsAny(arr: any[], compare: any[]): boolean {
  *
  * @param obj the object to parse keys.
  */
-export function keys<T>(obj: IMap<T>): string[] {
+export function keys(obj: IMap<any>): string[] {
   if (!isPlainObject(obj))
     return [];
   return Object.keys(obj);

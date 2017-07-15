@@ -5,7 +5,9 @@ List of changes.
 ### 7.15.2017
 
 + **toInteger** remove redundant check if isInteger, don't cast to string before tryWrap.
-+ add tests for integer and float when casting from array of values.
++ **castType** set the cast type in array to current or previous or first.
++ **tests** tests for integer and float when casting from array of values.
++ **keys** fix invalid typing for "keys".
 
 ## 7.14.2017
 

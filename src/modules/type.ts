@@ -35,7 +35,7 @@ export function castType<T>(val: any, type: any, def?: any): T {
 
     if (isArray(type)) {
       return toArray(val)
-        .map((v, i) => <T>castType(v, type[i] || type[0]));
+        .map((v, i) => <T>castType(v, type[i] || type[i - 1] || type[0]));
     }
 
     else if (isFunction(type)) {

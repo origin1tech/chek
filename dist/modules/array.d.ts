@@ -31,7 +31,7 @@ export declare function containsAny(arr: any[], compare: any[]): boolean;
  *
  * @param obj the object to parse keys.
  */
-export declare function keys<T>(obj: IMap<T>): string[];
+export declare function keys(obj: IMap<any>): string[];
 /**
  * Flatten
  * Takes multiple arrays and flattens to single array.

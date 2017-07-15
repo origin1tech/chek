@@ -29,7 +29,7 @@ function castType(val, type, def) {
         type = type || getType(val);
         if (is_1.isArray(type)) {
             return to_1.toArray(val)
-                .map(function (v, i) { return castType(v, type[i] || type[0]); });
+                .map(function (v, i) { return castType(v, type[i] || type[i - 1] || type[0]); });
         }
         else if (is_1.isFunction(type)) {
             val = to_1.toArray(val);
