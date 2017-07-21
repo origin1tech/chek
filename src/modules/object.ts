@@ -178,6 +178,8 @@ export function clone<T>(obj: any, json?: boolean): T {
  * Extends objects similar to Object.assign
  * with the exception that undefined values are ignored.
  *
+ * NOTE: use Object.assign if available!!
+ *
  * @example
  * extend({ name: 'Bob', active: true }, { active: undefined })
  * results in:
@@ -202,15 +204,20 @@ export function extend<T>(obj: any, ...args: any[]): T {
 
   // If not an object return null.
   if (!isObject(dest))
-    return null;
+    return dest;
 
   // Itearate each object and extend
   // to the target object.
-  for (let i = 0, src: any; src = args[i]; i++) {
 
-    // Ignore if not and object.
+  let i = 0;
+
+  // for (let i = 0, src: any; src = args[i]; i++) {
+  while (i < args.length) {
+
+    let src = args[i];
+
     if (!isObject(src))
-      continue;
+      src = {};
 
     for (let p in src) {
 
@@ -233,6 +240,10 @@ export function extend<T>(obj: any, ...args: any[]): T {
 
           }
 
+          else if (isArray(src[p])) {
+            dest[p] = src[p];
+          }
+
           else if (isPlainObject(src[p])) {
             dest[p] = extend(dest[p] || {}, src[p]);
           }
@@ -248,9 +259,12 @@ export function extend<T>(obj: any, ...args: any[]): T {
 
     }
 
+    i++;
+
   }
 
   return dest;
+
 }
 
 /**

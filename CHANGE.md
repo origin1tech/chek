@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 7.21.2017
+
++ **extend** fix issue where extend wasn't handling undefined values correctly.
+
 ### 7.15.2017
 
 + **toInteger** remove redundant check if isInteger, don't cast to string before tryWrap.

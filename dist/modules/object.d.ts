@@ -28,6 +28,8 @@ export declare function clone<T>(obj: any, json?: boolean): T;
  * Extends objects similar to Object.assign
  * with the exception that undefined values are ignored.
  *
+ * NOTE: use Object.assign if available!!
+ *
  * @example
  * extend({ name: 'Bob', active: true }, { active: undefined })
  * results in:

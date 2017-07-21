@@ -352,8 +352,8 @@ describe('Chek', () => {
     assert.deepEqual(ck.extend({}, testObj, { active: true, tags: ['red', 'cyan', 'blue'] }), extObj);
     assert.deepEqual(ck.extend(testObj), testObj);
     assert.deepEqual(ck.extend(true), {});
-    assert.deepEqual(ck.extend(true, { name: 'bob' }, { age: 31 }, 'not an object'), { name: 'bob', age: 31 });
-    assert.deepEqual(ck.extend(true, 'not an object'), null);
+    assert.deepEqual(ck.extend(true, { name: 'bob' }, { age: 31 }, { 'save-dev': true }, 'not an object'), { name: 'bob', age: 31, 'save-dev': true });
+    assert.deepEqual(ck.extend('not an object'), 'not an object');
   });
 
   it('should Set value by dot notated property.', () => {

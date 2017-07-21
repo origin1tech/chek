@@ -842,6 +842,8 @@ exports.clone = clone;
  * Extends objects similar to Object.assign
  * with the exception that undefined values are ignored.
  *
+ * NOTE: use Object.assign if available!!
+ *
  * @example
  * extend({ name: 'Bob', active: true }, { active: undefined })
  * results in:
@@ -867,13 +869,15 @@ function extend(obj) {
     }
     // If not an object return null.
     if (!is_1.isObject(dest))
-        return null;
+        return dest;
     // Itearate each object and extend
     // to the target object.
-    for (var i = 0, src = void 0; src = args[i]; i++) {
-        // Ignore if not and object.
+    var i = 0;
+    // for (let i = 0, src: any; src = args[i]; i++) {
+    while (i < args.length) {
+        var src = args[i];
         if (!is_1.isObject(src))
-            continue;
+            src = {};
         var _loop_1 = function (p) {
             if (src.hasOwnProperty(p)) {
                 // Copy only top level props.
@@ -888,6 +892,9 @@ function extend(obj) {
                             dest[p][idx] = v;
                         });
                     }
+                    else if (is_1.isArray(src[p])) {
+                        dest[p] = src[p];
+                    }
                     else if (is_1.isPlainObject(src[p])) {
                         dest[p] = extend(dest[p] || {}, src[p]);
                     }
@@ -901,6 +908,7 @@ function extend(obj) {
         for (var p in src) {
             _loop_1(p);
         }
+        i++;
     }
     return dest;
 }
