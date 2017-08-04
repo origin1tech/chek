@@ -292,7 +292,12 @@ var to_1 = require("./to");
 /**
  * Noop
  */
-function noop() { }
+function noop() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+}
 exports.noop = noop;
 /**
  * Noop If

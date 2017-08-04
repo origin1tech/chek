@@ -1,7 +1,7 @@
 /**
  * Noop
  */
-export declare function noop(): void;
+export declare function noop(...args: any[]): void;
 /**
  * Noop If
  * If function provided return no operation funciton.

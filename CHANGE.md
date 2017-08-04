@@ -2,6 +2,9 @@
 
 List of changes.
 
+### 8.4.2017
++ **noop** set noop to allow any args to prevent typescript from complaining.
+
 ### 7.21.2017
 
 + **extend** fix issue where extend wasn't handling undefined values correctly.

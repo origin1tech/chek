@@ -6,7 +6,7 @@ import { toDefault } from './to';
 /**
  * Noop
  */
-export function noop() { }
+export function noop(...args: any[]) { }
 
 /**
  * Noop If
