@@ -14,7 +14,7 @@ export function noop(...args: any[]) { }
  *
  * @param fn optional function.
  */
-export function noopIf(fn?: Function) {
+export function noopIf(fn?: any) {
   return fn || noop;
 }
 

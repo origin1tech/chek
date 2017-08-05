@@ -4,6 +4,7 @@ List of changes.
 
 ### 8.4.2017
 + **noop** set noop to allow any args to prevent typescript from complaining.
++ **noopIf** set noop if function to type of any to prevent TypeScript design time error.
 
 ### 7.21.2017
 

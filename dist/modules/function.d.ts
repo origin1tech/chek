@@ -8,7 +8,7 @@ export declare function noop(...args: any[]): void;
  *
  * @param fn optional function.
  */
-export declare function noopIf(fn?: Function): Function;
+export declare function noopIf(fn?: any): any;
 /**
  * Try Wrap
  * Generic helper for calling try catch on a method.
