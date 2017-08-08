@@ -150,6 +150,28 @@ describe('Chek', () => {
     assert.equal(ck.noopIf(), ck.noop);
   });
 
+  it('should Try to Wrap method safely.', () => {
+    const msg = 'whoops you can\'t do that!';
+    function test() {
+      return {}['pop']();
+    }
+    assert.equal(ck.tryWrap(test)(), null);
+    assert.equal(ck.tryWrap(test)(msg), msg);
+    assert.equal(ck.tryWrap(test)(() => { return msg; }), msg);
+  });
+
+  it('should Try to Require a module safely.', () => {
+    assert.equal(ck.tryRequire('unknown'), null);
+    assert.deepEqual(ck.tryRequire('unknown', {}), {});
+    assert.isFunction(ck.tryRequire('path').resolve);
+  });
+
+  it('should Try to Require a Root module safely.', () => {
+    assert.equal(ck.tryRootRequire('unknown'), null);
+    assert.deepEqual(ck.tryRootRequire('unknown', {}), {});
+    assert.isFunction(ck.tryRootRequire('clone'));
+  });
+
   // IS CHEKS
 
   it('should check if is Array.', () => {
@@ -599,26 +621,7 @@ describe('Chek', () => {
     delete global['window'];
   });
 
-  // TRY CHEKS
-
-  it('should Try to Wrap method safely.', () => {
-    const msg = 'whoops you can\'t do that!';
-    function test() {
-      return {}['pop']();
-    }
-    assert.equal(ck.tryWrap(test)(), null);
-    assert.equal(ck.tryWrap(test)(msg), msg);
-    assert.equal(ck.tryWrap(test)(() => { return msg; }), msg);
-  });
-
-  it('should Try to Require a module safely.', () => {
-    assert.equal(ck.tryRequire('unknown'), null);
-    assert.deepEqual(ck.tryRequire('unknown', {}), {});
-    assert.isFunction(ck.tryRequire('path').resolve);
-  });
-
-
-  // Type CHEKS
+  // TYPE CHEKS
 
   it('should get the value\'s Type.', () => {
     class TypeClass { }

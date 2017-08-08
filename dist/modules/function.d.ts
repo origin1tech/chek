@@ -38,5 +38,14 @@ export declare function tryWrap(fn: Function, ...args: any[]): (def?: any) => an
  *
  * @param name the name of module to try and require.
  * @param def optional default value on null.
+ * @param isRoot used internally by tryRootRequire to require root modules.
  */
-export declare function tryRequire(name: string, def?: any): any;
+export declare function tryRequire(name: string, def?: any, isRoot?: boolean): any;
+/**
+ * Try Root Require
+ * Tries to require module relative from root module.
+ *
+ * @param name the name of the module to try and require.
+ * @param def the default value if null.
+ */
+export declare function tryRootRequire(name: string, def?: any): any;

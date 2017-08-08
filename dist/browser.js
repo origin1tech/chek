@@ -354,17 +354,31 @@ exports.tryWrap = tryWrap;
  *
  * @param name the name of module to try and require.
  * @param def optional default value on null.
+ * @param isRoot used internally by tryRootRequire to require root modules.
  */
-function tryRequire(name, def) {
+function tryRequire(name, def, isRoot) {
     function _require() {
         if (!is_1.isNode())
             /* istanbul ignore next */
             return to_1.toDefault(null, def);
+        if (isRoot)
+            return require.main.require(name);
         return require(name);
     }
     return tryWrap(_require)(def);
 }
 exports.tryRequire = tryRequire;
+/**
+ * Try Root Require
+ * Tries to require module relative from root module.
+ *
+ * @param name the name of the module to try and require.
+ * @param def the default value if null.
+ */
+function tryRootRequire(name, def) {
+    return tryRequire(name, def);
+}
+exports.tryRootRequire = tryRootRequire;
 
 },{"./is":7,"./to":10}],7:[function(require,module,exports){
 (function (process){
