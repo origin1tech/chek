@@ -151,6 +151,9 @@ If you know TypeScript you already know this. The below params and return result
     <tr>
       <td>tryRequire</td><td>name: string, def?: any</td><td>any</td><td>Safely requires node module.</td>
     </tr>
+    <tr>
+      <td>tryRootRequire</td><td>name: string, def?: any</td><td>any</td><td>Safely requires Root node module.</td>
+    </tr>
   </tbody>
 </table>
 

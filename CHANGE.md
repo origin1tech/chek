@@ -4,6 +4,7 @@ List of changes.
 
 ### 8.8.2017
 + **tryRootRequire** add new method to require root modules from sub modules.
++ **isDebug** add checks for newer --inspect and --inspect-brk.
 
 ### 8.4.2017
 + **noop** set noop to allow any args to prevent typescript from complaining.

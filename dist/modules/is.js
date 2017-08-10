@@ -69,6 +69,8 @@ function isDebug(debugging) {
     function chkDebug() {
         return (eargv.indexOf('--debug') !== -1 ||
             eargv.indexOf('--debug-brk') !== -1 ||
+            eargv.indexOf('--inspect') !== -1 ||
+            eargv.indexOf('--inspect-brk') !== -1 ||
             isValue(v8debug));
     }
     return function_1.tryWrap(chkDebug)(false);
