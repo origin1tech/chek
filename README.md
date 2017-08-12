@@ -157,7 +157,7 @@ If you know TypeScript you already know this. The below params and return result
   </tbody>
 </table>
 
-## Function
+## Is
 
 <table>
   <caption>CHEK IS</caption>
@@ -325,7 +325,7 @@ If you know TypeScript you already know this. The below params and return result
   </tbody>
 </table>
 
-## String
+## To
 
 <table>
   <caption>CHEK TO</caption>
@@ -383,7 +383,7 @@ If you know TypeScript you already know this. The below params and return result
   </tbody>
 </table>
 
-## String
+## Type
 
 <table>
   <caption>CHEK TYPE</caption>
