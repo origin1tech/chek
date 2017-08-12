@@ -2,6 +2,9 @@
 
 List of changes.
 
+### 8.11.2017
++ **split** allowed specified char to accept array of values.
+
 ### 8.8.2017
 + **tryRootRequire** add new method to require root modules from sub modules.
 + **isDebug** add checks for newer --inspect and --inspect-brk.

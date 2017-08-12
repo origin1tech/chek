@@ -308,7 +308,7 @@ If you know TypeScript you already know this. The below params and return result
       <td>padValues</td><td>arr: string[], strategy?: string, offset?: number | string, char?: string</td><td>string[]</td><td>Pads and array of strings to the widest value.</td>
     </tr>
     <tr>
-      <td>split</td><td>val: string | string[], char?: string</td><td>string[]</td><td>Splits a string by provided char to scans for known chars.</td>
+      <td>split</td><td>val: string | string[], chars?: string | string[]</td><td>string[]</td><td>Splits a string by provided char to scans for known chars.</td>
     </tr>
     <tr>
       <td>slugify</td><td>val: string</td><td>string</td><td>Slugifies a string.</td>

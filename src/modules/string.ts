@@ -1,5 +1,5 @@
 import { isArray, isEmpty, isFunction, isString, isValue } from './is';
-import { toDefault } from './to';
+import { toDefault, toArray } from './to';
 
 declare var performance;
 
@@ -157,7 +157,7 @@ export function padValues(arr: string[], strategy?: string, offset?: number | st
  * @param val the string to be split.
  * @param char the character to split at.
  */
-export function split(val: string | string[], char?: string): string[] {
+export function split(val: string | string[], chars?: string | string[]): string[] {
 
   if (isArray(val))
     return <string[]>val;
@@ -167,18 +167,18 @@ export function split(val: string | string[], char?: string): string[] {
 
   // default characters.
   let defChars = ['/', '.', ',', ';', '|'];
-  let arr;
+  let arr, char;
+  chars = chars ? toArray<string>(chars) : defChars;
 
   // if no char iterate defaults.
-  let i = defChars.length;
+  let i = chars.length;
   while (i-- && !char) {
-    const tmpChar = defChars[i];
-    if (val.indexOf(tmpChar) !== -1)
-      char = tmpChar;
+    if (val.indexOf(chars[i]) !== -1)
+      char = chars[i];
   }
 
   char = char || '.';
-  arr = (val as string).split(char);
+  arr = (val as string).split(<string>char);
 
   // If empty remove first element.
   // this happens when splitting on

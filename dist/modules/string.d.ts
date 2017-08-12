@@ -56,7 +56,7 @@ export declare function padValues(arr: string[], strategy?: string, offset?: num
  * @param val the string to be split.
  * @param char the character to split at.
  */
-export declare function split(val: string | string[], char?: string): string[];
+export declare function split(val: string | string[], chars?: string | string[]): string[];
 /**
  * Slugify
  * Slugifies string.

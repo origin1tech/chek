@@ -990,6 +990,7 @@ exports.set = set;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
+var to_1 = require("./to");
 /**
  * Camelcase
  * Converts string to camelcase.
@@ -1128,20 +1129,20 @@ exports.padValues = padValues;
  * @param val the string to be split.
  * @param char the character to split at.
  */
-function split(val, char) {
+function split(val, chars) {
     if (is_1.isArray(val))
         return val;
     if (!is_1.isValue(val) || !is_1.isString(val))
         return null;
     // default characters.
     var defChars = ['/', '.', ',', ';', '|'];
-    var arr;
+    var arr, char;
+    chars = chars ? to_1.toArray(chars) : defChars;
     // if no char iterate defaults.
-    var i = defChars.length;
+    var i = chars.length;
     while (i-- && !char) {
-        var tmpChar = defChars[i];
-        if (val.indexOf(tmpChar) !== -1)
-            char = tmpChar;
+        if (val.indexOf(chars[i]) !== -1)
+            char = chars[i];
     }
     char = char || '.';
     arr = val.split(char);
@@ -1237,7 +1238,7 @@ function uuid() {
 }
 exports.uuid = uuid;
 
-},{"./is":7}],10:[function(require,module,exports){
+},{"./is":7,"./to":10}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var array_1 = require("./array");

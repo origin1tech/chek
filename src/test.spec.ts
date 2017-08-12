@@ -450,6 +450,7 @@ describe('Chek', () => {
     // result in duplicate arrays.
     assert.deepEqual(ck.split(str), ck.split(str2));
     assert.deepEqual(ck.split('.' + str), ck.split(str2));
+    assert.deepEqual(ck.split('1 2 3', [',', ' ']), ['1', '2', '3']);
     assert.equal(ck.split(invalid), null);
   });
 
