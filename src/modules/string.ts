@@ -171,10 +171,11 @@ export function split(val: string | string[], chars?: string | string[]): string
   chars = chars ? toArray<string>(chars) : defChars;
 
   // if no char iterate defaults.
-  let i = chars.length;
-  while (i-- && !char) {
+  let i = 0;
+  while (i < chars.length && !char) {
     if (val.indexOf(chars[i]) !== -1)
       char = chars[i];
+    i++;
   }
 
   char = char || '.';

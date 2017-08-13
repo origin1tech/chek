@@ -1139,10 +1139,11 @@ function split(val, chars) {
     var arr, char;
     chars = chars ? to_1.toArray(chars) : defChars;
     // if no char iterate defaults.
-    var i = chars.length;
-    while (i-- && !char) {
+    var i = 0;
+    while (i < chars.length && !char) {
         if (val.indexOf(chars[i]) !== -1)
             char = chars[i];
+        i++;
     }
     char = char || '.';
     arr = val.split(char);
@@ -1694,7 +1695,7 @@ function castType(val, type, def) {
 exports.castType = castType;
 /**
  * Get Type
- * Gets the type of an object.
+ * Gets the type of the provided value.
  *
  * Value                Type                  Strict
  * -------------------------------------------------

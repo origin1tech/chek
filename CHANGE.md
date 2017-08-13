@@ -2,6 +2,9 @@
 
 List of changes.
 
+### 8.13.2017
++ **split** iterate chars lookup in order instead of refirst to support first found char.
+
 ### 8.11.2017
 + **split** allowed specified char to accept array of values.
 

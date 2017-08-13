@@ -51,7 +51,7 @@ function castType(val, type, def) {
 exports.castType = castType;
 /**
  * Get Type
- * Gets the type of an object.
+ * Gets the type of the provided value.
  *
  * Value                Type                  Strict
  * -------------------------------------------------

@@ -68,7 +68,7 @@ export function castType<T>(val: any, type: any, def?: any): T {
 
 /**
  * Get Type
- * Gets the type of an object.
+ * Gets the type of the provided value.
  *
  * Value                Type                  Strict
  * -------------------------------------------------
