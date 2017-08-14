@@ -200,6 +200,9 @@ If you know TypeScript you already know this. The below params and return result
     <tr>
       <td>isInfinite</td><td>val: any</td><td>boolean</td><td>Checks if is infinite.</td>
     </tr>
+        <tr>
+      <td>isInspect</td><td>inspecting?: boolean</td><td>boolean</td><td>Checks if is stated with --inspect or --inspect-brk.</td>
+    </tr>
     <tr>
       <td>isInteger</td><td>val: any</td><td>boolean</td><td>Checks if is an integer.</td>
     </tr>

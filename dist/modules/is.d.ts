@@ -82,6 +82,12 @@ export declare function isFunction(val: any): boolean;
  */
 export declare function isInfinite(val: any): boolean;
 /**
+ * Indicates if app is started with --inspect flag.
+ *
+ * @param inspecting a manual flag to denote inspecting.
+ */
+export declare function isInspect(inspecting?: boolean): any;
+/**
  * Is Integer
  * Checks if numbers is an integer.
  *

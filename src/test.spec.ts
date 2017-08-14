@@ -248,6 +248,12 @@ describe('Chek', () => {
     assert.equal(ck.isInfinite(Math.pow(10, 1000)), true);
   });
 
+  it('should check if is Node Inspect mode.', () => {
+    assert.equal(ck.isInspect(), false);
+    assert.equal(ck.isInspect(true), true);
+  });
+
+
   it('should check if is Integer.', () => {
     assert.equal(ck.isInteger(123), true);
   });

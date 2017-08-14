@@ -69,8 +69,6 @@ function isDebug(debugging) {
     function chkDebug() {
         return (eargv.indexOf('--debug') !== -1 ||
             eargv.indexOf('--debug-brk') !== -1 ||
-            eargv.indexOf('--inspect') !== -1 ||
-            eargv.indexOf('--inspect-brk') !== -1 ||
             isValue(v8debug));
     }
     return function_1.tryWrap(chkDebug)(false);
@@ -156,6 +154,23 @@ function isInfinite(val) {
     return val === Infinity;
 }
 exports.isInfinite = isInfinite;
+/**
+ * Indicates if app is started with --inspect flag.
+ *
+ * @param inspecting a manual flag to denote inspecting.
+ */
+function isInspect(inspecting) {
+    // If manually passed just return.
+    if (isValue(inspecting))
+        return inspecting;
+    var eargv = process && process.execArgv;
+    function chkInspect() {
+        return (eargv.indexOf('--inspect') !== -1 ||
+            eargv.indexOf('--inspect-brk') !== -1);
+    }
+    return function_1.tryWrap(chkInspect)(false);
+}
+exports.isInspect = isInspect;
 /**
  * Is Integer
  * Checks if numbers is an integer.

@@ -80,8 +80,6 @@ export function isDebug(debugging?: boolean) {
     return (
       eargv.indexOf('--debug') !== -1 ||
       eargv.indexOf('--debug-brk') !== -1 ||
-      eargv.indexOf('--inspect') !== -1 ||
-      eargv.indexOf('--inspect-brk') !== -1 ||
       isValue(v8debug)
     );
   }
@@ -172,6 +170,30 @@ export function isFunction(val: any): boolean {
  */
 export function isInfinite(val: any): boolean {
   return val === Infinity;
+}
+
+/**
+ * Indicates if app is started with --inspect flag.
+ *
+ * @param inspecting a manual flag to denote inspecting.
+ */
+export function isInspect(inspecting?: boolean) {
+
+  // If manually passed just return.
+  if (isValue(inspecting))
+    return inspecting;
+
+  const eargv = process && process.execArgv;
+
+  function chkInspect() {
+    return (
+      eargv.indexOf('--inspect') !== -1 ||
+      eargv.indexOf('--inspect-brk') !== -1
+    );
+  }
+
+  return tryWrap(chkInspect)(false);
+
 }
 
 /**
