@@ -52,11 +52,13 @@ export declare function padValues(arr: string[], strategy?: string, offset?: num
  * Split
  * Splits a string at character.
  * Default possible chars to match: ['/', '.', ',', ';', '|']
+ * Note accepts string[] to simplify external methods that call split
+ * In this case will simply return the array.
  *
  * @param val the string to be split.
  * @param char the character to split at.
  */
-export declare function split(val: string | string[], chars?: string | string[]): string[];
+export declare function split(val: string | string[], chars?: string | string[] | boolean, trim?: boolean): string[];
 /**
  * Slugify
  * Slugifies string.

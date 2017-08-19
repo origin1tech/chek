@@ -164,6 +164,7 @@ describe('Chek', () => {
     assert.equal(ck.tryRequire('unknown'), null);
     assert.deepEqual(ck.tryRequire('unknown', {}), {});
     assert.isFunction(ck.tryRequire('path').resolve);
+    assert.isFunction(ck.tryRequire('clone', null, true));
   });
 
   it('should Try to Require a Root module safely.', () => {
@@ -457,6 +458,7 @@ describe('Chek', () => {
     assert.deepEqual(ck.split(str), ck.split(str2));
     assert.deepEqual(ck.split('.' + str), ck.split(str2));
     assert.deepEqual(ck.split('1 2 3', [',', ' ']), ['1', '2', '3']);
+    assert.deepEqual(ck.split('1, 2,  3', true), ['1', '2', '3']);
     assert.equal(ck.split(invalid), null);
   });
 

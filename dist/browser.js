@@ -1140,15 +1140,21 @@ exports.padValues = padValues;
  * Split
  * Splits a string at character.
  * Default possible chars to match: ['/', '.', ',', ';', '|']
+ * Note accepts string[] to simplify external methods that call split
+ * In this case will simply return the array.
  *
  * @param val the string to be split.
  * @param char the character to split at.
  */
-function split(val, chars) {
+function split(val, chars, trim) {
     if (is_1.isArray(val))
         return val;
     if (!is_1.isValue(val) || !is_1.isString(val))
         return null;
+    if (is_1.isBoolean(chars)) {
+        trim = chars;
+        chars = undefined;
+    }
     // default characters.
     var defChars = ['/', '.', ',', ';', '|'];
     var arr, char;
@@ -1161,6 +1167,9 @@ function split(val, chars) {
         i++;
     }
     char = char || '.';
+    // Strip any spaces.
+    if (trim)
+        val = val.replace(/\s/g, '');
     arr = val.split(char);
     // If empty remove first element.
     // this happens when splitting on

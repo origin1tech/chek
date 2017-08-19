@@ -1,4 +1,4 @@
-import { isArray, isEmpty, isFunction, isString, isValue } from './is';
+import { isArray, isEmpty, isFunction, isString, isValue, isBoolean } from './is';
 import { toDefault, toArray } from './to';
 
 declare var performance;
@@ -153,17 +153,24 @@ export function padValues(arr: string[], strategy?: string, offset?: number | st
  * Split
  * Splits a string at character.
  * Default possible chars to match: ['/', '.', ',', ';', '|']
+ * Note accepts string[] to simplify external methods that call split
+ * In this case will simply return the array.
  *
  * @param val the string to be split.
  * @param char the character to split at.
  */
-export function split(val: string | string[], chars?: string | string[]): string[] {
+export function split(val: string | string[], chars?: string | string[] | boolean, trim?: boolean): string[] {
 
   if (isArray(val))
     return <string[]>val;
 
   if (!isValue(val) || !isString(val))
     return null;
+
+  if (isBoolean(chars)) {
+    trim = <boolean>chars;
+    chars = undefined;
+  }
 
   // default characters.
   let defChars = ['/', '.', ',', ';', '|'];
@@ -179,6 +186,11 @@ export function split(val: string | string[], chars?: string | string[]): string
   }
 
   char = char || '.';
+
+  // Strip any spaces.
+  if (trim)
+    val = (val as string).replace(/\s/g, '');
+
   arr = (val as string).split(<string>char);
 
   // If empty remove first element.

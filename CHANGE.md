@@ -2,6 +2,11 @@
 
 List of changes.
 
+### 8.19.2017
+
++ **split** added "trim" option to run /\s/g replace before splitting to remove all spaces.
++ **tryRequire** create missing test for tryRequire "root" modules.
+
 ### 8.14.2017
 
 + **isInspect** added method to check if node started with --inspect or --inspect-brk flags.
