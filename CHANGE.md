@@ -5,6 +5,7 @@ List of changes.
 ### 8.20.2017
 
 + **toFloat** fixed issue where toNumber whole numbers were converted to binary by error.
++ **src/** .npmignore had source dir exlcuded add it back in.
 
 ### 8.19.2017
 
