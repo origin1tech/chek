@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 8.20.2017
+
++ **toFloat** fixed issue where toNumber whole numbers were converted to binary by error.
+
 ### 8.19.2017
 
 + **split** added trim after split to trim whitespace (note removed "trim" option from v1.0.18, automatic now)

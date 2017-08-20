@@ -2,7 +2,7 @@
 import { IMap } from '../interfaces';
 import { keys, push, contains } from './array';
 import { fromEpoch } from './from';
-import { isValue, isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isNull, isInfinite, isDate, isFloat, isInteger, isRegExp, isBrowser } from './is';
+import { isValue, isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isNull, isInfinite, isDate, isFloat, isInteger, isRegExp, isBrowser, isNumber } from './is';
 import { clone, set, extend, del } from './object';
 import { tryWrap } from './function';
 import { split } from './string';
@@ -162,8 +162,8 @@ export function toFloat(val: any, def?: number): number {
     return val;
   if (!isValue(val))
     return toDefault(null, def);
-  const parsed = tryWrap(parseFloat, val.toString())(def);
-  if (isFloat(parsed))
+  const parsed = tryWrap(parseFloat, val)(def);
+  if (isFloat(parsed) || isNumber(parsed))
     return parsed;
   if (toBoolean(val))
     return 1;

@@ -1398,8 +1398,8 @@ function toFloat(val, def) {
         return val;
     if (!is_1.isValue(val))
         return toDefault(null, def);
-    var parsed = function_1.tryWrap(parseFloat, val.toString())(def);
-    if (is_1.isFloat(parsed))
+    var parsed = function_1.tryWrap(parseFloat, val)(def);
+    if (is_1.isFloat(parsed) || is_1.isNumber(parsed))
         return parsed;
     if (toBoolean(val))
         return 1;
