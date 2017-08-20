@@ -458,7 +458,7 @@ describe('Chek', () => {
     assert.deepEqual(ck.split(str), ck.split(str2));
     assert.deepEqual(ck.split('.' + str), ck.split(str2));
     assert.deepEqual(ck.split('1 2 3', [',', ' ']), ['1', '2', '3']);
-    assert.deepEqual(ck.split('1, 2,  3', true), ['1', '2', '3']);
+    assert.deepEqual(ck.split('1, 2,  3'), ['1', '2', '3']);
     assert.equal(ck.split(invalid), null);
   });
 
@@ -510,6 +510,8 @@ describe('Chek', () => {
     assert.deepEqual(ck.toArray({ 100: 'one' }), <any[]>[{ 100: 'one' }]);
     assert.deepEqual(ck.toArray({ 100: { name: 'jeff' } }), <any[]>[{ $id: '100', name: 'jeff' }]);
     assert.deepEqual(ck.toArray({ 100: { name: 'jeff' } }, 'key'), <any[]>[{ key: '100', name: 'jeff' }]);
+    assert.deepEqual(ck.toArray('one, two, three'), ['one', 'two', 'three']);
+
   });
 
   it('should convert To Boolean.', () => {

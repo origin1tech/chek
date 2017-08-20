@@ -1146,15 +1146,11 @@ exports.padValues = padValues;
  * @param val the string to be split.
  * @param char the character to split at.
  */
-function split(val, chars, trim) {
+function split(val, chars) {
     if (is_1.isArray(val))
         return val;
     if (!is_1.isValue(val) || !is_1.isString(val))
         return null;
-    if (is_1.isBoolean(chars)) {
-        trim = chars;
-        chars = undefined;
-    }
     // default characters.
     var defChars = ['/', '.', ',', ';', '|'];
     var arr, char;
@@ -1167,10 +1163,7 @@ function split(val, chars, trim) {
         i++;
     }
     char = char || '.';
-    // Strip any spaces.
-    if (trim)
-        val = val.replace(/\s/g, '');
-    arr = val.split(char);
+    arr = val.split(char).map(function (v) { return v.trim(); });
     // If empty remove first element.
     // this happens when splitting on
     // char and is first char in string.
@@ -1276,6 +1269,7 @@ var string_1 = require("./string");
  * To Array
  * Converts value to array or converts object to array where
  * key will be inserted into object as $id: 'your object key'
+ * or converts 'one, two, three' to ['one', 'two', 'three']
  *
  * @param val the value to convert to array.
  * @param def optional default value on null or error.
@@ -1285,6 +1279,7 @@ function toArray(val, id, def) {
         return toDefault(null, def);
     if (is_1.isArray(val))
         return val;
+    var ARRAY_LIKE_EXP = /^(.+(,|\||\s).+){1,}$/;
     if (is_1.isArray(id)) {
         def = id;
         id = undefined;
@@ -1306,6 +1301,10 @@ function toArray(val, id, def) {
                 }
             }
         }
+        return arr;
+    }
+    if (is_1.isString(val) && ARRAY_LIKE_EXP.test(val)) {
+        var arr = string_1.split(val);
         return arr;
     }
     return [val];
@@ -1801,6 +1800,9 @@ function getType(val, strict, def) {
     return def || 'any';
 }
 exports.getType = getType;
+function tryCastType(val) {
+}
+exports.tryCastType = tryCastType;
 
 },{"./function":6,"./is":7,"./to":10}],12:[function(require,module,exports){
 'use strict'

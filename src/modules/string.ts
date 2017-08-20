@@ -159,18 +159,13 @@ export function padValues(arr: string[], strategy?: string, offset?: number | st
  * @param val the string to be split.
  * @param char the character to split at.
  */
-export function split(val: string | string[], chars?: string | string[] | boolean, trim?: boolean): string[] {
+export function split(val: string | string[], chars?: string | string[] | boolean): string[] {
 
   if (isArray(val))
     return <string[]>val;
 
   if (!isValue(val) || !isString(val))
     return null;
-
-  if (isBoolean(chars)) {
-    trim = <boolean>chars;
-    chars = undefined;
-  }
 
   // default characters.
   let defChars = ['/', '.', ',', ';', '|'];
@@ -187,11 +182,7 @@ export function split(val: string | string[], chars?: string | string[] | boolea
 
   char = char || '.';
 
-  // Strip any spaces.
-  if (trim)
-    val = (val as string).replace(/\s/g, '');
-
-  arr = (val as string).split(<string>char);
+  arr = (val as string).split(<string>char).map(v => v.trim());
 
   // If empty remove first element.
   // this happens when splitting on

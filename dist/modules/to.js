@@ -10,6 +10,7 @@ var string_1 = require("./string");
  * To Array
  * Converts value to array or converts object to array where
  * key will be inserted into object as $id: 'your object key'
+ * or converts 'one, two, three' to ['one', 'two', 'three']
  *
  * @param val the value to convert to array.
  * @param def optional default value on null or error.
@@ -19,6 +20,7 @@ function toArray(val, id, def) {
         return toDefault(null, def);
     if (is_1.isArray(val))
         return val;
+    var ARRAY_LIKE_EXP = /^(.+(,|\||\s).+){1,}$/;
     if (is_1.isArray(id)) {
         def = id;
         id = undefined;
@@ -40,6 +42,10 @@ function toArray(val, id, def) {
                 }
             }
         }
+        return arr;
+    }
+    if (is_1.isString(val) && ARRAY_LIKE_EXP.test(val)) {
+        var arr = string_1.split(val);
         return arr;
     }
     return [val];

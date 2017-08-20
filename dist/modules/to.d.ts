@@ -3,6 +3,7 @@ import { IMap } from '../interfaces';
  * To Array
  * Converts value to array or converts object to array where
  * key will be inserted into object as $id: 'your object key'
+ * or converts 'one, two, three' to ['one', 'two', 'three']
  *
  * @param val the value to convert to array.
  * @param def optional default value on null or error.

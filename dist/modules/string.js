@@ -142,15 +142,11 @@ exports.padValues = padValues;
  * @param val the string to be split.
  * @param char the character to split at.
  */
-function split(val, chars, trim) {
+function split(val, chars) {
     if (is_1.isArray(val))
         return val;
     if (!is_1.isValue(val) || !is_1.isString(val))
         return null;
-    if (is_1.isBoolean(chars)) {
-        trim = chars;
-        chars = undefined;
-    }
     // default characters.
     var defChars = ['/', '.', ',', ';', '|'];
     var arr, char;
@@ -163,10 +159,7 @@ function split(val, chars, trim) {
         i++;
     }
     char = char || '.';
-    // Strip any spaces.
-    if (trim)
-        val = val.replace(/\s/g, '');
-    arr = val.split(char);
+    arr = val.split(char).map(function (v) { return v.trim(); });
     // If empty remove first element.
     // this happens when splitting on
     // char and is first char in string.

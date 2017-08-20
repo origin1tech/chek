@@ -13,6 +13,7 @@ declare var window;
  * To Array
  * Converts value to array or converts object to array where
  * key will be inserted into object as $id: 'your object key'
+ * or converts 'one, two, three' to ['one', 'two', 'three']
  *
  * @param val the value to convert to array.
  * @param def optional default value on null or error.
@@ -24,6 +25,8 @@ export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
 
   if (isArray(val))
     return val;
+
+  const ARRAY_LIKE_EXP = /^(.+(,|\||\s).+){1,}$/;
 
   if (isArray(id)) {
     def = <any>id;
@@ -53,6 +56,11 @@ export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
 
     return arr;
 
+  }
+
+  if (isString(val) && ARRAY_LIKE_EXP.test(val)) {
+    const arr: any = split(val);
+    return arr;
   }
 
   return [val];

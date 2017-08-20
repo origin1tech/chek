@@ -4,7 +4,7 @@ List of changes.
 
 ### 8.19.2017
 
-+ **split** added "trim" option to run /\s/g replace before splitting to remove all spaces.
++ **split** added trim after split to trim whitespace (note removed "trim" option from v1.0.18, automatic now)
 + **tryRequire** create missing test for tryRequire "root" modules.
 
 ### 8.14.2017
