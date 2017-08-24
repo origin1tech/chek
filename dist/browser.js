@@ -1153,19 +1153,19 @@ function split(val, chars) {
         return null;
     // default characters.
     var defChars = ['/', '.', ',', ';', '|'];
-    var arr, char;
+    var char;
+    var arr;
     chars = chars ? to_1.toArray(chars) : defChars;
     // if no char iterate defaults.
     var i = 0;
     while (i < chars.length && !char) {
         if (val.indexOf(chars[i]) !== -1) {
-            console.log(chars[i]);
             char = chars[i];
         }
         i++;
     }
-    if (!char)
-        return arr;
+    if (!is_1.isValue(char))
+        return [val];
     arr = val.split(char).map(function (v) { return v.trim(); });
     // If empty remove first element.
     // this happens when splitting on

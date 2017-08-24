@@ -169,21 +169,21 @@ export function split(val: string | string[], chars?: string | string[] | boolea
 
   // default characters.
   let defChars = ['/', '.', ',', ';', '|'];
-  let arr, char;
+  let char;
+  let arr;
   chars = chars ? toArray<string>(chars) : defChars;
 
   // if no char iterate defaults.
   let i = 0;
   while (i < chars.length && !char) {
     if (val.indexOf(chars[i]) !== -1) {
-      console.log(chars[i])
       char = chars[i];
     }
     i++;
   }
 
-  if (!char)
-    return arr;
+  if (!isValue(char))
+    return [<string>val];
 
   arr = (val as string).split(<string>char).map(v => v.trim());
 
