@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 8.23.2017
+
++ **split** fix issue where custom chars are not honored.
+
 ### 8.20.2017
 
 + **toFloat** fixed issue where toNumber whole numbers were converted to binary by error.

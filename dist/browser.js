@@ -1158,11 +1158,14 @@ function split(val, chars) {
     // if no char iterate defaults.
     var i = 0;
     while (i < chars.length && !char) {
-        if (val.indexOf(chars[i]) !== -1)
+        if (val.indexOf(chars[i]) !== -1) {
+            console.log(chars[i]);
             char = chars[i];
+        }
         i++;
     }
-    char = char || '.';
+    if (!char)
+        return arr;
     arr = val.split(char).map(function (v) { return v.trim(); });
     // If empty remove first element.
     // this happens when splitting on

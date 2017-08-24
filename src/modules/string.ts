@@ -175,12 +175,15 @@ export function split(val: string | string[], chars?: string | string[] | boolea
   // if no char iterate defaults.
   let i = 0;
   while (i < chars.length && !char) {
-    if (val.indexOf(chars[i]) !== -1)
+    if (val.indexOf(chars[i]) !== -1) {
+      console.log(chars[i])
       char = chars[i];
+    }
     i++;
   }
 
-  char = char || '.';
+  if (!char)
+    return arr;
 
   arr = (val as string).split(<string>char).map(v => v.trim());
 
