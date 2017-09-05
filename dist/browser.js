@@ -1554,7 +1554,7 @@ function toRegExp(val, def) {
     function regExpFromStr() {
         var opts;
         if (exp.test(val)) {
-            optsExp.exec(val)[0];
+            opts = optsExp.exec(val)[0];
             val = val.replace(/^\//, '').replace(optsExp, '').replace(/\/$/, '');
         }
         return new RegExp(val, opts);

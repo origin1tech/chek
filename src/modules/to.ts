@@ -335,7 +335,7 @@ export function toRegExp(val: any, def?: RegExp) {
   function regExpFromStr() {
     let opts;
     if (exp.test(val)) {
-      optsExp.exec(val)[0];
+      opts = optsExp.exec(val)[0];
       val = val.replace(/^\//, '').replace(optsExp, '').replace(/\/$/, '');
     }
     return new RegExp(val, opts);

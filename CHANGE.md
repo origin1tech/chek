@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 9.5.2017
+
++ **toRegExp** fixed issue where RegExp options are not appended.
+
 ### 8.23.2017
 
 + **split** fix issue where custom chars are not honored.
