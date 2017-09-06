@@ -254,7 +254,6 @@ describe('Chek', () => {
     assert.equal(ck.isInspect(true), true);
   });
 
-
   it('should check if is Integer.', () => {
     assert.equal(ck.isInteger(123), true);
   });
@@ -333,6 +332,17 @@ describe('Chek', () => {
 
   it('should check if is Value.', () => {
     assert.equal(ck.isValue({}), true);
+    assert.equal(ck.isValue(0), true);
+    assert.equal(ck.isValue(''), true);
+    assert.equal(ck.isValue(), false);
+  });
+
+  it('should check if is Windows.', () => {
+    const isWin = process.platform.indexOf('win') === 0;
+    if (isWin)
+      assert.equal(ck.isWindows(), true);
+    else
+      assert.equal(ck.isWindows(), false);
   });
 
   // OBJECT CHEKS

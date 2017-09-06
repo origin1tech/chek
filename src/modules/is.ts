@@ -379,7 +379,7 @@ export function isUnique(arr: any[], value: any): boolean {
  *
  * @param val the value to inspect.
  */
-export function isValue(val: any): boolean {
+export function isValue(val?: any): boolean {
   return (
     !isUndefined(val)
     && !isNull(val) && !(isNumber(val) && isNaN(val))
