@@ -5,6 +5,7 @@ List of changes.
 ### 9.5.2017
 
 + **toRegExp** fixed issue where RegExp options are not appended.
++ **isWindows** added method to indicate if node running in windows.
 
 ### 8.23.2017
 

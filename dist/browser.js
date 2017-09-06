@@ -736,6 +736,16 @@ function isValue(val) {
         && !isInfinite(val));
 }
 exports.isValue = isValue;
+/**
+ * Is Windows
+ * Returns boolean if node is running in Windows.
+ */
+function isWindows() {
+    if (!isNode() || !(process && process.platform))
+        return false;
+    return process.platform.indexOf('win') === 0;
+}
+exports.isWindows = isWindows;
 
 }).call(this,require('_process'))
 },{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":16}],8:[function(require,module,exports){

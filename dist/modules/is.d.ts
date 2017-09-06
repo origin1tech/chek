@@ -203,3 +203,8 @@ export declare function isUnique(arr: any[], value: any): boolean;
  * @param val the value to inspect.
  */
 export declare function isValue(val: any): boolean;
+/**
+ * Is Windows
+ * Returns boolean if node is running in Windows.
+ */
+export declare function isWindows(): boolean;

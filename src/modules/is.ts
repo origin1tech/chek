@@ -386,3 +386,13 @@ export function isValue(val: any): boolean {
     && !isInfinite(val)
   );
 }
+
+/**
+ * Is Windows
+ * Returns boolean if node is running in Windows.
+ */
+export function isWindows(): boolean {
+  if (!isNode() || !(process && process.platform))
+    return false;
+  return process.platform.indexOf('win') === 0;
+}

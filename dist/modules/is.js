@@ -352,4 +352,14 @@ function isValue(val) {
         && !isInfinite(val));
 }
 exports.isValue = isValue;
+/**
+ * Is Windows
+ * Returns boolean if node is running in Windows.
+ */
+function isWindows() {
+    if (!isNode() || !(process && process.platform))
+        return false;
+    return process.platform.indexOf('win') === 0;
+}
+exports.isWindows = isWindows;
 //# sourceMappingURL=is.js.map
