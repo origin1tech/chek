@@ -12,11 +12,12 @@ declare var performance;
 export function camelcase(val: string): string {
   if (!isValue(val))
     return null;
-  return val.replace(/[^A-Za-z0-9]/g, ' ').replace(/^\w|[A-Z]|\b\w|\s+/g, (m, i) => {
+  const result = val.replace(/[^A-Za-z0-9]/g, ' ').replace(/^\w|[A-Z]|\b\w|\s+/g, (m, i) => {
     if (+m === 0 || /(\.|-|_)/.test(m))
       return '';
     return i === 0 ? m.toLowerCase() : m.toUpperCase();
   });
+  return result.charAt(0).toLowerCase() + result.slice(1);
 }
 
 /**

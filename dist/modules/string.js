@@ -11,11 +11,12 @@ var to_1 = require("./to");
 function camelcase(val) {
     if (!is_1.isValue(val))
         return null;
-    return val.replace(/[^A-Za-z0-9]/g, ' ').replace(/^\w|[A-Z]|\b\w|\s+/g, function (m, i) {
+    var result = val.replace(/[^A-Za-z0-9]/g, ' ').replace(/^\w|[A-Z]|\b\w|\s+/g, function (m, i) {
         if (+m === 0 || /(\.|-|_)/.test(m))
             return '';
         return i === 0 ? m.toLowerCase() : m.toUpperCase();
     });
+    return result.charAt(0).toLowerCase() + result.slice(1);
 }
 exports.camelcase = camelcase;
 /**

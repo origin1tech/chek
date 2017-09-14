@@ -1,6 +1,6 @@
 
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isRegExp, isDate, isError, isNull, isValue, isFunction, isFloat, isInteger, isNumber } from './is';
-import { toDate, toNumber, toArray, toFloat, toInteger, toBoolean, toString, toDefault, toRegExp } from './to';
+import { toDate, toNumber, toArray, toFloat, toInteger, toBoolean, toString, toDefault, toRegExp, toEpoch } from './to';
 import { tryWrap } from './function';
 import { push } from './array';
 
@@ -12,6 +12,7 @@ const toMap = {
   'number': toNumber,
   'regexp': toRegExp,
   'string': toString,
+  'epoch': toEpoch,
   'any': (v) => v
 };
 

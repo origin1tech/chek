@@ -11,6 +11,7 @@ var toMap = {
     'number': to_1.toNumber,
     'regexp': to_1.toRegExp,
     'string': to_1.toString,
+    'epoch': to_1.toEpoch,
     'any': function (v) { return v; }
 };
 /**

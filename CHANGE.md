@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 9.14.2017
+
++ **camelcase** fix issue where first char isn't lower in some cases.
+
 ### 9.5.2017
 
 + **toRegExp** fixed issue where RegExp options are not appended.
