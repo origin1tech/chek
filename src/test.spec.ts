@@ -190,6 +190,13 @@ describe('Chek', () => {
     delete process.env.BROWSER;
   });
 
+  it('should check if is Buffer.', () => {
+    const buf = new Buffer('hello');
+    const d: any = new Date();
+    assert.equal(ck.isBuffer(buf), true);
+    assert.equal(ck.isBuffer('hello'), false);
+  });
+
   it('should check if is Date', () => {
 
     // Standard date.

@@ -381,7 +381,7 @@ function tryRootRequire(name, def) {
 exports.tryRootRequire = tryRootRequire;
 
 },{"./is":7,"./to":10}],7:[function(require,module,exports){
-(function (process){
+(function (process,Buffer){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var constant_1 = require("./constant");
@@ -427,6 +427,16 @@ function isBrowser(override) {
     return !isNode();
 }
 exports.isBrowser = isBrowser;
+/**
+ * Is Buffer
+ * Checks if value is an instanceof Buffer.
+ *
+ * @param val the value to inspect as Buffer.
+ */
+function isBuffer(val) {
+    return isValue(val) && (val instanceof Buffer);
+}
+exports.isBuffer = isBuffer;
 /**
  * Is Date
  * Inspects if is Date, parses date string when
@@ -747,8 +757,8 @@ function isWindows() {
 }
 exports.isWindows = isWindows;
 
-}).call(this,require('_process'))
-},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":16}],8:[function(require,module,exports){
+}).call(this,require('_process'),require("buffer").Buffer)
+},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":16,"buffer":13}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _clone = require("clone");

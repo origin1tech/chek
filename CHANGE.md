@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 9.23.2017
+
++ **isBuffer** add method to check if is buffer.
+
 ### 9.14.2017
 
 + **camelcase** fix issue where first char isn't lower in some cases.

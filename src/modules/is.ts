@@ -49,6 +49,16 @@ export function isBrowser(override?: string): boolean {
 }
 
 /**
+ * Is Buffer
+ * Checks if value is an instanceof Buffer.
+ *
+ * @param val the value to inspect as Buffer.
+ */
+export function isBuffer(val: any): boolean {
+  return isValue(val) && (val instanceof Buffer);
+}
+
+/**
  * Is Date
  * Inspects if is Date, parses date string when
  * parse flag is set to true.
