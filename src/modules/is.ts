@@ -6,6 +6,14 @@ import { keys, duplicates } from './array';
 declare var v8debug;
 declare var window;
 
+let existsSync, statSync;
+
+if (isNode()) {
+  const fs = require('fs');
+  existsSync = fs.existsSync.bind(fs);
+  statSync = fs.statSync.bind(fs);
+}
+
 /**
  * Is Array
  * Check if value is an array.
@@ -147,6 +155,36 @@ export function isError(val: any, prop?: string): boolean {
   const type = toStr.call(val).toLowerCase();
   return type === '[object error]' || type === '[object domexception]' || !isEmpty(val[prop]);
 
+}
+
+/**
+ * Is File
+ * Checks if value is path to file in filesytem.
+ * NODE ONLY!
+ *
+ * @param val the value to inspect as file.
+ */
+export function isFile(val: any) {
+  return (
+    isNode() &&
+    existsSync(val) &&
+    statSync(val).isFile()
+  );
+}
+
+/**
+ * Is Directory
+ * Checks if value is path to directory in filesytem.
+ * NODE ONLY!
+ *
+ * @param val the value to inspect as file.
+ */
+export function isDirectory(val: any) {
+  return (
+    isNode() &&
+    existsSync(val) &&
+    statSync(val).isDirectory()
+  );
 }
 
 /**

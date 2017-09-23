@@ -9,7 +9,6 @@ import * as ck from './';
 import * as moment from 'moment';
 import * as freeze from 'deep-freeze';
 
-
 let testObj: any = {
   name: 'Bob Smith',
   age: 35,
@@ -218,6 +217,10 @@ describe('Chek', () => {
 
   });
 
+  it('should check if is Directory in file system.', () => {
+    assert.equal(ck.isDirectory(__dirname), true);
+  });
+
   it('should check if is Node Debug.', () => {
     assert.equal(ck.isDebug(), false);
     assert.equal(ck.isDebug(true), true);
@@ -242,6 +245,10 @@ describe('Chek', () => {
   it('should check if is Error.', () => {
     assert.equal(ck.isError(new Error()), true);
     assert.equal(ck.isError({ __custom_prop__: true }, '__custom_prop__'), true);
+  });
+
+  it('should check if is File in file system.', () => {
+    assert.equal(ck.isFile(__dirname + '/' + 'test.spec.ts'), true);
   });
 
   it('should check if is Float.', () => {

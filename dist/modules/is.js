@@ -4,6 +4,12 @@ var constant_1 = require("./constant");
 var to_1 = require("./to");
 var function_1 = require("./function");
 var array_1 = require("./array");
+var existsSync, statSync;
+if (isNode()) {
+    var fs = require('fs');
+    existsSync = fs.existsSync.bind(fs);
+    statSync = fs.statSync.bind(fs);
+}
 /**
  * Is Array
  * Check if value is an array.
@@ -133,6 +139,32 @@ function isError(val, prop) {
     return type === '[object error]' || type === '[object domexception]' || !isEmpty(val[prop]);
 }
 exports.isError = isError;
+/**
+ * Is File
+ * Checks if value is path to file in filesytem.
+ * NODE ONLY!
+ *
+ * @param val the value to inspect as file.
+ */
+function isFile(val) {
+    return (isNode() &&
+        existsSync(val) &&
+        statSync(val).isFile());
+}
+exports.isFile = isFile;
+/**
+ * Is Directory
+ * Checks if value is path to directory in filesytem.
+ * NODE ONLY!
+ *
+ * @param val the value to inspect as file.
+ */
+function isDirectory(val) {
+    return (isNode() &&
+        existsSync(val) &&
+        statSync(val).isDirectory());
+}
+exports.isDirectory = isDirectory;
 /**
  * Is Float
  * Checks if number is float.

@@ -5,6 +5,8 @@ List of changes.
 ### 9.23.2017
 
 + **isBuffer** add method to check if is buffer.
++ **isFile** add method to check if is file in file system (Node Only).
++ **isDirectory** add method to check if is directory in file sys (Node Only).
 
 ### 9.14.2017
 

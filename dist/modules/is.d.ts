@@ -68,6 +68,22 @@ export declare function isEqual(val: any, comp: any, loose?: boolean): boolean;
  */
 export declare function isError(val: any, prop?: string): boolean;
 /**
+ * Is File
+ * Checks if value is path to file in filesytem.
+ * NODE ONLY!
+ *
+ * @param val the value to inspect as file.
+ */
+export declare function isFile(val: any): any;
+/**
+ * Is Directory
+ * Checks if value is path to directory in filesytem.
+ * NODE ONLY!
+ *
+ * @param val the value to inspect as file.
+ */
+export declare function isDirectory(val: any): any;
+/**
  * Is Float
  * Checks if number is float.
  *

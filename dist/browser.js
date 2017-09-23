@@ -388,6 +388,12 @@ var constant_1 = require("./constant");
 var to_1 = require("./to");
 var function_1 = require("./function");
 var array_1 = require("./array");
+var existsSync, statSync;
+if (isNode()) {
+    var fs = require('fs');
+    existsSync = fs.existsSync.bind(fs);
+    statSync = fs.statSync.bind(fs);
+}
 /**
  * Is Array
  * Check if value is an array.
@@ -517,6 +523,32 @@ function isError(val, prop) {
     return type === '[object error]' || type === '[object domexception]' || !isEmpty(val[prop]);
 }
 exports.isError = isError;
+/**
+ * Is File
+ * Checks if value is path to file in filesytem.
+ * NODE ONLY!
+ *
+ * @param val the value to inspect as file.
+ */
+function isFile(val) {
+    return (isNode() &&
+        existsSync(val) &&
+        statSync(val).isFile());
+}
+exports.isFile = isFile;
+/**
+ * Is Directory
+ * Checks if value is path to directory in filesytem.
+ * NODE ONLY!
+ *
+ * @param val the value to inspect as file.
+ */
+function isDirectory(val) {
+    return (isNode() &&
+        existsSync(val) &&
+        statSync(val).isDirectory());
+}
+exports.isDirectory = isDirectory;
 /**
  * Is Float
  * Checks if number is float.
@@ -758,7 +790,7 @@ function isWindows() {
 exports.isWindows = isWindows;
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":16,"buffer":13}],8:[function(require,module,exports){
+},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":17,"buffer":14,"fs":13}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _clone = require("clone");
@@ -1021,7 +1053,7 @@ function set(obj, key, val, immutable) {
 }
 exports.set = set;
 
-},{"./is":7,"./string":9,"clone":14}],9:[function(require,module,exports){
+},{"./is":7,"./string":9,"clone":15}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
@@ -1946,6 +1978,8 @@ function fromByteArray (uint8) {
 }
 
 },{}],13:[function(require,module,exports){
+
+},{}],14:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -3653,7 +3687,7 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":12,"ieee754":15}],14:[function(require,module,exports){
+},{"base64-js":12,"ieee754":16}],15:[function(require,module,exports){
 (function (Buffer){
 var clone = (function() {
 'use strict';
@@ -3908,7 +3942,7 @@ if (typeof module === 'object' && module.exports) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":13}],15:[function(require,module,exports){
+},{"buffer":14}],16:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -3994,7 +4028,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 

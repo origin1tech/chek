@@ -1,6 +1,6 @@
 {
   "name": "chek",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Minimal utility for checking types, working with arrays and objects.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
