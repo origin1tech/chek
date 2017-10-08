@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 10.7.2017
+
++ **.npmignore** ignore build & source folders.
+
 ### 9.23.2017
 
 + **isBuffer** add method to check if is buffer.

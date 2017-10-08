@@ -63,3 +63,6 @@ temp.js
 test.ts
 temp.ts
 temp.html
+build/
+src/
+
