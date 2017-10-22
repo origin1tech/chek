@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 10.18.2017
+
++ **.toType** create alias toType() to castType() becasue I'm stupid and always want to type it.
+
 ### 10.7.2017
 
 + **.npmignore** ignore build & source folders.
