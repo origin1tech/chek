@@ -606,10 +606,13 @@ describe('Chek', () => {
   });
 
   it('should convert To Date.', () => {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const date = new Date();
-    const date2 = ck.toDate('01/01/2017 12:34:26', { locales: 'en-US', timeZone: 'America/Los_Angeles' });
+    const date2 = ck.toDate('01/01/2017 12:34:26', { locales: 'en-US', timeZone: tz });
+    console.log(tz);
+    console.log(date2);
     assert.equal(ck.toDate(date, new Date()), date);
-    assert.equal(ck.toDate('01/01/2017 12:34:26', 'America/Los_Angeles').getTime(), 1483302866000);
+    assert.equal(ck.toDate(date.toISOString()).getTime(), date.getTime());
     assert.equal(ck.toDate('123:4447:22'), null);
   });
 
