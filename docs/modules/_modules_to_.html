@@ -107,7 +107,7 @@
 					<div class="tsd-signature tsd-kind-icon">window<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L10">modules/to.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L10">modules/to.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -124,7 +124,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L21">modules/to.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L21">modules/to.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -173,7 +173,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L77">modules/to.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L77">modules/to.ts:77</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -206,19 +206,23 @@
 					<a name="todate" class="tsd-anchor"></a>
 					<h3>to<wbr>Date</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">to<wbr>Date<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, def<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Date<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, format<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_interfaces_.idateformat.html" class="tsd-signature-type">IDateFormat</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span>, def<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L100">modules/to.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L105">modules/to.ts:105</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>To Date
-									Converts value to date using Date.parse when string.</p>
+										Converts value to date using Date.parse when string.
+										Optionally you can pass a format object containing
+										Intl.DateFormatOptions and locales. You may also pass
+										the timezone ONLY as a string. In this case locale en-US
+									is assumed.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -227,6 +231,12 @@
 									<h5>val: <span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the value to be converted to date.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> format: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_interfaces_.idateformat.html" class="tsd-signature-type">IDateFormat</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>date locale format options.</p>
 									</div>
 								</li>
 								<li>
@@ -250,7 +260,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L137">modules/to.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L163">modules/to.ts:163</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -290,7 +300,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L150">modules/to.ts:150</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L176">modules/to.ts:176</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -328,7 +338,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L160">modules/to.ts:160</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L186">modules/to.ts:186</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -363,7 +373,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L201">modules/to.ts:201</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L227">modules/to.ts:227</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -401,7 +411,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L181">modules/to.ts:181</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L207">modules/to.ts:207</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -445,7 +455,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L235">modules/to.ts:235</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L261">modules/to.ts:261</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -506,7 +516,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L294">modules/to.ts:294</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L320">modules/to.ts:320</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -548,7 +558,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L316">modules/to.ts:316</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L342">modules/to.ts:342</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -586,7 +596,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L328">modules/to.ts:328</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L354">modules/to.ts:354</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -625,7 +635,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L353">modules/to.ts:353</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L379">modules/to.ts:379</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -663,7 +673,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L374">modules/to.ts:374</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L400">modules/to.ts:400</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -712,7 +722,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/d86490e/src/modules/to.ts#L422">modules/to.ts:422</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/ae84689/src/modules/to.ts#L448">modules/to.ts:448</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

@@ -1474,11 +1474,28 @@ exports.toBoolean = toBoolean;
 /**
  * To Date
  * Converts value to date using Date.parse when string.
+ * Optionally you can pass a format object containing
+ * Intl.DateFormatOptions and locales. You may also pass
+ * the timezone ONLY as a string. In this case locale en-US
+ * is assumed.
  *
  * @param val the value to be converted to date.
+ * @param format date locale format options.
  * @param def a default date when null.
  */
-function toDate(val, def) {
+function toDate(val, format, def) {
+    if (is_1.isDate(format)) {
+        def = format;
+        format = undefined;
+    }
+    var opts = format;
+    // Date format options a simple timezine
+    // ex: 'America/Los_Angeles'.
+    if (is_1.isString(opts)) {
+        opts = {
+            timeZone: format
+        };
+    }
     // This just checks loosely if string is
     // date like string, below parse should
     // catch majority of scenarios.
@@ -1488,9 +1505,15 @@ function toDate(val, def) {
                 /(\.|\/|-|:)/g.test(val));
     }
     function parseDate() {
-        var date = Date.parse(val);
-        if (!isNaN(date))
-            return from_1.fromEpoch(date);
+        var epoch = Date.parse(val);
+        if (!isNaN(epoch)) {
+            var date = from_1.fromEpoch(epoch);
+            if (opts) {
+                opts.locales = opts.locales || 'en-US';
+                date = new Date(date.toLocaleString(opts.locales, opts));
+            }
+            return date;
+        }
         return toDefault(null, def);
     }
     if (is_1.isDate(val))

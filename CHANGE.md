@@ -5,6 +5,7 @@ List of changes.
 ### 12.3.2017
 
 + **orderBy** add method for sorting objects by propery names.
++ **toDate** allow passing Intl.DateFormatOptions to assigning date to locale/timezone.
 
 ### 10.18.2017
 
