@@ -60,9 +60,62 @@ describe('Chek', () => {
 
   // ARRAY CHEKS
 
-  it('should count the number of Duplicates in array.', () => {
-    assert.equal(ck.duplicates(['Mary', 'Jim', 'John', 'Anthony', 'John'], 'John'), 2);
-    assert.equal(ck.duplicates(['Mary', 'Jim', 'John', 'Anthony', 'John'], 'John', true), 1);
+  it('should Sort an array.', () => {
+    const nums = [44, 7, 3, 1, 32];
+    const names = ['jade', 'tiffany', 'ginger', 'sam'];
+    const actual = [
+      { start: 11, end: 13, row: 9 },
+      { start: 5, end: 6, row: 0 },
+      { start: 23, end: 31, row: 2 },
+      { start: 17, end: 19, row: 0 }
+    ];
+    const expected = [
+      { start: 5, end: 6, row: 0 },
+      { start: 17, end: 19, row: 0 },
+      { start: 23, end: 31, row: 2 },
+      { start: 11, end: 13, row: 9 }
+    ];
+    const actualTuple = actual.slice(0);
+    const expectedTuple = [
+      { start: 11, end: 13, row: 9 },
+      { start: 23, end: 31, row: 2 },
+      { start: 5, end: 6, row: 0 },
+      { start: 17, end: 19, row: 0 }
+    ];
+    const actualStr = [
+      { start: '11', end: 13, row: '9' },
+      { start: '5', end: 6, row: '0' },
+      { start: '23', end: 31, row: '2' },
+      { start: '17', end: 19, row: '0' }
+    ];
+    const actualStrDesc = actualStr.slice(0);
+    const expectedStr = [
+      { start: '5', end: 6, row: '0' },
+      { start: '17', end: 19, row: '0' },
+      { start: '23', end: 31, row: '2' },
+      { start: '11', end: 13, row: '9' }
+    ];
+    const expectedStrDesc = [
+      { start: '11', end: 13, row: '9' },
+      { start: '23', end: 31, row: '2' },
+      { start: '5', end: 6, row: '0' },
+      { start: '17', end: 19, row: '0' }
+    ];
+    const primer = v => parseInt(v);
+    ck.orderBy(actual, 'row', 'start');
+    ck.orderBy(actualStr, { key: 'row', primer: primer }, { key: 'start', primer: primer });
+    ck.orderBy(actualStrDesc, { key: 'row', order: 'desc' }, { key: 'start' }, primer);
+    ck.orderBy(nums);
+    ck.orderBy(names);
+    ck.orderBy(actualTuple, ['row', -1]);
+    console.log(actualTuple);
+    assert.deepEqual(actual, expected);
+    assert.deepEqual(actualTuple, expectedTuple);
+    assert.deepEqual(actualStr, expectedStr);
+    assert.deepEqual(actualStrDesc, expectedStrDesc);
+    assert.deepEqual(nums, [1, 3, 7, 32, 44]);
+    assert.deepEqual(names, ['ginger', 'jade', 'sam', 'tiffany']);
+
   });
 
   it('should check if array Contains value.', () => {
@@ -77,6 +130,11 @@ describe('Chek', () => {
     assert.equal(ck.containsAny([1, 2, 3], [8, 6, 3]), true);
     assert.equal(ck.containsAny([1, 2, 3], [8, 6, 5]), false);
     assert.equal(ck.containsAny([1, 2, 3], arr), false);
+  });
+
+  it('should count the number of Duplicates in array.', () => {
+    assert.equal(ck.duplicates(['Mary', 'Jim', 'John', 'Anthony', 'John'], 'John'), 2);
+    assert.equal(ck.duplicates(['Mary', 'Jim', 'John', 'Anthony', 'John'], 'John', true), 1);
   });
 
   it('should get array of Keys from object.', () => {

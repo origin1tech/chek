@@ -134,7 +134,4 @@ function getType(val, strict, def) {
     return def || 'any';
 }
 exports.getType = getType;
-function tryCastType(val) {
-}
-exports.tryCastType = tryCastType;
 //# sourceMappingURL=type.js.map

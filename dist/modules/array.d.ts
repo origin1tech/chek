@@ -1,13 +1,21 @@
-import { IMap, IArrayResult } from '../interfaces';
+import { IMap, IArrayResult, IComparatorField } from '../interfaces';
 /**
- * Duplicates
- * Counts the number of duplicates in an array.
+ * Order By
+ * : Orders arrays of objects by property, falls back to .sort() if not fields are specified.
  *
- * @param arr the array to check for duplicates.
- * @param value the value to match.
- * @param breakable when true allows breaking at first duplicate.
+ * @example
+ * const arr = [{ name: 'bob', age: 30 }, { name: 'john', age: 22 }];
+ * chek.orderBy(arr, 'age', 'name');
+ * check.orderBy(arr, { key: 'name', order: 'desc', primer: primerFunc });
+ * chek.orderBy(arr, 'age', 'name', primerFunc);
+ *
+ * Order property: asc, ascending, desc, descending, 1, -1, 0
+ * Primer property: a method that accepts single value and is run as a preprocessor before sorting.
+ *
+ * @param arr the collection to be sorted.
+ * @param fields an array of field names or comparator field objects.
  */
-export declare function duplicates(arr: any[], value: any, breakable?: boolean): number;
+export declare function orderBy<T>(arr: any[], ...fields: IComparatorField[]): T[];
 /**
  *
  * Contains
@@ -26,6 +34,15 @@ export declare function contains(arr: any[], value: any): boolean;
  */
 export declare function containsAny(arr: any[], compare: any[]): boolean;
 /**
+ * Duplicates
+ * Counts the number of duplicates in an array.
+ *
+ * @param arr the array to check for duplicates.
+ * @param value the value to match.
+ * @param breakable when true allows breaking at first duplicate.
+ */
+export declare function duplicates(arr: any[], value: any, breakable?: boolean): number;
+/**
  * Keys
  * Takes an object then returns keys in array.
  *
@@ -40,7 +57,7 @@ export declare function keys(obj: IMap<any>): string[];
  *
  * @param args rest param containing multiple arrays to flatten.
  */
-export declare function flatten(...arr: any[]): any[];
+export declare function flatten<T>(...arr: any[]): T[];
 /**
  * First
  * Simple method to get first element just
@@ -48,14 +65,14 @@ export declare function flatten(...arr: any[]): any[];
  *
  * @param arr the array to get first element from.
  */
-export declare function first(arr: any[]): any;
+export declare function first<T>(arr: any[]): T;
 /**
  * Last
  * Simple method to get last element.
  *
  * @param arr the array to get last element.
  */
-export declare function last(arr: any[]): any;
+export declare function last<T>(arr: any[]): T;
 /**
  * Pop
  * Pops/removes last element in array.

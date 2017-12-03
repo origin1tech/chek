@@ -172,9 +172,3 @@ export function getType(val: any, strict?: boolean | string, def?: string): any 
   return def || 'any';
 
 }
-
-export function tryCastType(val: any) {
-
-
-
-}

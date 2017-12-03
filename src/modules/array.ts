@@ -1,29 +1,89 @@
 
-import { IMap, IArrayResult } from '../interfaces';
-import { isArray, isEqual, isPlainObject, isValue } from './is';
+import { IMap, IArrayResult, IComparatorPrimer, IComparatorOptions, IComparator, IComparatorField, IComparatorTuple } from '../interfaces';
+import { isArray, isEqual, isPlainObject, isValue, isString, isBoolean, isFunction, isObject, isNumber } from './is';
 import { tryWrap } from './function';
 
+function defComparator(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
+function normComparator<T>(primer?: IComparatorPrimer, order?: string | number | boolean) {
+  let comp = defComparator;
+  let reverse = false;
+  if (primer)
+    comp = (a, b) => defComparator(primer(a), primer(b));
+  if (order && /^(desc|descending|-1|true)/.test(order + ''))
+    return (a, b) => {
+      return -1 * comp(a, b);
+    };
+  return comp;
+}
+
 /**
- * Duplicates
- * Counts the number of duplicates in an array.
+ * Order By
+ * : Orders arrays of objects by property, falls back to .sort() if not fields are specified.
  *
- * @param arr the array to check for duplicates.
- * @param value the value to match.
- * @param breakable when true allows breaking at first duplicate.
+ * @example
+ * const arr = [{ name: 'bob', age: 30 }, { name: 'john', age: 22 }];
+ * chek.orderBy(arr, 'age', 'name');
+ * check.orderBy(arr, { key: 'name', order: 'desc', primer: primerFunc });
+ * chek.orderBy(arr, 'age', 'name', primerFunc);
+ *
+ * Order property: asc, ascending, desc, descending, 1, -1, 0
+ * Primer property: a method that accepts single value and is run as a preprocessor before sorting.
+ *
+ * @param arr the collection to be sorted.
+ * @param fields an array of field names or comparator field objects.
  */
-export function duplicates(arr: any[], value: any, breakable?: boolean): number {
+export function orderBy<T>(arr: any[], ...fields: IComparatorField[]): T[] {
 
-  let i = arr.length;
-  let dupes = 0;
+  let primer = v => v;
 
-  while (i--) {
-    if (breakable && dupes > 0)
-      break;
-    if (isEqual(arr[i], value))
-      dupes += 1;
+  // Allows common primer function to be last arg in fields.
+  if (isFunction(last(fields)))
+    primer = (fields.pop()) as IComparatorPrimer;
+
+  if (!fields.length) {
+    const hasNumbers = isNumber(first(arr)) && isNumber(last(arr));
+    return arr.sort((a, b) => {
+      a = primer(a);
+      b = primer(b);
+      if (hasNumbers)
+        return a - b;
+      a += '';
+      b += '';
+      if (a < b)
+        return -1;
+      else if (a > b)
+        return 1;
+      else
+        /* istanbul ignore next */
+        return 0;
+    });
   }
 
-  return dupes;
+  fields = (fields as IComparatorOptions[]).map((f) => {
+    let field = <IComparatorOptions>f;
+    if (isString(field)) {
+      field = <IComparatorOptions>{ key: <any>f };
+      field.order = /^-/.test(f + ''); // if prefixed with - is reversed.
+    }
+    else if (isArray(field)) {
+      field = <IComparatorOptions>{ key: f[0] };
+      field.order = f[1];
+    }
+    field.primer = field.primer || primer;
+    field.comparator = normComparator(field.primer, field.order);
+    return field;
+  });
+
+  const comparator = (a, b) => {
+    let result;
+    for (const field of fields as IComparatorOptions[]) {
+      result = field.comparator(a[field.key], b[field.key]);
+      if (result !== 0) break;
+    }
+    return result;
+  };
+
+  return arr.sort(comparator as IComparator);
 
 }
 
@@ -58,6 +118,30 @@ export function containsAny(arr: any[], compare: any[]): boolean {
 }
 
 /**
+ * Duplicates
+ * Counts the number of duplicates in an array.
+ *
+ * @param arr the array to check for duplicates.
+ * @param value the value to match.
+ * @param breakable when true allows breaking at first duplicate.
+ */
+export function duplicates(arr: any[], value: any, breakable?: boolean): number {
+
+  let i = arr.length;
+  let dupes = 0;
+
+  while (i--) {
+    if (breakable && dupes > 0)
+      break;
+    if (isEqual(arr[i], value))
+      dupes += 1;
+  }
+
+  return dupes;
+
+}
+
+/**
  * Keys
  * Takes an object then returns keys in array.
  *
@@ -77,7 +161,7 @@ export function keys(obj: IMap<any>): string[] {
  *
  * @param args rest param containing multiple arrays to flatten.
  */
-export function flatten(...arr: any[]): any[] {
+export function flatten<T>(...arr: any[]): T[] {
 
   let i = 0;
   let result = [];
@@ -102,7 +186,7 @@ export function flatten(...arr: any[]): any[] {
  *
  * @param arr the array to get first element from.
  */
-export function first(arr: any[]): any {
+export function first<T>(arr: any[]): T {
   return arr[0];
 }
 
@@ -112,7 +196,7 @@ export function first(arr: any[]): any {
  *
  * @param arr the array to get last element.
  */
-export function last(arr: any[]): any {
+export function last<T>(arr: any[]): T {
   return arr[arr.length - 1];
 }
 

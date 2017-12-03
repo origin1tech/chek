@@ -97,18 +97,20 @@
 					<li><strong>object</strong>        - things like get, set, clone, extend.</li>
 					<li><strong>string</strong>        - things like lowercase, uppercase, slugify, padding, uuid.</li>
 					<li><strong>to</strong>            - handles converting to a type like toBoolean, toRegExp.</li>
-					<li><strong>type</strong>          - handles get and casting types.</li>
+					<li><strong>type</strong>          - handles getting and casting types.</li>
 				</ul>
 				<p><strong>Legend</strong></p>
 				<p>If you know TypeScript you already know this. The below params and return results are denoted by TypeScript syntax. Here are the basics if there&#39;s somethign that doesn&#39;t make sense pop on over the Microsft&#39;s TypeScript page I&#39;m sure it will clear it up.</p>
 				<ul>
-					<li><strong>any</strong>       - means any type</li>
-					<li><strong>?</strong>         - means it&#39;s optional.</li>
-					<li><strong>[]</strong>        - means an array of some type like string[].</li>
-					<li><strong>...</strong>       - indicates a spread operator.</li>
-					<li><strong>T</strong>         - indicates generic type (if not using TypeScript you can ignore).</li>
-					<li><strong>IArrayResult</strong> - used for immutable array methods which return the new array and rel. value.</li>
-					<li><strong>IMap<T></strong>   - simple type which basically represents an object literal.</li>
+					<li><strong>any</strong>                 - means any type</li>
+					<li><strong>?</strong>                   - means it&#39;s optional.</li>
+					<li><strong>[]</strong>                  - means an array of some type like string[].</li>
+					<li><strong>...</strong>                 - indicates a spread operator.</li>
+					<li><strong>T</strong>                   - indicates generic type (if not using TypeScript you can ignore).</li>
+					<li><strong>IArrayResult</strong>        - used for immutable array methods which return the new array and rel. value.</li>
+					<li><strong>IMap<T></strong>             - simple type which basically represents an object literal.</li>
+					<li><strong>IComparatorOptions</strong>  - orderyBy options object contains key, primer &amp; order.</li>
+					<li><strong>IComparatorField</strong>    - custom type, a string, IComparatorOptions object or primer method.</li>
 				</ul>
 				<p><strong>Please Note the following tables are here for convenience you should ALWAYS reference the &quot;docs&quot; folder in the project for updated method signatues, there&#39;s only so much time in the day.</strong></p>
 				<h2 id="array">Array</h2>
@@ -120,10 +122,10 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>duplicates</td><td>arr: any[], val: any, breakable?: boolean</td><td>number</td><td>Counts duplicates in array.</td>
+							<td>contains</td><td>arr: any[], val: any</td><td>boolean</td><td>Tests if array contains value.</td>
 						</tr>
 						<tr>
-							<td>contains</td><td>arr: any[], val: any</td><td>boolean</td><td>Tests if array contains value.</td>
+							<td>duplicates</td><td>arr: any[], val: any, breakable?: boolean</td><td>number</td><td>Counts duplicates in array.</td>
 						</tr>
 						<tr>
 							<td>contains</td><td>arr: any[], compare: any[]</td><td>boolean</td><td>Tests if array contains any value.</td>
@@ -139,6 +141,9 @@
 						</tr>
 						<tr>
 							<td>last</td><td>arr: any[]</td><td>any</td><td>Returns last value in array without mutating.</td>
+						</tr>
+						<tr>
+							<td>orderBy</td><td>arr: any[], ...fields: IComparatorField[]</td><td>T[]</td><td>Orders array of objects by property name, falls back to .sort() for convenience.</td>
 						</tr>
 						<tr>
 							<td>pop</td><td>arr: any[]</td><td>IArrayResult</td><td>Pops value returns object w/o mutating w/ new array and val.</td>

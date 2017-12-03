@@ -1,26 +1,88 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
-/**
- * Duplicates
- * Counts the number of duplicates in an array.
- *
- * @param arr the array to check for duplicates.
- * @param value the value to match.
- * @param breakable when true allows breaking at first duplicate.
- */
-function duplicates(arr, value, breakable) {
-    var i = arr.length;
-    var dupes = 0;
-    while (i--) {
-        if (breakable && dupes > 0)
-            break;
-        if (is_1.isEqual(arr[i], value))
-            dupes += 1;
-    }
-    return dupes;
+function defComparator(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
+function normComparator(primer, order) {
+    var comp = defComparator;
+    var reverse = false;
+    if (primer)
+        comp = function (a, b) { return defComparator(primer(a), primer(b)); };
+    if (order && /^(desc|descending|-1|true)/.test(order + ''))
+        return function (a, b) {
+            return -1 * comp(a, b);
+        };
+    return comp;
 }
-exports.duplicates = duplicates;
+/**
+ * Order By
+ * : Orders arrays of objects by property, falls back to .sort() if not fields are specified.
+ *
+ * @example
+ * const arr = [{ name: 'bob', age: 30 }, { name: 'john', age: 22 }];
+ * chek.orderBy(arr, 'age', 'name');
+ * check.orderBy(arr, { key: 'name', order: 'desc', primer: primerFunc });
+ * chek.orderBy(arr, 'age', 'name', primerFunc);
+ *
+ * Order property: asc, ascending, desc, descending, 1, -1, 0
+ * Primer property: a method that accepts single value and is run as a preprocessor before sorting.
+ *
+ * @param arr the collection to be sorted.
+ * @param fields an array of field names or comparator field objects.
+ */
+function orderBy(arr) {
+    var fields = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        fields[_i - 1] = arguments[_i];
+    }
+    var primer = function (v) { return v; };
+    // Allows common primer function to be last arg in fields.
+    if (is_1.isFunction(last(fields)))
+        primer = (fields.pop());
+    if (!fields.length) {
+        var hasNumbers_1 = is_1.isNumber(first(arr)) && is_1.isNumber(last(arr));
+        return arr.sort(function (a, b) {
+            a = primer(a);
+            b = primer(b);
+            if (hasNumbers_1)
+                return a - b;
+            a += '';
+            b += '';
+            if (a < b)
+                return -1;
+            else if (a > b)
+                return 1;
+            else
+                /* istanbul ignore next */
+                return 0;
+        });
+    }
+    fields = fields.map(function (f) {
+        var field = f;
+        if (is_1.isString(field)) {
+            field = { key: f };
+            field.order = /^-/.test(f + ''); // if prefixed with - is reversed.
+        }
+        else if (is_1.isArray(field)) {
+            field = { key: f[0] };
+            field.order = f[1];
+        }
+        field.primer = field.primer || primer;
+        field.comparator = normComparator(field.primer, field.order);
+        return field;
+    });
+    var comparator = function (a, b) {
+        var result;
+        for (var _i = 0, _a = fields; _i < _a.length; _i++) {
+            var field = _a[_i];
+            result = field.comparator(a[field.key], b[field.key]);
+            if (result !== 0)
+                break;
+        }
+        return result;
+    };
+    return arr.sort(comparator);
+}
+exports.orderBy = orderBy;
 /**
  *
  * Contains
@@ -51,6 +113,26 @@ function containsAny(arr, compare) {
     }).length > 0;
 }
 exports.containsAny = containsAny;
+/**
+ * Duplicates
+ * Counts the number of duplicates in an array.
+ *
+ * @param arr the array to check for duplicates.
+ * @param value the value to match.
+ * @param breakable when true allows breaking at first duplicate.
+ */
+function duplicates(arr, value, breakable) {
+    var i = arr.length;
+    var dupes = 0;
+    while (i--) {
+        if (breakable && dupes > 0)
+            break;
+        if (is_1.isEqual(arr[i], value))
+            dupes += 1;
+    }
+    return dupes;
+}
+exports.duplicates = duplicates;
 /**
  * Keys
  * Takes an object then returns keys in array.

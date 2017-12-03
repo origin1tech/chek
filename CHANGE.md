@@ -2,9 +2,13 @@
 
 List of changes.
 
+### 12.3.2017
+
++ **orderBy** add method for sorting objects by propery names.
+
 ### 10.18.2017
 
-+ **.toType** create alias toType() to castType() becasue I'm stupid and always want to type it.
++ **toType** create alias toType() to castType() becasue I'm stupid and always want to type it.
 
 ### 10.7.2017
 

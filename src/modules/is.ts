@@ -441,6 +441,7 @@ export function isValue(val?: any): boolean {
  */
 export function isWindows(): boolean {
   if (!isNode() || !(process && process.platform))
+    /* istanbul ignore next */
     return false;
   return process.platform.indexOf('win') === 0;
 }

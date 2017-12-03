@@ -400,6 +400,7 @@ exports.isValue = isValue;
  */
 function isWindows() {
     if (!isNode() || !(process && process.platform))
+        /* istanbul ignore next */
         return false;
     return process.platform.indexOf('win') === 0;
 }

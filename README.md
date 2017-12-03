@@ -47,19 +47,21 @@ Methods are broken into several categories. Some have only a method or two and w
 + **object**        - things like get, set, clone, extend.
 + **string**        - things like lowercase, uppercase, slugify, padding, uuid.
 + **to**            - handles converting to a type like toBoolean, toRegExp.
-+ **type**          - handles get and casting types.
++ **type**          - handles getting and casting types.
 
 **Legend**
 
 If you know TypeScript you already know this. The below params and return results are denoted by TypeScript syntax. Here are the basics if there's somethign that doesn't make sense pop on over the Microsft's TypeScript page I'm sure it will clear it up.
 
-+ **any**       - means any type
-+ **?**         - means it's optional.
-+ **[]**        - means an array of some type like string[].
-+ **...**       - indicates a spread operator.
-+ **T**         - indicates generic type (if not using TypeScript you can ignore).
-+ **IArrayResult** - used for immutable array methods which return the new array and rel. value.
-+ **IMap<T>**   - simple type which basically represents an object literal.
++ **any**                 - means any type
++ **?**                   - means it's optional.
++ **[]**                  - means an array of some type like string[].
++ **...**                 - indicates a spread operator.
++ **T**                   - indicates generic type (if not using TypeScript you can ignore).
++ **IArrayResult**        - used for immutable array methods which return the new array and rel. value.
++ **IMap<T>**             - simple type which basically represents an object literal.
++ **IComparatorOptions**  - orderyBy options object contains key, primer & order.
++ **IComparatorField**    - custom type, a string, IComparatorOptions object or primer method.
 
 **Please Note the following tables are here for convenience you should ALWAYS reference the "docs" folder in the project for updated method signatues, there's only so much time in the day.**
 
@@ -73,10 +75,10 @@ If you know TypeScript you already know this. The below params and return result
   </thead>
   <tbody>
     <tr>
-      <td>duplicates</td><td>arr: any[], val: any, breakable?: boolean</td><td>number</td><td>Counts duplicates in array.</td>
+      <td>contains</td><td>arr: any[], val: any</td><td>boolean</td><td>Tests if array contains value.</td>
     </tr>
     <tr>
-      <td>contains</td><td>arr: any[], val: any</td><td>boolean</td><td>Tests if array contains value.</td>
+      <td>duplicates</td><td>arr: any[], val: any, breakable?: boolean</td><td>number</td><td>Counts duplicates in array.</td>
     </tr>
     <tr>
       <td>contains</td><td>arr: any[], compare: any[]</td><td>boolean</td><td>Tests if array contains any value.</td>
@@ -92,6 +94,9 @@ If you know TypeScript you already know this. The below params and return result
     </tr>
     <tr>
       <td>last</td><td>arr: any[]</td><td>any</td><td>Returns last value in array without mutating.</td>
+    </tr>
+    <tr>
+    <td>orderBy</td><td>arr: any[], ...fields: IComparatorField[]</td><td>T[]</td><td>Orders array of objects by property name, falls back to .sort() for convenience.</td>
     </tr>
     <tr>
       <td>pop</td><td>arr: any[]</td><td>IArrayResult</td><td>Pops value returns object w/o mutating w/ new array and val.</td>

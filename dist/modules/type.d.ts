@@ -32,4 +32,3 @@ export declare function castType<T>(val: any, type: any, def?: any): T;
  * @param def the optional string name for unknown types.
  */
 export declare function getType(val: any, strict?: boolean | string, def?: string): any;
-export declare function tryCastType(val: any): void;
