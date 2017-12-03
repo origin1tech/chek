@@ -1,4 +1,4 @@
-import { IMap } from '../interfaces';
+import { IMap, IDateFormat } from '../interfaces';
 /**
  * To Array
  * Converts value to array or converts object to array where
@@ -21,11 +21,16 @@ export declare function toBoolean(val: any, def?: boolean): boolean;
 /**
  * To Date
  * Converts value to date using Date.parse when string.
+ * Optionally you can pass a format object containing
+ * Intl.DateFormatOptions and locales. You may also pass
+ * the timezone ONLY as a string. In this case locale en-US
+ * is assumed.
  *
  * @param val the value to be converted to date.
+ * @param format date locale format options.
  * @param def a default date when null.
  */
-export declare function toDate(val: any, def?: Date): Date;
+export declare function toDate(val: any, format?: string | IDateFormat | Date, def?: Date): Date;
 /**
  * To Default
  * Returns a default value when provided if

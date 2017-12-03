@@ -1,5 +1,5 @@
 
-import { IMap } from '../interfaces';
+import { IMap, IDateFormat } from '../interfaces';
 import { keys, push, contains } from './array';
 import { fromEpoch } from './from';
 import { isValue, isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isNull, isInfinite, isDate, isFloat, isInteger, isRegExp, isBrowser, isNumber } from './is';
@@ -93,11 +93,31 @@ export function toBoolean(val: any, def?: boolean): boolean {
 /**
  * To Date
  * Converts value to date using Date.parse when string.
+ * Optionally you can pass a format object containing
+ * Intl.DateFormatOptions and locales. You may also pass
+ * the timezone ONLY as a string. In this case locale en-US
+ * is assumed.
  *
  * @param val the value to be converted to date.
+ * @param format date locale format options.
  * @param def a default date when null.
  */
-export function toDate(val: any, def?: Date): Date {
+export function toDate(val: any, format?: string | IDateFormat | Date, def?: Date): Date {
+
+  if (isDate(format)) {
+    def = <Date>format;
+    format = undefined;
+  }
+
+  let opts = <IDateFormat>format;
+
+  // Date format options a simple timezine
+  // ex: 'America/Los_Angeles'.
+  if (isString(opts)) {
+    opts = {
+      timeZone: <string>format
+    };
+  }
 
   // This just checks loosely if string is
   // date like string, below parse should
@@ -109,9 +129,15 @@ export function toDate(val: any, def?: Date): Date {
   }
 
   function parseDate() {
-    let date = Date.parse(val);
-    if (!isNaN(date))
-      return fromEpoch(<number>date);
+    let epoch = Date.parse(val);
+    if (!isNaN(epoch)) {
+      let date = fromEpoch(epoch);
+      if (opts) {
+        opts.locales = opts.locales || 'en-US';
+        date = new Date(date.toLocaleString(opts.locales, opts));
+      }
+      return date;
+    }
     return toDefault(null, def);
   }
 

@@ -108,7 +108,6 @@ describe('Chek', () => {
     ck.orderBy(nums);
     ck.orderBy(names);
     ck.orderBy(actualTuple, ['row', -1]);
-    console.log(actualTuple);
     assert.deepEqual(actual, expected);
     assert.deepEqual(actualTuple, expectedTuple);
     assert.deepEqual(actualStr, expectedStr);
@@ -608,9 +607,9 @@ describe('Chek', () => {
 
   it('should convert To Date.', () => {
     const date = new Date();
-    const date2 = ck.toDate(Date.parse('01/01/2017 12:34:26'));
-    assert.equal(ck.toDate(date), date);
-    assert.equal(ck.toDate('01/01/2017 12:34:26').getTime(), 1483302866000);
+    const date2 = ck.toDate('01/01/2017 12:34:26', { locales: 'en-US', timeZone: 'America/Los_Angeles' });
+    assert.equal(ck.toDate(date, new Date()), date);
+    assert.equal(ck.toDate('01/01/2017 12:34:26', 'America/Los_Angeles').getTime(), 1483302866000);
     assert.equal(ck.toDate('123:4447:22'), null);
   });
 

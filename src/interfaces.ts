@@ -12,6 +12,10 @@ export interface IArrayResult {
   val: any;
 }
 
+export interface IDateFormat extends Intl.DateTimeFormatOptions {
+  locales?: string | string[];
+}
+
 export type IComparator = (a, b) => number;
 export type IComparatorPrimer = (val: any) => any;
 export type IComparatorOptions = { key: string, primer?: IComparatorPrimer, order?: string | number | boolean, comparator?: IComparator };

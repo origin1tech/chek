@@ -8,6 +8,9 @@ export interface IArrayResult {
     result: any[];
     val: any;
 }
+export interface IDateFormat extends Intl.DateTimeFormatOptions {
+    locales?: string | string[];
+}
 export declare type IComparator = (a, b) => number;
 export declare type IComparatorPrimer = (val: any) => any;
 export declare type IComparatorOptions = {
