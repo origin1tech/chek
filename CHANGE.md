@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 12.17.2017
+
++ **toArray** all default value as second argument.
+
 ### 12.3.2017
 
 + **orderBy** add method for sorting objects by propery names.

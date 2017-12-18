@@ -16,6 +16,10 @@ var string_1 = require("./string");
  * @param def optional default value on null or error.
  */
 function toArray(val, id, def) {
+    if (is_1.isArray(id)) {
+        def = id;
+        id = undefined;
+    }
     if (!is_1.isValue(val))
         return toDefault(null, def);
     if (is_1.isArray(val))

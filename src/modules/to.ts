@@ -20,6 +20,11 @@ declare var window;
  */
 export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
 
+  if (isArray(id)) {
+    def = <T[]>id;
+    id = undefined;
+  }
+
   if (!isValue(val))
     return toDefault(null, def);
 
