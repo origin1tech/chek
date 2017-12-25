@@ -52,9 +52,7 @@ const unnested = {
   'posts.102.category': 'Lunch',
 };
 
-const isCI = process.env.CI ? true : false;
-
-console.log(process.env);
+const isCI = process.env.WERCKER ? true : false;
 
 describe('Chek', () => {
 
