@@ -52,6 +52,8 @@ const unnested = {
   'posts.102.category': 'Lunch',
 };
 
+const isCI = process.env.CI ? true : false;
+
 describe('Chek', () => {
 
   before((done) => {
@@ -279,7 +281,9 @@ describe('Chek', () => {
   });
 
   it('should check if is running in Docker container', () => {
-    assert.equal(ck.isDocker(), false);
+
+    assert.equal(ck.isDocker(), isCI);
+
   });
 
   it('should check if is Node Debug.', () => {
