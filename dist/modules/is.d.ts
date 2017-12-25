@@ -74,7 +74,7 @@ export declare function isError(val: any, prop?: string): boolean;
  *
  * @param val the value to inspect as file.
  */
-export declare function isFile(val: any): any;
+export declare function isFile(val: any): boolean;
 /**
  * Is Directory
  * Checks if value is path to directory in filesytem.
@@ -82,7 +82,12 @@ export declare function isFile(val: any): any;
  *
  * @param val the value to inspect as file.
  */
-export declare function isDirectory(val: any): any;
+export declare function isDirectory(val: any): boolean;
+/**
+ * Is Docker
+ * Checks if running inside Docker container.
+ */
+export declare function isDocker(): boolean;
 /**
  * Is Float
  * Checks if number is float.
@@ -170,6 +175,11 @@ export declare function isPromise(val: any, name?: string): boolean;
  * @param val the value to inspect as RegExp.
  */
 export declare function isRegExp(val: any): boolean;
+/**
+ * Is Root
+ * If Node checks if is running under sudo.
+ */
+export declare function isRoot(): boolean;
 /**
  * Is String
  * Inspect value provided testing if is string.

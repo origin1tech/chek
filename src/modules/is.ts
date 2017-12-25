@@ -6,12 +6,13 @@ import { keys, duplicates } from './array';
 declare var v8debug;
 declare var window;
 
-let existsSync, statSync;
+let existsSync, statSync, readFileSync;
 
 if (isNode()) {
   const fs = require('fs');
   existsSync = fs.existsSync.bind(fs);
   statSync = fs.statSync.bind(fs);
+  readFileSync = fs.readFileSync.bind(fs);
 }
 
 /**
@@ -164,7 +165,7 @@ export function isError(val: any, prop?: string): boolean {
  *
  * @param val the value to inspect as file.
  */
-export function isFile(val: any) {
+export function isFile(val: any): boolean {
   return (
     isNode() &&
     existsSync(val) &&
@@ -179,12 +180,28 @@ export function isFile(val: any) {
  *
  * @param val the value to inspect as file.
  */
-export function isDirectory(val: any) {
+export function isDirectory(val: any): boolean {
   return (
     isNode() &&
     existsSync(val) &&
     statSync(val).isDirectory()
   );
+}
+
+/**
+ * Is Docker
+ * Checks if running inside Docker container.
+ */
+export function isDocker(): boolean {
+  if (!isNode()) return false;
+  const hasEnv = tryWrap(() => {
+    statSync('/.dockerenv');
+    return true;
+  })(false);
+  const hasGroup = tryWrap(() => {
+    return ~readFileSync('/proc/self/cgroup', 'utf8').indexOf('docker');
+  })(false);
+  return hasEnv || hasGroup;
 }
 
 /**
@@ -343,6 +360,15 @@ export function isPromise(val: any, name?: string): boolean {
  */
 export function isRegExp(val: any): boolean {
   return val && val.constructor && val.constructor === RegExp;
+}
+
+/**
+ * Is Root
+ * If Node checks if is running under sudo.
+ */
+export function isRoot(): boolean {
+  if (!isNode()) return false;
+  return process.getuid() === 0;
 }
 
 /**

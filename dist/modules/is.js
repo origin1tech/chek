@@ -4,11 +4,12 @@ var constant_1 = require("./constant");
 var to_1 = require("./to");
 var function_1 = require("./function");
 var array_1 = require("./array");
-var existsSync, statSync;
+var existsSync, statSync, readFileSync;
 if (isNode()) {
     var fs = require('fs');
     existsSync = fs.existsSync.bind(fs);
     statSync = fs.statSync.bind(fs);
+    readFileSync = fs.readFileSync.bind(fs);
 }
 /**
  * Is Array
@@ -166,6 +167,23 @@ function isDirectory(val) {
 }
 exports.isDirectory = isDirectory;
 /**
+ * Is Docker
+ * Checks if running inside Docker container.
+ */
+function isDocker() {
+    if (!isNode())
+        return false;
+    var hasEnv = function_1.tryWrap(function () {
+        statSync('/.dockerenv');
+        return true;
+    })(false);
+    var hasGroup = function_1.tryWrap(function () {
+        return ~readFileSync('/proc/self/cgroup', 'utf8').indexOf('docker');
+    })(false);
+    return hasEnv || hasGroup;
+}
+exports.isDocker = isDocker;
+/**
  * Is Float
  * Checks if number is float.
  *
@@ -308,6 +326,16 @@ function isRegExp(val) {
     return val && val.constructor && val.constructor === RegExp;
 }
 exports.isRegExp = isRegExp;
+/**
+ * Is Root
+ * If Node checks if is running under sudo.
+ */
+function isRoot() {
+    if (!isNode())
+        return false;
+    return process.getuid() === 0;
+}
+exports.isRoot = isRoot;
 /**
  * Is String
  * Inspect value provided testing if is string.

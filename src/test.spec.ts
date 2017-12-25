@@ -278,6 +278,10 @@ describe('Chek', () => {
     assert.equal(ck.isDirectory(__dirname), true);
   });
 
+  it('should check if is running in Docker container', () => {
+    assert.equal(ck.isDocker(), false);
+  });
+
   it('should check if is Node Debug.', () => {
     assert.equal(ck.isDebug(), false);
     assert.equal(ck.isDebug(true), true);
@@ -366,6 +370,10 @@ describe('Chek', () => {
 
   it('should check if is RegExp.', () => {
     assert.equal(ck.isRegExp(/test/), true);
+  });
+
+  it('should check if is running sudo as root.', () => {
+    assert.equal(ck.isRoot(), false);
   });
 
   it('should check if is String.', () => {

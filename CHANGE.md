@@ -2,6 +2,11 @@
 
 List of changes.
 
+### 12.25.2017
+
++ **isRoot** add method to check if running sudo (Node ONLY).
++ **isDocker** add method to check if running within a docker containter (Node ONLY).
+
 ### 12.17.2017
 
 + **toArray** all default value as second argument.
