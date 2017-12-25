@@ -281,9 +281,7 @@ describe('Chek', () => {
   });
 
   it('should check if is running in Docker container', () => {
-
     assert.equal(ck.isDocker(), isCI);
-
   });
 
   it('should check if is Node Debug.', () => {
@@ -377,7 +375,7 @@ describe('Chek', () => {
   });
 
   it('should check if is running sudo as root.', () => {
-    assert.equal(ck.isRoot(), false);
+    assert.equal(ck.isRoot(), isCI);
   });
 
   it('should check if is String.', () => {
