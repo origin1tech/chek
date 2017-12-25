@@ -54,6 +54,8 @@ const unnested = {
 
 const isCI = process.env.CI ? true : false;
 
+console.log(process.env);
+
 describe('Chek', () => {
 
   before((done) => {
