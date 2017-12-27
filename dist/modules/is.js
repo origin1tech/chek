@@ -40,8 +40,8 @@ exports.isBoolean = isBoolean;
  * @param override an optional key to inspect on process.env.
  */
 function isBrowser(override) {
-    // Enables checking a proces.env key while
-    // in Node. Good for multi-environment builds.
+    // Enables checking a process.env key while
+    // in Node.
     if (override)
         return typeof process !== 'undefined' &&
             function_1.tryWrap(to_1.toBoolean, process.env &&

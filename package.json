@@ -1,6 +1,6 @@
 {
   "name": "chek",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Minimal utility for checking types, working with arrays and objects.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -47,7 +47,7 @@
     "ts-node": "^3.2.0",
     "tslint": "^5.4.3",
     "typedoc": "^0.7.1",
-    "typescript": "^2.4.1",
+    "typescript": "^2.6.2",
     "uglify-js": "^3.0.24"
   },
   "dependencies": {

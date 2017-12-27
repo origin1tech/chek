@@ -20,12 +20,21 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+/* Import all methods in case need to add to window */
 var chek = require("./chek");
 /* istanbul ignore if */
 chek.toWindow('chek', chek, ['tryRequire', 'isNode']);
-__export(require("./chek"));
+__export(require("./modules/array"));
+__export(require("./modules/constant"));
+__export(require("./modules/from"));
+__export(require("./modules/function"));
+__export(require("./modules/is"));
+__export(require("./modules/object"));
+__export(require("./modules/string"));
+__export(require("./modules/to"));
+__export(require("./modules/type"));
 
-},{"./chek":1}],3:[function(require,module,exports){
+},{"./chek":1,"./modules/array":3,"./modules/constant":4,"./modules/from":5,"./modules/function":6,"./modules/is":7,"./modules/object":8,"./modules/string":9,"./modules/to":10,"./modules/type":11}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
@@ -505,8 +514,8 @@ exports.isBoolean = isBoolean;
  * @param override an optional key to inspect on process.env.
  */
 function isBrowser(override) {
-    // Enables checking a proces.env key while
-    // in Node. Good for multi-environment builds.
+    // Enables checking a process.env key while
+    // in Node.
     if (override)
         return typeof process !== 'undefined' &&
             function_1.tryWrap(to_1.toBoolean, process.env &&
