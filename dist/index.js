@@ -5,7 +5,6 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var chek = require("./chek");
 /* istanbul ignore if */
-if (chek.isBrowser())
-    chek.toWindow('chek', chek, ['tryRequire', 'isNode']);
+chek.toWindow('chek', chek, ['tryRequire', 'isNode']);
 __export(require("./chek"));
 //# sourceMappingURL=index.js.map

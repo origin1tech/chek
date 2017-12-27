@@ -1,7 +1,7 @@
 import * as chek from './chek';
 
 /* istanbul ignore if */
-if (chek.isBrowser())
-  chek.toWindow('chek', chek, ['tryRequire', 'isNode']);
+chek.toWindow('chek', chek, ['tryRequire', 'isNode']);
 
+export * from './interfaces';
 export * from './chek';

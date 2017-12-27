@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 12.27.2017
+
++ **interfaces** export interfaces to better support custom functions/wrappers.
+
 ### 12.25.2017
 
 + **isRoot** add method to check if running sudo (Node ONLY).
