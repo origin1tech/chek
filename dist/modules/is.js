@@ -84,8 +84,7 @@ function isDebug(debugging) {
         return debugging;
     var eargv = process && process.execArgv;
     function chkDebug() {
-        return (eargv.indexOf('--debug') !== -1 ||
-            eargv.indexOf('--debug-brk') !== -1 ||
+        return (eargv.filter(function (v) { return /^(--debug|--inspect)/.test(v); }).length ||
             isValue(v8debug));
     }
     return function_1.tryWrap(chkDebug)(false);

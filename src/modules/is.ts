@@ -97,10 +97,8 @@ export function isDebug(debugging?: boolean) {
 
   function chkDebug() {
     return (
-      eargv.indexOf('--debug') !== -1 ||
-      eargv.indexOf('--debug-brk') !== -1 ||
-      isValue(v8debug)
-    );
+      eargv.filter(v => /^(--debug|--inspect)/.test(v)).length ||
+      isValue(v8debug));
   }
 
   return tryWrap(chkDebug)(false);

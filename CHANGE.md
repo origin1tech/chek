@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 02.09.2018
+
++ **isDebug** add check for --inspect improve checking favor regex over indexOf check.
+
 ### 12.27.2017
 
 + **interfaces** export interfaces to better support custom functions/wrappers.
