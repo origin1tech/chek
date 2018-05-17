@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 05.16.2018
+
++ **set** fix bug where arrays are not created if do not exist.
+
 ### 02.09.2018
 
 + **isDebug** add check for --inspect improve checking favor regex over indexOf check.

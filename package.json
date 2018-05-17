@@ -1,6 +1,6 @@
 {
   "name": "chek",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Minimal utility for checking types, working with arrays and objects.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -9,9 +9,9 @@
     "compile": "node ./node_modules/typescript/bin/tsc -p ./src/tsconfig.json",
     "browserify": "BROWSER=true node ./node_modules/browserify/bin/cmd  ./dist/index.js -o ./dist/browser.js",
     "uglify": "node ./node_modules/uglify-js/bin/uglifyjs ./dist/browser.js --output ./dist/browser.min.js --compress --mangle",
-    "docs": "node ./node_modules/typedoc/bin/typedoc --out ./docs ./src --options ./typedoc.json --tsconfig ./src/tsconfig.json",
+    "typedoc": "node ./node_modules/typedoc/bin/typedoc --out ./docs ./src --options ./typedoc.json --tsconfig ./src/tsconfig.json",
     "bump": "node ./build/bump",
-    "build": "npm run clean && npm run compile && npm run browserify && npm run uglify && npm run docs",
+    "build": "npm run clean && npm run compile && npm run browserify && npm run uglify && npm run typedoc",
     "commit": "git add . && git commit -am 'auto commit' && git push",
     "release": "npm run build && npm run bump && npm run commit && npm publish",
     "test": "nyc mocha --opts ./src/mocha.opts"

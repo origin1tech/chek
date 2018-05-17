@@ -98,7 +98,6 @@ function _get<T>(obj: any, key: string | string[]): T {
  */
 function _set<T>(obj: any, key: string | string[], val: any): T {
 
-
   if (arguments.length !== 3 || (!isArray(key) && !isString(key)))
     return null;
 
@@ -112,11 +111,14 @@ function _set<T>(obj: any, key: string | string[], val: any): T {
   const match = matchIndex(prop);
   let next = obj[prop];
 
-  if (!isValue(next))
+  if (!isValue(next) && !match)
     next = obj[prop] = {};
 
-  if (match)
+  if (match) {
+    if (!obj[match.name])
+      obj[match.name] = [];
     next = obj[match.name][match.index];
+  }
 
   if (props.length > 0) {
     _set(next, props, val);

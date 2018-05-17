@@ -990,10 +990,13 @@ function _set(obj, key, val) {
     var prop = props.shift();
     var match = matchIndex(prop);
     var next = obj[prop];
-    if (!is_1.isValue(next))
+    if (!is_1.isValue(next) && !match)
         next = obj[prop] = {};
-    if (match)
+    if (match) {
+        if (!obj[match.name])
+            obj[match.name] = [];
         next = obj[match.name][match.index];
+    }
     if (props.length > 0) {
         _set(next, props, val);
     }
