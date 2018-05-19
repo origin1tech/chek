@@ -1,5 +1,5 @@
 
-import { IMap, IArrayResult, IComparatorPrimer, IComparatorOptions, IComparator, IComparatorField, IComparatorTuple } from '../interfaces';
+import { IMap, IArrayResult, IComparatorPrimer, IComparatorOptions, IComparator, IComparatorField, IComparatorTuple, Transform } from '../interfaces';
 import { isArray, isEqual, isPlainObject, isValue, isString, isBoolean, isFunction, isObject, isNumber } from './is';
 import { tryWrap } from './function';
 
@@ -95,9 +95,13 @@ export function orderBy<T>(arr: any[], ...fields: IComparatorField[]): T[] {
  * @param arr the array to be inspected.
  * @param value the value to check if is contained in array.
  */
-export function contains(arr: any[], value: any): boolean {
+export function contains(arr: string | any[], value: any, transform?: Transform): boolean {
   arr = arr || [];
-  return arr.filter((v) => {
+  if (isString(arr))
+    arr = (arr as string).split('');
+  return (arr as any[]).filter((v) => {
+    if (transform)
+      v = transform(v);
     return isEqual(v, value);
   }).length > 0;
 }
@@ -109,11 +113,16 @@ export function contains(arr: any[], value: any): boolean {
  * @param arr the array to be inspected.
  * @param compare - array of values to compare.
  */
-export function containsAny(arr: any[], compare: any[]): boolean {
+export function containsAny(arr: string | any[], compare: string | any[], transform?: Transform): boolean {
+  if (isString(arr))
+    arr = (arr as string).split('');
+  if (isString(compare))
+    compare = (compare as string).split('');
   if (!isArray(arr) || !isArray(compare))
     return false;
-  return compare.filter(c => {
-    return contains(arr, c);
+  return (compare as any[]).filter(c => {
+    console.log(c);
+    return contains(arr, c, transform);
   }).length > 0;
 }
 
@@ -188,6 +197,32 @@ export function flatten<T>(...arr: any[]): T[] {
  */
 export function first<T>(arr: any[]): T {
   return arr[0];
+}
+
+/**
+ *
+ * Includes
+ * Tests if array contains value.
+ *
+ * @param arr the array to be inspected.
+ * @param value the value to check if is contained in array.
+ */
+/* istanbul ignore next */
+export function includes(arr: string | any[], value: any, transform?: Transform): boolean {
+  return contains(arr, value);
+}
+
+/**
+ *
+ * Includes Any
+ * Tests if array contains any value.
+ *
+ * @param arr the array to be inspected.
+ * @param compare the array to compare.
+ */
+/* istanbul ignore next */
+export function includesAny(arr: string | any[], compare: string | any[], transform?: Transform): boolean {
+  return containsAny(arr, compare);
 }
 
 /**

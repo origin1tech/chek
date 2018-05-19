@@ -76,10 +76,13 @@
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-private tsd-is-not-exported"><a href="_modules_object_.html#_del" class="tsd-kind-icon">_del</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-private tsd-is-not-exported"><a href="_modules_object_.html#_get" class="tsd-kind-icon">_get</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-private tsd-is-not-exported"><a href="_modules_object_.html#_set" class="tsd-kind-icon">_set</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#assign" class="tsd-kind-icon">assign</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#clone" class="tsd-kind-icon">clone</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#del" class="tsd-kind-icon">del</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#extend" class="tsd-kind-icon">extend</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_modules_object_.html#getmatch" class="tsd-kind-icon">get<wbr>Match</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_modules_object_.html#has" class="tsd-kind-icon">has</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="_modules_object_.html#matchindex" class="tsd-kind-icon">match<wbr>Index</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#reverse" class="tsd-kind-icon">reverse</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#set" class="tsd-kind-icon">set</a></li>
@@ -100,7 +103,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L26">modules/object.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L48">modules/object.ts:48</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -137,7 +140,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L62">modules/object.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L84">modules/object.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -174,7 +177,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L99">modules/object.ts:99</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L121">modules/object.ts:121</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -205,6 +208,50 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="assign" class="tsd-anchor"></a>
+					<h3>assign</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">assign&lt;T&gt;<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L169">modules/object.ts:169</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Assign
+									Convenience wrapper to Object.assign.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obj: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>object to assign.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>additional source object.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="clone" class="tsd-anchor"></a>
 					<h3>clone</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
@@ -214,7 +261,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L172">modules/object.ts:172</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L253">modules/object.ts:253</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -258,7 +305,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L148">modules/object.ts:148</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L182">modules/object.ts:182</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -308,7 +355,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L193">modules/object.ts:193</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L274">modules/object.ts:274</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -337,13 +384,13 @@
 								<li>
 									<h5>obj: <span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>primary object.</p>
+										<p>primary target object.</p>
 									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>unlimited number of objects to extend from.</p>
+										<p>additional source objects to merge with target.</p>
 									</div>
 								</li>
 							</ul>
@@ -361,7 +408,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L161">modules/object.ts:161</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L195">modules/object.ts:195</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -395,6 +442,70 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="getmatch" class="tsd-anchor"></a>
+					<h3>get<wbr>Match</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Match<span class="tsd-signature-symbol">(</span>prop<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L7">modules/object.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>prop: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">object</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="has" class="tsd-anchor"></a>
+					<h3>has</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">has<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L206">modules/object.ts:206</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Has
+									Checks if property exists in object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obj: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the object to be inpsected.</p>
+									</div>
+								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the key to be found.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 					<a name="matchindex" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> match<wbr>Index</h3>
@@ -405,7 +516,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L13">modules/object.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L29">modules/object.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -439,7 +550,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L280">modules/object.ts:280</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L357">modules/object.ts:357</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -479,7 +590,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/object.ts#L323">modules/object.ts:323</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/object.ts#L400">modules/object.ts:400</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -585,6 +696,9 @@
 						<a href="_modules_object_.html#_set" class="tsd-kind-icon">_set</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_modules_object_.html#assign" class="tsd-kind-icon">assign</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_modules_object_.html#clone" class="tsd-kind-icon">clone</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
@@ -595,6 +709,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_modules_object_.html#get" class="tsd-kind-icon">get</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_modules_object_.html#getmatch" class="tsd-kind-icon">get<wbr>Match</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_modules_object_.html#has" class="tsd-kind-icon">has</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="_modules_object_.html#matchindex" class="tsd-kind-icon">match<wbr>Index</a>

@@ -1,3 +1,4 @@
+
 import * as chai from 'chai';
 import * as mocha from 'mocha';
 
@@ -124,13 +125,14 @@ describe('Chek', () => {
     assert.equal(ck.contains([1, 2, 3], 3), true);
     assert.equal(ck.contains([1, 2, 3], 6), false);
     assert.equal(ck.contains(arr, null), false);
+    assert.equal(ck.contains('1357', 7, (v) => parseInt(v)), true);
   });
 
   it('should check if source array Contains Any value in inspected array.', () => {
-    const arr: any = 'test';
     assert.equal(ck.containsAny([1, 2, 3], [8, 6, 3]), true);
     assert.equal(ck.containsAny([1, 2, 3], [8, 6, 5]), false);
-    assert.equal(ck.containsAny([1, 2, 3], arr), false);
+    assert.equal(ck.containsAny([1, 2, 3], 'test'), false);
+    assert.equal(ck.containsAny('1357', [7, 9, 11], (v) => parseInt(v)), true);
   });
 
   it('should count the number of Duplicates in array.', () => {
@@ -474,6 +476,22 @@ describe('Chek', () => {
     assert.deepEqual(ck.extend(true), {});
     assert.deepEqual(ck.extend(true, { name: 'bob' }, { age: 31 }, { 'save-dev': true }, 'not an object'), { name: 'bob', age: 31, 'save-dev': true });
     assert.deepEqual(ck.extend('not an object'), 'not an object');
+  });
+
+  it('should check if Has property path in object', () => {
+    const obj = {
+      title: 'My Blog',
+      author: {
+        name: 'Joe'
+      },
+      tags: ['one', 'two', [{
+        name: 'three',
+      }]]
+    };
+    assert.isTrue(ck.has(obj, 'author.name'));
+    assert.isTrue(ck.has(obj, 'tags[1]'));
+    assert.isTrue(ck.has(obj, 'tags[2][0].name'));
+    assert.isFalse(ck.has(obj, 'tags[2][0].bad'));
   });
 
   it('should Set value by dot notated property.', () => {

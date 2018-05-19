@@ -128,9 +128,13 @@ exports.orderBy = orderBy;
  * @param arr the array to be inspected.
  * @param value the value to check if is contained in array.
  */
-function contains(arr, value) {
+function contains(arr, value, transform) {
     arr = arr || [];
+    if (is_1.isString(arr))
+        arr = arr.split('');
     return arr.filter(function (v) {
+        if (transform)
+            v = transform(v);
         return is_1.isEqual(v, value);
     }).length > 0;
 }
@@ -142,11 +146,16 @@ exports.contains = contains;
  * @param arr the array to be inspected.
  * @param compare - array of values to compare.
  */
-function containsAny(arr, compare) {
+function containsAny(arr, compare, transform) {
+    if (is_1.isString(arr))
+        arr = arr.split('');
+    if (is_1.isString(compare))
+        compare = compare.split('');
     if (!is_1.isArray(arr) || !is_1.isArray(compare))
         return false;
     return compare.filter(function (c) {
-        return contains(arr, c);
+        console.log(c);
+        return contains(arr, c, transform);
     }).length > 0;
 }
 exports.containsAny = containsAny;
@@ -219,6 +228,32 @@ function first(arr) {
     return arr[0];
 }
 exports.first = first;
+/**
+ *
+ * Includes
+ * Tests if array contains value.
+ *
+ * @param arr the array to be inspected.
+ * @param value the value to check if is contained in array.
+ */
+/* istanbul ignore next */
+function includes(arr, value, transform) {
+    return contains(arr, value);
+}
+exports.includes = includes;
+/**
+ *
+ * Includes Any
+ * Tests if array contains any value.
+ *
+ * @param arr the array to be inspected.
+ * @param compare the array to compare.
+ */
+/* istanbul ignore next */
+function includesAny(arr, compare, transform) {
+    return containsAny(arr, compare);
+}
+exports.includesAny = includesAny;
 /**
  * Last
  * Simple method to get last element.
@@ -912,8 +947,24 @@ exports.isWindows = isWindows;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _clone = require("clone");
+var array_1 = require("./array");
 var is_1 = require("./is");
 var string_1 = require("./string");
+function getMatch(prop) {
+    if (!prop || !/\[\d+\]/.test(prop))
+        return false;
+    var prefix = prop.match(/[^\[]+/i);
+    var idx;
+    var indices = prop.match(/\d+/g);
+    if (!indices)
+        return false;
+    //  const name = new RegExp('(.+)\\[([0-9]*)\\]', 'i').exec(prop);
+    return {
+        key: prefix[0],
+        index: indices[0],
+        indices: indices.slice(1)
+    };
+}
 /**
  * Match Index
  * @private
@@ -921,19 +972,25 @@ var string_1 = require("./string");
  * @param prop the property to match.
  */
 function matchIndex(prop) {
-    // expression for matching arrays.
-    var match = new RegExp('(.+)\\[([0-9]*)\\]', 'i').exec(prop);
-    if (match && match.length === 3) {
-        return { name: match[1], index: match[2] };
-    }
-    return false;
+    if (!prop || !/\[\d+\]/.test(prop))
+        return false;
+    var prefix = prop.match(/[^\[]+/i);
+    var idx;
+    var indices = prop.match(/\d+/g);
+    if (!indices)
+        return false;
+    return {
+        name: prefix[0],
+        index: indices[0],
+        indices: indices.slice(1)
+    };
 }
 /**
  * Del
  * @private
  */
 function _del(obj, key) {
-    if (arguments.length !== 2 || (!is_1.isArray(key) && !is_1.isString(key)))
+    if (arguments.length !== 2 || !is_1.isObject(obj) || (!is_1.isArray(key) && !is_1.isString(key)))
         return null;
     var props = string_1.split(key);
     var prop = props.shift();
@@ -959,7 +1016,7 @@ function _del(obj, key) {
  * @private
  */
 function _get(obj, key) {
-    if (arguments.length !== 2 || (!is_1.isArray(key) && !is_1.isString(key)))
+    if (!is_1.isObject(obj) || (!is_1.isArray(key) && !is_1.isString(key)))
         return null;
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
@@ -967,8 +1024,11 @@ function _get(obj, key) {
         match = matchIndex(prop);
         if (match) {
             /* istanbul ignore next  */
-            if (!is_1.isUndefined(obj[match.name]))
+            if (!is_1.isUndefined(obj[match.name])) {
                 obj = obj[match.name][match.index];
+                // iterate each indices and set obj to that index.
+                match.indices.forEach(function (i) { return obj = obj[i]; });
+            }
         }
         else {
             obj = obj[prop];
@@ -981,7 +1041,7 @@ function _get(obj, key) {
  * @private
  */
 function _set(obj, key, val) {
-    if (arguments.length !== 3 || (!is_1.isArray(key) && !is_1.isString(key)))
+    if (arguments.length !== 3 || !is_1.isObject(obj) || (!is_1.isArray(key) && !is_1.isString(key)))
         return null;
     var props = string_1.split(key);
     /* istanbul ignore if */
@@ -1009,6 +1069,22 @@ function _set(obj, key, val) {
     return obj;
 }
 /**
+ * Assign
+ * Convenience wrapper to Object.assign.
+ *
+ * @param obj object to assign.
+ * @param args additional source object.
+ */
+function assign(obj) {
+    var args = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        args[_i - 1] = arguments[_i];
+    }
+    if (Object['assign'])
+        return Object.assign.apply(Object, [obj].concat(args));
+}
+exports.assign = assign;
+/**
  * Del
  * Removes a property within the supplied object.
  *
@@ -1034,6 +1110,42 @@ function get(obj, key) {
 }
 exports.get = get;
 /**
+ * Has
+ * Checks if property exists in object.
+ *
+ * @param obj the object to be inpsected.
+ * @param key the key to be found.
+ */
+function has(obj, key) {
+    if (!is_1.isObject(obj) || (!is_1.isArray(key) && !is_1.isString(key)))
+        return false;
+    var props = is_1.isArray(key) ? key : string_1.split(key);
+    while (props.length && obj) {
+        var prop = props.shift(), match = matchIndex(prop);
+        if (!props.length) {
+            var _keys = array_1.keys(obj);
+            if (match) {
+                return array_1.contains(_keys, match.name) && is_1.isValue(obj[match.name][match.index]);
+            }
+            else {
+                return array_1.contains(_keys, prop);
+            }
+        }
+        if (match) {
+            /* istanbul ignore next  */
+            if (!is_1.isUndefined(obj[match.name])) {
+                obj = obj[match.name][match.index];
+                // iterate each indices and set obj to that index.
+                match.indices.forEach(function (i) { return obj = obj[i]; });
+            }
+        }
+        else {
+            obj = obj[prop];
+        }
+    }
+}
+exports.has = has;
+/**
  * Clone
  * Performs deep cloning of objects.
  *
@@ -1058,8 +1170,8 @@ exports.clone = clone;
  * results in:
  * { name: 'Bob', active: true }
  *
- * @param obj primary object.
- * @param args unlimited number of objects to extend from.
+ * @param obj primary target object.
+ * @param args additional source objects to merge with target.
  */
 function extend(obj) {
     var args = [];
@@ -1079,10 +1191,7 @@ function extend(obj) {
     // If not an object return null.
     if (!is_1.isObject(dest))
         return dest;
-    // Itearate each object and extend
-    // to the target object.
     var i = 0;
-    // for (let i = 0, src: any; src = args[i]; i++) {
     while (i < args.length) {
         var src = args[i];
         if (!is_1.isObject(src))
@@ -1174,7 +1283,7 @@ function set(obj, key, val, immutable) {
 }
 exports.set = set;
 
-},{"./is":7,"./string":9,"clone":15}],9:[function(require,module,exports){
+},{"./array":3,"./is":7,"./string":9,"clone":15}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");

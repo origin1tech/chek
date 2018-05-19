@@ -1,3 +1,4 @@
+export declare type Transform = (value: any) => any;
 export interface IMap<T> {
     [key: string]: T;
 }

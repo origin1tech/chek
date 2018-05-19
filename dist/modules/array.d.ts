@@ -1,4 +1,4 @@
-import { IMap, IArrayResult, IComparatorField } from '../interfaces';
+import { IMap, IArrayResult, IComparatorField, Transform } from '../interfaces';
 /**
  * Order By
  * : Orders arrays of objects by property, falls back to .sort() if not fields are specified.
@@ -24,7 +24,7 @@ export declare function orderBy<T>(arr: any[], ...fields: IComparatorField[]): T
  * @param arr the array to be inspected.
  * @param value the value to check if is contained in array.
  */
-export declare function contains(arr: any[], value: any): boolean;
+export declare function contains(arr: string | any[], value: any, transform?: Transform): boolean;
 /**
  * Contains Any
  * Tests array check if contains value.
@@ -32,7 +32,7 @@ export declare function contains(arr: any[], value: any): boolean;
  * @param arr the array to be inspected.
  * @param compare - array of values to compare.
  */
-export declare function containsAny(arr: any[], compare: any[]): boolean;
+export declare function containsAny(arr: string | any[], compare: string | any[], transform?: Transform): boolean;
 /**
  * Duplicates
  * Counts the number of duplicates in an array.
@@ -66,6 +66,24 @@ export declare function flatten<T>(...arr: any[]): T[];
  * @param arr the array to get first element from.
  */
 export declare function first<T>(arr: any[]): T;
+/**
+ *
+ * Includes
+ * Tests if array contains value.
+ *
+ * @param arr the array to be inspected.
+ * @param value the value to check if is contained in array.
+ */
+export declare function includes(arr: string | any[], value: any, transform?: Transform): boolean;
+/**
+ *
+ * Includes Any
+ * Tests if array contains any value.
+ *
+ * @param arr the array to be inspected.
+ * @param compare the array to compare.
+ */
+export declare function includesAny(arr: string | any[], compare: string | any[], transform?: Transform): boolean;
 /**
  * Last
  * Simple method to get last element.

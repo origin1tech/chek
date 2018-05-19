@@ -1,8 +1,24 @@
 
 import * as _clone from 'clone';
-import { keys } from './array';
+import { keys, contains } from './array';
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isValue } from './is';
 import { split } from './string';
+
+function getMatch(prop) {
+  if (!prop || !/\[\d+\]/.test(prop))
+    return false;
+  const prefix = prop.match(/[^\[]+/i);
+  let idx;
+  const indices = prop.match(/\d+/g);
+  if (!indices)
+    return false;
+  //  const name = new RegExp('(.+)\\[([0-9]*)\\]', 'i').exec(prop);
+  return {
+    key: prefix[0],
+    index: indices[0],
+    indices: indices.slice(1)
+  };
+}
 
 /**
  * Match Index
@@ -11,12 +27,18 @@ import { split } from './string';
  * @param prop the property to match.
  */
 function matchIndex(prop) {
-  // expression for matching arrays.
-  const match = new RegExp('(.+)\\[([0-9]*)\\]', 'i').exec(prop);
-  if (match && match.length === 3) {
-    return { name: match[1], index: match[2] };
-  }
-  return false;
+  if (!prop || !/\[\d+\]/.test(prop))
+    return false;
+  const prefix = prop.match(/[^\[]+/i);
+  let idx;
+  const indices = prop.match(/\d+/g);
+  if (!indices)
+    return false;
+  return {
+    name: prefix[0],
+    index: indices[0],
+    indices: indices.slice(1)
+  };
 }
 
 /**
@@ -25,7 +47,7 @@ function matchIndex(prop) {
  */
 function _del<T>(obj: any, key: string | string[]): T {
 
-  if (arguments.length !== 2 || (!isArray(key) && !isString(key)))
+  if (arguments.length !== 2 || !isObject(obj) || (!isArray(key) && !isString(key)))
     return null;
 
   const props: string[] = split(key);
@@ -61,7 +83,7 @@ function _del<T>(obj: any, key: string | string[]): T {
  */
 function _get<T>(obj: any, key: string | string[]): T {
 
-  if (arguments.length !== 2 || (!isArray(key) && !isString(key)))
+  if (!isObject(obj) || (!isArray(key) && !isString(key)))
     return null;
 
   let props: string[] = isArray(key) ? <string[]>key : split(key);
@@ -74,16 +96,16 @@ function _get<T>(obj: any, key: string | string[]): T {
     match = matchIndex(prop);
 
     if (match) {
-
       /* istanbul ignore next  */
-      if (!isUndefined(obj[match.name]))
+      if (!isUndefined(obj[match.name])) {
         obj = obj[match.name][match.index];
-
+        // iterate each indices and set obj to that index.
+        match.indices.forEach(i => obj = obj[i]);
+      }
     }
 
     else {
       obj = obj[prop];
-
     }
 
   }
@@ -98,7 +120,7 @@ function _get<T>(obj: any, key: string | string[]): T {
  */
 function _set<T>(obj: any, key: string | string[], val: any): T {
 
-  if (arguments.length !== 3 || (!isArray(key) && !isString(key)))
+  if (arguments.length !== 3 || !isObject(obj) || (!isArray(key) && !isString(key)))
     return null;
 
   let props: string[] = split(key);
@@ -138,6 +160,18 @@ function _set<T>(obj: any, key: string | string[], val: any): T {
 }
 
 /**
+ * Assign
+ * Convenience wrapper to Object.assign.
+ *
+ * @param obj object to assign.
+ * @param args additional source object.
+ */
+export function assign<T>(obj: any, ...args: any[]): T {
+  if (Object['assign'])
+    return Object.assign(obj, ...args);
+}
+
+/**
  * Del
  * Removes a property within the supplied object.
  *
@@ -160,6 +194,53 @@ export function del<T>(obj: any, key: string | string[], immutable?: boolean): T
  */
 export function get<T>(obj: any, key: string | string[]): T {
   return _get<T>(clone(obj), key);
+}
+
+/**
+ * Has
+ * Checks if property exists in object.
+ *
+ * @param obj the object to be inpsected.
+ * @param key the key to be found.
+ */
+export function has(obj: any, key: string | string[]): boolean {
+
+
+  if (!isObject(obj) || (!isArray(key) && !isString(key)))
+    return false;
+
+  let props: string[] = isArray(key) ? <string[]>key : split(key);
+
+  while (props.length && obj) {
+
+    let prop = props.shift(),
+      match = matchIndex(prop);
+
+    if (!props.length) { // no more props chek path.
+      const _keys = keys(obj);
+      if (match) {
+        return contains(_keys, match.name) && isValue(obj[match.name][match.index]);
+      }
+      else {
+        return contains(_keys, prop);
+      }
+    }
+
+    if (match) {
+      /* istanbul ignore next  */
+      if (!isUndefined(obj[match.name])) {
+        obj = obj[match.name][match.index];
+        // iterate each indices and set obj to that index.
+        match.indices.forEach(i => obj = obj[i]);
+      }
+    }
+
+    else {
+      obj = obj[prop];
+    }
+
+  }
+
 }
 
 /**
@@ -187,8 +268,8 @@ export function clone<T>(obj: any, json?: boolean): T {
  * results in:
  * { name: 'Bob', active: true }
  *
- * @param obj primary object.
- * @param args unlimited number of objects to extend from.
+ * @param obj primary target object.
+ * @param args additional source objects to merge with target.
  */
 export function extend<T>(obj: any, ...args: any[]): T {
 
@@ -208,12 +289,8 @@ export function extend<T>(obj: any, ...args: any[]): T {
   if (!isObject(dest))
     return dest;
 
-  // Itearate each object and extend
-  // to the target object.
-
   let i = 0;
 
-  // for (let i = 0, src: any; src = args[i]; i++) {
   while (i < args.length) {
 
     let src = args[i];

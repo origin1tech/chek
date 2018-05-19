@@ -79,6 +79,8 @@
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_modules_array_.html#duplicates" class="tsd-kind-icon">duplicates</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_array_.html#first" class="tsd-kind-icon">first</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_array_.html#flatten" class="tsd-kind-icon">flatten</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_modules_array_.html#includes" class="tsd-kind-icon">includes</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_modules_array_.html#includesany" class="tsd-kind-icon">includes<wbr>Any</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_modules_array_.html#keys" class="tsd-kind-icon">keys</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_array_.html#last" class="tsd-kind-icon">last</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported"><a href="_modules_array_.html#normcomparator" class="tsd-kind-icon">norm<wbr>Comparator</a></li>
@@ -99,13 +101,13 @@
 					<a name="contains" class="tsd-anchor"></a>
 					<h3>contains</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">contains<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">contains<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, transform<span class="tsd-signature-symbol">?: </span><a href="_interfaces_.html#transform" class="tsd-signature-type">Transform</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L98">modules/array.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L98">modules/array.ts:98</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -117,7 +119,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>arr: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>arr: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the array to be inspected.</p>
 									</div>
@@ -128,6 +130,9 @@
 										<p>the value to check if is contained in array.</p>
 									</div>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> transform: <a href="_interfaces_.html#transform" class="tsd-signature-type">Transform</a></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
@@ -137,13 +142,13 @@
 					<a name="containsany" class="tsd-anchor"></a>
 					<h3>contains<wbr>Any</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">contains<wbr>Any<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, compare<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">contains<wbr>Any<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, compare<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, transform<span class="tsd-signature-symbol">?: </span><a href="_interfaces_.html#transform" class="tsd-signature-type">Transform</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L112">modules/array.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L116">modules/array.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -155,16 +160,19 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>arr: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>arr: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the array to be inspected.</p>
 									</div>
 								</li>
 								<li>
-									<h5>compare: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>compare: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>array of values to compare.</p>
 									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> transform: <a href="_interfaces_.html#transform" class="tsd-signature-type">Transform</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -181,7 +189,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L6">modules/array.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L6">modules/array.ts:6</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -212,7 +220,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L128">modules/array.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L137">modules/array.ts:137</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -256,7 +264,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L189">modules/array.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L198">modules/array.ts:198</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -295,7 +303,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L164">modules/array.ts:164</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L173">modules/array.ts:173</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -323,6 +331,88 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="includes" class="tsd-anchor"></a>
+					<h3>includes</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">includes<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, transform<span class="tsd-signature-symbol">?: </span><a href="_interfaces_.html#transform" class="tsd-signature-type">Transform</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L211">modules/array.ts:211</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Includes
+									Tests if array contains value.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>arr: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the array to be inspected.</p>
+									</div>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the value to check if is contained in array.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> transform: <a href="_interfaces_.html#transform" class="tsd-signature-type">Transform</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="includesany" class="tsd-anchor"></a>
+					<h3>includes<wbr>Any</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">includes<wbr>Any<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, compare<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, transform<span class="tsd-signature-symbol">?: </span><a href="_interfaces_.html#transform" class="tsd-signature-type">Transform</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L224">modules/array.ts:224</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Includes Any
+									Tests if array contains any value.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>arr: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the array to be inspected.</p>
+									</div>
+								</li>
+								<li>
+									<h5>compare: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the array to compare.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> transform: <a href="_interfaces_.html#transform" class="tsd-signature-type">Transform</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="keys" class="tsd-anchor"></a>
 					<h3>keys</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
@@ -332,7 +422,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L150">modules/array.ts:150</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L159">modules/array.ts:159</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -364,7 +454,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L199">modules/array.ts:199</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L234">modules/array.ts:234</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -402,7 +492,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L7">modules/array.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L7">modules/array.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -434,7 +524,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L35">modules/array.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L35">modules/array.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -488,7 +578,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L211">modules/array.ts:211</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L246">modules/array.ts:246</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -520,7 +610,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L230">modules/array.ts:230</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L265">modules/array.ts:265</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -558,7 +648,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L246">modules/array.ts:246</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L281">modules/array.ts:281</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -592,7 +682,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L264">modules/array.ts:264</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L299">modules/array.ts:299</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -642,7 +732,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/cca17d2/src/modules/array.ts#L300">modules/array.ts:300</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/f027abb/src/modules/array.ts#L335">modules/array.ts:335</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -732,6 +822,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_modules_array_.html#flatten" class="tsd-kind-icon">flatten</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_modules_array_.html#includes" class="tsd-kind-icon">includes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_modules_array_.html#includesany" class="tsd-kind-icon">includes<wbr>Any</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_modules_array_.html#keys" class="tsd-kind-icon">keys</a>

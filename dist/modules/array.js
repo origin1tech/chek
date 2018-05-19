@@ -91,9 +91,13 @@ exports.orderBy = orderBy;
  * @param arr the array to be inspected.
  * @param value the value to check if is contained in array.
  */
-function contains(arr, value) {
+function contains(arr, value, transform) {
     arr = arr || [];
+    if (is_1.isString(arr))
+        arr = arr.split('');
     return arr.filter(function (v) {
+        if (transform)
+            v = transform(v);
         return is_1.isEqual(v, value);
     }).length > 0;
 }
@@ -105,11 +109,16 @@ exports.contains = contains;
  * @param arr the array to be inspected.
  * @param compare - array of values to compare.
  */
-function containsAny(arr, compare) {
+function containsAny(arr, compare, transform) {
+    if (is_1.isString(arr))
+        arr = arr.split('');
+    if (is_1.isString(compare))
+        compare = compare.split('');
     if (!is_1.isArray(arr) || !is_1.isArray(compare))
         return false;
     return compare.filter(function (c) {
-        return contains(arr, c);
+        console.log(c);
+        return contains(arr, c, transform);
     }).length > 0;
 }
 exports.containsAny = containsAny;
@@ -182,6 +191,32 @@ function first(arr) {
     return arr[0];
 }
 exports.first = first;
+/**
+ *
+ * Includes
+ * Tests if array contains value.
+ *
+ * @param arr the array to be inspected.
+ * @param value the value to check if is contained in array.
+ */
+/* istanbul ignore next */
+function includes(arr, value, transform) {
+    return contains(arr, value);
+}
+exports.includes = includes;
+/**
+ *
+ * Includes Any
+ * Tests if array contains any value.
+ *
+ * @param arr the array to be inspected.
+ * @param compare the array to compare.
+ */
+/* istanbul ignore next */
+function includesAny(arr, compare, transform) {
+    return containsAny(arr, compare);
+}
+exports.includesAny = includesAny;
 /**
  * Last
  * Simple method to get last element.

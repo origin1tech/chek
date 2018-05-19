@@ -1,4 +1,12 @@
 /**
+ * Assign
+ * Convenience wrapper to Object.assign.
+ *
+ * @param obj object to assign.
+ * @param args additional source object.
+ */
+export declare function assign<T>(obj: any, ...args: any[]): T;
+/**
  * Del
  * Removes a property within the supplied object.
  *
@@ -15,6 +23,14 @@ export declare function del<T>(obj: any, key: string | string[], immutable?: boo
  * @param key the dot notated key or array of keys.
  */
 export declare function get<T>(obj: any, key: string | string[]): T;
+/**
+ * Has
+ * Checks if property exists in object.
+ *
+ * @param obj the object to be inpsected.
+ * @param key the key to be found.
+ */
+export declare function has(obj: any, key: string | string[]): boolean;
 /**
  * Clone
  * Performs deep cloning of objects.
@@ -35,8 +51,8 @@ export declare function clone<T>(obj: any, json?: boolean): T;
  * results in:
  * { name: 'Bob', active: true }
  *
- * @param obj primary object.
- * @param args unlimited number of objects to extend from.
+ * @param obj primary target object.
+ * @param args additional source objects to merge with target.
  */
 export declare function extend<T>(obj: any, ...args: any[]): T;
 /**

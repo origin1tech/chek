@@ -2,7 +2,17 @@
 
 List of changes.
 
-### 05.16.2018
+### 05.19.2018 (v1.1.8)
+
++ **has** add method .has() to check if object has property path.
++ **get** fix bug where doesn't get nested arrays correct.
++ **assign** convenience wrapper to Object.assign.
++ **contains** allow passing strings, add transform option.
++ **containsAny** allow passing strings, add transform option.
++ **includes** alias to contains
++ **includesAny** alias to containsAny.
+
+### 05.16.2018 (v1.1.7)
 
 + **set** fix bug where arrays are not created if do not exist.
 
