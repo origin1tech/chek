@@ -2,7 +2,7 @@
 
 List of changes.
 
-### 05.19.2018 (v1.1.8)
+### 05.19.2018 (v1.1.8-v.1.1.9)
 
 + **has** add method .has() to check if object has property path.
 + **get** fix bug where doesn't get nested arrays correct.

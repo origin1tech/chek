@@ -267,16 +267,19 @@ If you know TypeScript you already know this. The below params and return result
   </thead>
   <tbody>
     <tr>
+      <td>clone</td><td>obj: any, shallow?: boolean</td><td>T</td><td>Clones an object with shallow option.</td>
+    </tr>
+    <tr>
       <td>del</td><td>obj: any, key: string | string[], immutable?: boolean</td><td>T</td><td>Removes properties from object using dot notation optional immutable result.</td>
     </tr>
     <tr>
       <td>get</td><td>obj: any, key: string</td><td>T</td><td>Gets properties from object using dot notation.</td>
     </tr>
     <tr>
-      <td>clone</td><td>obj: any, shallow?: boolean</td><td>T</td><td>Clones an object with shallow option.</td>
+      <td>extend</td><td>obj: any, ...args: any[]</td><td>T</td><td>Extends objects pass true as first arg for shallow extend.</td>
     </tr>
     <tr>
-      <td>extend</td><td>obj: any, ...args: any[]</td><td>T</td><td>Extends objects pass true as first arg for shallow extend.</td>
+      <td>has</td><td>obj: any, key: string</td><td>boolean</td><td>Checks if object has property path.</td>
     </tr>
     <tr>
       <td>reverse</td><td>obj: any</td><td>T</td><td>Reverses an object { error: 0 } becomes { 0: 'error' }.</td>
