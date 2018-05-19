@@ -158,9 +158,15 @@ exports.del = del;
  *
  * @param obj the object to inspect.
  * @param key the dot notated key or array of keys.
+ * @param def a default value to set if not exists.
  */
-function get(obj, key) {
-    return _get(clone(obj), key);
+function get(obj, key, def) {
+    var result = _get(clone(obj), key);
+    if (!is_1.isValue(result)) {
+        _set(obj, key, def);
+        result = def;
+    }
+    return result;
 }
 exports.get = get;
 /**

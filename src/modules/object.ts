@@ -191,9 +191,15 @@ export function del<T>(obj: any, key: string | string[], immutable?: boolean): T
  *
  * @param obj the object to inspect.
  * @param key the dot notated key or array of keys.
+ * @param def a default value to set if not exists.
  */
-export function get<T>(obj: any, key: string | string[]): T {
-  return _get<T>(clone(obj), key);
+export function get<T>(obj: any, key: string | string[], def?: any): T {
+  let result = _get<T>(clone(obj), key);
+  if (!isValue(result)) {
+    _set(obj, key, def);
+    result = def;
+  }
+  return result;
 }
 
 /**

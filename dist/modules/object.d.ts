@@ -21,8 +21,9 @@ export declare function del<T>(obj: any, key: string | string[], immutable?: boo
  *
  * @param obj the object to inspect.
  * @param key the dot notated key or array of keys.
+ * @param def a default value to set if not exists.
  */
-export declare function get<T>(obj: any, key: string | string[]): T;
+export declare function get<T>(obj: any, key: string | string[], def?: any): T;
 /**
  * Has
  * Checks if property exists in object.

@@ -436,6 +436,8 @@ describe('Chek', () => {
     assert.equal(ck.get(testObj, 'phone.mobile'), '8885551212');
     testObj.langs = ['java', 'c', 'erlang'];
     assert.equal(ck.get(testObj, 'langs[1]'), 'c');
+    assert.equal(ck.get(testObj, 'langs[3]', 'python'), 'python');
+    assert.deepEqual(ck.get(testObj, 'langs'), ['java', 'c', 'erlang', 'python']);
     delete testObj.langs;
   });
 
