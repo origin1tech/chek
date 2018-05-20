@@ -2,7 +2,7 @@
 
 List of changes.
 
-### 05.19.2018 (v1.1.8-v.1.1.10)
+### 05.19.2018 (v1.1.8-v.1.1.12)
 
 + **has** add method .has() to check if object has property path.
 + **get** fix bug where doesn't get nested arrays, allow setting default values.
@@ -11,6 +11,7 @@ List of changes.
 + **containsAny** allow passing strings, add transform option.
 + **includes** alias to contains
 + **includesAny** alias to containsAny.
++ **get** fix bug where default value is set when it shouldn't be.
 
 ### 05.16.2018 (v1.1.7)
 

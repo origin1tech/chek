@@ -168,7 +168,8 @@ function _set<T>(obj: any, key: string | string[], val: any): T {
  */
 export function assign<T>(obj: any, ...args: any[]): T {
   if (Object['assign'])
-    return Object.assign(obj, ...args);
+    return Object.assign(obj, ...args) as T;
+  return extend(obj, ...args) as T;
 }
 
 /**
@@ -194,8 +195,8 @@ export function del<T>(obj: any, key: string | string[], immutable?: boolean): T
  * @param def a default value to set if not exists.
  */
 export function get<T>(obj: any, key: string | string[], def?: any): T {
-  let result = _get<T>(clone(obj), key);
-  if (!isValue(result)) {
+  let result = _get<T>(assign({}, obj), key);
+  if (!isValue(result) && def) {
     _set(obj, key, def);
     result = def;
   }
@@ -214,6 +215,8 @@ export function has(obj: any, key: string | string[]): boolean {
 
   if (!isObject(obj) || (!isArray(key) && !isString(key)))
     return false;
+
+  obj = assign({}, obj);
 
   let props: string[] = isArray(key) ? <string[]>key : split(key);
 

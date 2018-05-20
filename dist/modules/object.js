@@ -136,6 +136,7 @@ function assign(obj) {
     }
     if (Object['assign'])
         return Object.assign.apply(Object, [obj].concat(args));
+    return extend.apply(void 0, [obj].concat(args));
 }
 exports.assign = assign;
 /**
@@ -161,8 +162,8 @@ exports.del = del;
  * @param def a default value to set if not exists.
  */
 function get(obj, key, def) {
-    var result = _get(clone(obj), key);
-    if (!is_1.isValue(result)) {
+    var result = _get(assign({}, obj), key);
+    if (!is_1.isValue(result) && def) {
         _set(obj, key, def);
         result = def;
     }
@@ -179,6 +180,7 @@ exports.get = get;
 function has(obj, key) {
     if (!is_1.isObject(obj) || (!is_1.isArray(key) && !is_1.isString(key)))
         return false;
+    obj = assign({}, obj);
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
         var prop = props.shift(), match = matchIndex(prop);
