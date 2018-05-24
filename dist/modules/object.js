@@ -4,21 +4,6 @@ var _clone = require("clone");
 var array_1 = require("./array");
 var is_1 = require("./is");
 var string_1 = require("./string");
-function getMatch(prop) {
-    if (!prop || !/\[\d+\]/.test(prop))
-        return false;
-    var prefix = prop.match(/[^\[]+/i);
-    var idx;
-    var indices = prop.match(/\d+/g);
-    if (!indices)
-        return false;
-    //  const name = new RegExp('(.+)\\[([0-9]*)\\]', 'i').exec(prop);
-    return {
-        key: prefix[0],
-        index: indices[0],
-        indices: indices.slice(1)
-    };
-}
 /**
  * Match Index
  * @private

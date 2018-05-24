@@ -2,6 +2,11 @@
 
 List of changes.
 
+### 05.23.2018 (v1.1.13)
+
++ **containsAny** whoops! had a console.log in there.
++ **comments** remove some unnecessary comments.
+
 ### 05.19.2018 (v1.1.8-v.1.1.12)
 
 + **has** add method .has() to check if object has property path.

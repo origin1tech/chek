@@ -121,7 +121,6 @@ export function containsAny(arr: string | any[], compare: string | any[], transf
   if (!isArray(arr) || !isArray(compare))
     return false;
   return (compare as any[]).filter(c => {
-    console.log(c);
     return contains(arr, c, transform);
   }).length > 0;
 }

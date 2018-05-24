@@ -4,22 +4,6 @@ import { keys, contains } from './array';
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isValue } from './is';
 import { split } from './string';
 
-function getMatch(prop) {
-  if (!prop || !/\[\d+\]/.test(prop))
-    return false;
-  const prefix = prop.match(/[^\[]+/i);
-  let idx;
-  const indices = prop.match(/\d+/g);
-  if (!indices)
-    return false;
-  //  const name = new RegExp('(.+)\\[([0-9]*)\\]', 'i').exec(prop);
-  return {
-    key: prefix[0],
-    index: indices[0],
-    indices: indices.slice(1)
-  };
-}
-
 /**
  * Match Index
  * @private

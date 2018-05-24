@@ -117,7 +117,6 @@ function containsAny(arr, compare, transform) {
     if (!is_1.isArray(arr) || !is_1.isArray(compare))
         return false;
     return compare.filter(function (c) {
-        console.log(c);
         return contains(arr, c, transform);
     }).length > 0;
 }
