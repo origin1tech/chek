@@ -421,6 +421,7 @@ function toWindow(key, val, exclude) {
             window[key] = obj;
         }
     }
+    // object passed to key.
     else if (is_1.isPlainObject(key)) {
         _keys = array_1.keys(key);
         i = _keys.length;

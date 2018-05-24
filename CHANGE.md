@@ -6,6 +6,7 @@ List of changes.
 
 + **containsAny** whoops! had a console.log in there.
 + **comments** remove some unnecessary comments.
++ **packages** update packages.
 
 ### 05.19.2018 (v1.1.8-v.1.1.12)
 

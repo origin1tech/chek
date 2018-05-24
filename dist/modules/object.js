@@ -169,7 +169,7 @@ function has(obj, key) {
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
         var prop = props.shift(), match = matchIndex(prop);
-        if (!props.length) {
+        if (!props.length) { // no more props chek path.
             var _keys = array_1.keys(obj);
             if (match) {
                 return array_1.contains(_keys, match.name) && is_1.isValue(obj[match.name][match.index]);
