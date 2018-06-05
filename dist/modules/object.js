@@ -329,4 +329,14 @@ function set(obj, key, val, immutable) {
     return _set(obj, key, val);
 }
 exports.set = set;
+/**
+ * Create is a convenience method that simply calls Object.create().
+ * If no object is passed creates using null.
+ *
+ * @param obj optional object to use with Object.create.
+ */
+function create(obj) {
+    return Object.create(obj || null);
+}
+exports.create = create;
 //# sourceMappingURL=object.js.map

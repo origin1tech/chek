@@ -78,6 +78,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-private tsd-is-not-exported"><a href="_modules_object_.html#_set" class="tsd-kind-icon">_set</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#assign" class="tsd-kind-icon">assign</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#clone" class="tsd-kind-icon">clone</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#create" class="tsd-kind-icon">create</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#del" class="tsd-kind-icon">del</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#extend" class="tsd-kind-icon">extend</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_modules_object_.html#get" class="tsd-kind-icon">get</a></li>
@@ -102,7 +103,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L32">modules/object.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L32">modules/object.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -139,7 +140,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L68">modules/object.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L68">modules/object.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -176,7 +177,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L105">modules/object.ts:105</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L105">modules/object.ts:105</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,7 +217,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L153">modules/object.ts:153</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L153">modules/object.ts:153</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -260,7 +261,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L246">modules/object.ts:246</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L246">modules/object.ts:246</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -295,6 +296,44 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="create" class="tsd-anchor"></a>
+					<h3>create</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">create&lt;T&gt;<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L405">modules/object.ts:405</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create is a convenience method that simply calls Object.create().
+									If no object is passed creates using null.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> obj: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>optional object to use with Object.create.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="del" class="tsd-anchor"></a>
 					<h3>del</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
@@ -304,7 +343,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L167">modules/object.ts:167</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L167">modules/object.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -354,7 +393,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L267">modules/object.ts:267</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L267">modules/object.ts:267</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -407,7 +446,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L181">modules/object.ts:181</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L181">modules/object.ts:181</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -457,7 +496,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L197">modules/object.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L197">modules/object.ts:197</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -495,7 +534,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L13">modules/object.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L13">modules/object.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,7 +568,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L350">modules/object.ts:350</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L350">modules/object.ts:350</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -569,7 +608,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/2768016/src/modules/object.ts#L393">modules/object.ts:393</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/chek/blob/dbf8c7a/src/modules/object.ts#L393">modules/object.ts:393</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -679,6 +718,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_modules_object_.html#clone" class="tsd-kind-icon">clone</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_modules_object_.html#create" class="tsd-kind-icon">create</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_modules_object_.html#del" class="tsd-kind-icon">del</a>

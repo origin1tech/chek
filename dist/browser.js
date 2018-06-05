@@ -51,8 +51,7 @@ function normComparator(primer, order) {
     return comp;
 }
 /**
- * Order By
- * : Orders arrays of objects by property, falls back to .sort() if not fields are specified.
+ * Orders arrays of objects by property, falls back to .sort() if not fields are specified.
  *
  * @example
  * const arr = [{ name: 'bob', age: 30 }, { name: 'john', age: 22 }];
@@ -774,7 +773,7 @@ exports.isNull = isNull;
  * @param val the value to be tested.
  */
 function isNumber(val) {
-    return !isNaN(parseFloat(val)) && isFinite(val);
+    return !isObject(val) && !isNaN(parseFloat(val)) && isFinite(val);
 }
 exports.isNumber = isNumber;
 /**
@@ -1274,6 +1273,16 @@ function set(obj, key, val, immutable) {
     return _set(obj, key, val);
 }
 exports.set = set;
+/**
+ * Create is a convenience method that simply calls Object.create().
+ * If no object is passed creates using null.
+ *
+ * @param obj optional object to use with Object.create.
+ */
+function create(obj) {
+    return Object.create(obj || null);
+}
+exports.create = create;
 
 },{"./array":3,"./is":7,"./string":9,"clone":15}],9:[function(require,module,exports){
 "use strict";

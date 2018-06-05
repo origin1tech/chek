@@ -1,7 +1,6 @@
 
-import { IMap, IArrayResult, IComparatorPrimer, IComparatorOptions, IComparator, IComparatorField, IComparatorTuple, Transform } from '../interfaces';
-import { isArray, isEqual, isPlainObject, isValue, isString, isBoolean, isFunction, isObject, isNumber } from './is';
-import { tryWrap } from './function';
+import { IMap, IArrayResult, IComparatorPrimer, IComparatorOptions, IComparator, IComparatorField, Transform } from '../interfaces';
+import { isArray, isEqual, isPlainObject, isValue, isString, isFunction, isNumber } from './is';
 
 function defComparator(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 function normComparator<T>(primer?: IComparatorPrimer, order?: string | number | boolean) {
@@ -17,8 +16,7 @@ function normComparator<T>(primer?: IComparatorPrimer, order?: string | number |
 }
 
 /**
- * Order By
- * : Orders arrays of objects by property, falls back to .sort() if not fields are specified.
+ * Orders arrays of objects by property, falls back to .sort() if not fields are specified.
  *
  * @example
  * const arr = [{ name: 'bob', age: 30 }, { name: 'john', age: 22 }];

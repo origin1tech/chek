@@ -14,8 +14,7 @@ function normComparator(primer, order) {
     return comp;
 }
 /**
- * Order By
- * : Orders arrays of objects by property, falls back to .sort() if not fields are specified.
+ * Orders arrays of objects by property, falls back to .sort() if not fields are specified.
  *
  * @example
  * const arr = [{ name: 'bob', age: 30 }, { name: 'john', age: 22 }];

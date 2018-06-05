@@ -396,5 +396,15 @@ export function set<T>(obj: any, key: string | string[], val: any, immutable?: b
   return _set<T>(obj, key, val);
 }
 
+/**
+ * Create is a convenience method that simply calls Object.create().
+ * If no object is passed creates using null.
+ *
+ * @param obj optional object to use with Object.create.
+ */
+export function create<T>(obj?: any) {
+  return Object.create(obj || null);
+}
+
 
 

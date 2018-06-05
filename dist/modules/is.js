@@ -266,7 +266,7 @@ exports.isNull = isNull;
  * @param val the value to be tested.
  */
 function isNumber(val) {
-    return !isNaN(parseFloat(val)) && isFinite(val);
+    return !isObject(val) && !isNaN(parseFloat(val)) && isFinite(val);
 }
 exports.isNumber = isNumber;
 /**

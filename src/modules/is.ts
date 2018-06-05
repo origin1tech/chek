@@ -1,5 +1,5 @@
 import { toStr } from './constant';
-import { toDate, toBoolean, toEpoch } from './to';
+import { toBoolean, toEpoch } from './to';
 import { tryWrap } from './function';
 import { keys, duplicates } from './array';
 
@@ -297,7 +297,7 @@ export function isNull(val: any): boolean {
  * @param val the value to be tested.
  */
 export function isNumber(val: any): boolean {
-  return !isNaN(parseFloat(val)) && isFinite(val);
+  return !isObject(val) && !isNaN(parseFloat(val)) && isFinite(val);
 }
 
 /**

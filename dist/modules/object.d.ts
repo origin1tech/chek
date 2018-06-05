@@ -78,3 +78,10 @@ export declare function reverse<T>(obj: any): T;
  *
  */
 export declare function set<T>(obj: any, key: string | string[], val: any, immutable?: boolean): T;
+/**
+ * Create is a convenience method that simply calls Object.create().
+ * If no object is passed creates using null.
+ *
+ * @param obj optional object to use with Object.create.
+ */
+export declare function create<T>(obj?: any): any;
