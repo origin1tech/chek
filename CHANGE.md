@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 06.07.2018 (v1.1.15)
+
++ **containsAny** add "push" which uses set to ensure pushing values to an array without first doing a get.
+
 ### 05.23.2018 (v1.1.13)
 
 + **containsAny** whoops! had a console.log in there.

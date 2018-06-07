@@ -3,6 +3,7 @@ import * as _clone from 'clone';
 import { keys, contains } from './array';
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isValue } from './is';
 import { split } from './string';
+import { toArray } from './to';
 
 /**
  * Match Index
@@ -140,6 +141,21 @@ function _set<T>(obj: any, key: string | string[], val: any): T {
   }
 
   return obj;
+
+}
+
+function _put<T>(obj: any, key: string | string[], val: any): T {
+
+  if (!isObject(obj) || (!isArray(key) && !isString(key)))
+    return null;
+
+  // Get current and ensure an array.
+  const cur = toArray(get(obj, key), []);
+
+  if (!isArray(val))
+    val = [val];
+
+  return _set<T>(obj, key, [...cur, ...val]);
 
 }
 
@@ -337,6 +353,20 @@ export function extend<T>(obj: any, ...args: any[]): T {
 
   return dest;
 
+}
+
+/**
+ * Put a value to key. If the value is not currently an array it converts.
+ *
+ * @param obj the object to push value to.
+ * @param key the key or array of keys to be joined as dot notation.
+ * @param val the value to be pushed.
+ * @param immutable when true update in immutable mode.
+ */
+export function put<T>(obj: any, key: string | string[], val: any, immutable?: boolean) {
+  if (immutable)
+    return _put<T>(clone(obj), key, val);
+  return _put<T>(obj, key, val);
 }
 
 /**

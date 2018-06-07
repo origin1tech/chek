@@ -57,6 +57,15 @@ export declare function clone<T>(obj: any, json?: boolean): T;
  */
 export declare function extend<T>(obj: any, ...args: any[]): T;
 /**
+ * Put a value to key. If the value is not currently an array it converts.
+ *
+ * @param obj the object to push value to.
+ * @param key the key or array of keys to be joined as dot notation.
+ * @param val the value to be pushed.
+ * @param immutable when true update in immutable mode.
+ */
+export declare function put<T>(obj: any, key: string | string[], val: any, immutable?: boolean): T;
+/**
  * Reverse
  * Reverses arrays, strings or objects.
  * Only numbers, strings or booleans are supported

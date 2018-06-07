@@ -496,6 +496,14 @@ describe('Chek', () => {
     assert.isFalse(ck.has(obj, 'tags[2][0].bad'));
   });
 
+  it('should Push a value to an object key.', () => {
+    const obj: any = {
+      tags: 'java'
+    };
+    ck.put(obj, 'tags', ['javascript']);
+    assert.equal(ck.get(obj, 'tags[1]'), ['javascript']);
+  });
+
   it('should Set value by dot notated property.', () => {
     const movies: any = {
       startrek: {

@@ -948,6 +948,7 @@ var _clone = require("clone");
 var array_1 = require("./array");
 var is_1 = require("./is");
 var string_1 = require("./string");
+var to_1 = require("./to");
 /**
  * Match Index
  * @private
@@ -1050,6 +1051,15 @@ function _set(obj, key, val) {
             obj[prop] = val;
     }
     return obj;
+}
+function _put(obj, key, val) {
+    if (!is_1.isObject(obj) || (!is_1.isArray(key) && !is_1.isString(key)))
+        return null;
+    // Get current and ensure an array.
+    var cur = to_1.toArray(get(obj, key), []);
+    if (!is_1.isArray(val))
+        val = [val];
+    return _set(obj, key, cur.concat(val));
 }
 /**
  * Assign
@@ -1223,6 +1233,20 @@ function extend(obj) {
 }
 exports.extend = extend;
 /**
+ * Put a value to key. If the value is not currently an array it converts.
+ *
+ * @param obj the object to push value to.
+ * @param key the key or array of keys to be joined as dot notation.
+ * @param val the value to be pushed.
+ * @param immutable when true update in immutable mode.
+ */
+function put(obj, key, val, immutable) {
+    if (immutable)
+        return _put(clone(obj), key, val);
+    return _put(obj, key, val);
+}
+exports.put = put;
+/**
  * Reverse
  * Reverses arrays, strings or objects.
  * Only numbers, strings or booleans are supported
@@ -1284,7 +1308,7 @@ function create(obj) {
 }
 exports.create = create;
 
-},{"./array":3,"./is":7,"./string":9,"clone":15}],9:[function(require,module,exports){
+},{"./array":3,"./is":7,"./string":9,"./to":10,"clone":15}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
