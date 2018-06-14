@@ -413,6 +413,10 @@ If you know TypeScript you already know this. The below params and return result
   </tbody>
 </table>
 
+## Docs
+
+See [https://origin1tech.github.io/chek/](https://origin1tech.github.io/chek/)
+
 ## Changes
 
 See [CHANGE.md](CHANGE.md)

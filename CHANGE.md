@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 06.14.2018 (v1.1.16)
+
++ **toDefault** fix issue where "false" results in a null but should not.
+
 ### 06.07.2018 (v1.1.15)
 
 + **containsAny** add "push" which uses set to ensure pushing values to an array without first doing a get.

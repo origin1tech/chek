@@ -168,7 +168,7 @@ export function toDate(val: any, format?: string | IDateFormat | Date, def?: Dat
 export function toDefault(val: any, def?: any) {
   if (isValue(val))
     return val;
-  return (isValue(def) && def) || null;
+  return isValue(def) || null;
 }
 
 /**
