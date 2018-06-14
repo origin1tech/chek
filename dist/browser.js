@@ -1711,7 +1711,7 @@ exports.toDate = toDate;
 function toDefault(val, def) {
     if (is_1.isValue(val))
         return val;
-    return is_1.isValue(def) || null;
+    return is_1.isValue(def) ? def : null;
 }
 exports.toDefault = toDefault;
 /**
