@@ -546,6 +546,12 @@ describe('Chek', () => {
     assert.equal(ck.camelcase(null), null);
   });
 
+  it('should Decamelcase a camelcase string.', () => {
+    assert.equal(ck.decamelcase('CamelCase'), 'camel-case');
+    assert.equal(ck.decamelcase('camelCase'), 'camel-case');
+    assert.equal(ck.decamelcase(null), null);
+  });
+
   it('should convert string to Capitalize.', () => {
     assert.equal(ck.capitalize('capitalize'), 'Capitalize');
     assert.equal(ck.capitalize(null), null);

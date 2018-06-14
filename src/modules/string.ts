@@ -21,6 +21,21 @@ export function camelcase(val: string): string {
 }
 
 /**
+ * Decamelcase converts a camelcase string to --some-flag.
+ *
+ * @param val the value to de-camelize.
+ * @param separator the separator char once decamelized.
+ */
+export function decamelcase(val: string, separator: string = '-') {
+  if (!isValue(val))
+    return null;
+  return val
+    .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
+    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')
+    .toLowerCase();
+}
+
+/**
  * Capitalize
  * Converts string to capitalize.
  *

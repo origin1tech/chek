@@ -99,20 +99,7 @@
 					<li><strong>to</strong>            - handles converting to a type like toBoolean, toRegExp.</li>
 					<li><strong>type</strong>          - handles getting and casting types.</li>
 				</ul>
-				<p><strong>Legend</strong></p>
-				<p>If you know TypeScript you already know this. The below params and return results are denoted by TypeScript syntax. Here are the basics if there&#39;s somethign that doesn&#39;t make sense pop on over the Microsft&#39;s TypeScript page I&#39;m sure it will clear it up.</p>
-				<ul>
-					<li><strong>any</strong>                 - means any type</li>
-					<li><strong>?</strong>                   - means it&#39;s optional.</li>
-					<li><strong>[]</strong>                  - means an array of some type like string[].</li>
-					<li><strong>...</strong>                 - indicates a spread operator.</li>
-					<li><strong>T</strong>                   - indicates generic type (if not using TypeScript you can ignore).</li>
-					<li><strong>IArrayResult</strong>        - used for immutable array methods which return the new array and rel. value.</li>
-					<li><strong>IMap<T></strong>             - simple type which basically represents an object literal.</li>
-					<li><strong>IComparatorOptions</strong>  - orderyBy options object contains key, primer &amp; order.</li>
-					<li><strong>IComparatorField</strong>    - custom type, a string, IComparatorOptions object or primer method.</li>
-				</ul>
-				<p><strong>Please Note the following tables are here for convenience you should ALWAYS reference the &quot;docs&quot; folder in the project for updated method signatues, there&#39;s only so much time in the day.</strong></p>
+				<p><strong>Please Note the following tables are here for convenience you should ALWAYS reference the &quot;docs&quot; below for updated method signatues, there&#39;s only so much time in the day.</strong></p>
 				<h2 id="array">Array</h2>
 				<table>
 					<thead>
@@ -342,6 +329,9 @@
 						</tr>
 						<tr>
 							<td>capitalize</td><td>val: string</td><td>string</td><td>Converts string to Capitalized.</td>
+						</tr>
+						<tr>
+							<td>decamelcase</td><td>val: string, separator?: string</td><td>string</td><td>Decamelizes a string to option/flag style with dashes.</td>
 						</tr>
 						<tr>
 							<td>lowercase</td><td>val: string</td><td>string</td><td>Converts string to lowercase.</td>

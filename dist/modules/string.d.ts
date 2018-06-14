@@ -6,6 +6,13 @@
  */
 export declare function camelcase(val: string): string;
 /**
+ * Decamelcase converts a camelcase string to --some-flag.
+ *
+ * @param val the value to de-camelize.
+ * @param separator the separator char once decamelized.
+ */
+export declare function decamelcase(val: string, separator?: string): string;
+/**
  * Capitalize
  * Converts string to capitalize.
  *

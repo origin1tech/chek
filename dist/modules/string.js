@@ -20,6 +20,22 @@ function camelcase(val) {
 }
 exports.camelcase = camelcase;
 /**
+ * Decamelcase converts a camelcase string to --some-flag.
+ *
+ * @param val the value to de-camelize.
+ * @param separator the separator char once decamelized.
+ */
+function decamelcase(val, separator) {
+    if (separator === void 0) { separator = '-'; }
+    if (!is_1.isValue(val))
+        return null;
+    return val
+        .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
+        .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')
+        .toLowerCase();
+}
+exports.decamelcase = decamelcase;
+/**
  * Capitalize
  * Converts string to capitalize.
  *

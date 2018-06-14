@@ -49,21 +49,7 @@ Methods are broken into several categories. Some have only a method or two and w
 + **to**            - handles converting to a type like toBoolean, toRegExp.
 + **type**          - handles getting and casting types.
 
-**Legend**
-
-If you know TypeScript you already know this. The below params and return results are denoted by TypeScript syntax. Here are the basics if there's somethign that doesn't make sense pop on over the Microsft's TypeScript page I'm sure it will clear it up.
-
-+ **any**                 - means any type
-+ **?**                   - means it's optional.
-+ **[]**                  - means an array of some type like string[].
-+ **...**                 - indicates a spread operator.
-+ **T**                   - indicates generic type (if not using TypeScript you can ignore).
-+ **IArrayResult**        - used for immutable array methods which return the new array and rel. value.
-+ **IMap<T>**             - simple type which basically represents an object literal.
-+ **IComparatorOptions**  - orderyBy options object contains key, primer & order.
-+ **IComparatorField**    - custom type, a string, IComparatorOptions object or primer method.
-
-**Please Note the following tables are here for convenience you should ALWAYS reference the "docs" folder in the project for updated method signatues, there's only so much time in the day.**
+**Please Note the following tables are here for convenience you should ALWAYS reference the "docs" below for updated method signatues, there's only so much time in the day.**
 
 ## Array
 
@@ -305,6 +291,9 @@ If you know TypeScript you already know this. The below params and return result
     </tr>
     <tr>
       <td>capitalize</td><td>val: string</td><td>string</td><td>Converts string to Capitalized.</td>
+    </tr>
+    <tr>
+      <td>decamelcase</td><td>val: string, separator?: string</td><td>string</td><td>Decamelizes a string to option/flag style with dashes.</td>
     </tr>
     <tr>
       <td>lowercase</td><td>val: string</td><td>string</td><td>Converts string to lowercase.</td>

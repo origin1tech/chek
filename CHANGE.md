@@ -2,8 +2,9 @@
 
 List of changes.
 
-### 06.14.2018 (v1.1.17)
+### 06.14.2018 (v1.1.17-v1.1.18)
 
++ **decamelcase** converts a camelcase string to option/flag with dashes.
 + **toDefault** fix issue where "false" results in a null but should not.
 
 ### 06.07.2018 (v1.1.15)
