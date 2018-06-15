@@ -4,7 +4,9 @@
 
 What is Chek? Well we have a guy we call Chekov, as in "I can do zat Captain I can do zat". So we shortened it to "Chek". Hey there's a logger named after "Winston" right.
 
-Anyway Chek is a slimmed down lib for common tasks like check if "is" a type or convert to a type. There are helpers for dealing with strings, converting objects to arrays and back (handy for Firebase type apis) and so on. Nothing special just a nice little toolkit preventing the need for large libs like Lodash or Underscore (both great of course).
+Anyway Chek is a slimmed down lib for common tasks like check if "is" a type or convert to a type. There are helpers for dealing with strings, converting objects to arrays and back (handy for Firebase type apis) and so on.
+
+Nothing special just a nice little toolkit preventing the need for large libs like Lodash or Underscore (both great of course).
 
 The end game is simple. Have about 90% or so coverage for common tasks preventing the need for a larger footprint.
 

@@ -96,7 +96,10 @@ export declare function last<T>(arr: any[]): T;
  *
  * @param arr the array to pop value from.
  */
-export declare function pop(arr: any[]): IArrayResult;
+export declare function pop(arr: any[]): {
+    array: any[];
+    val: {};
+};
 /**
  * Push
  * Non mutating way to push to an array.
@@ -104,7 +107,10 @@ export declare function pop(arr: any[]): IArrayResult;
  * @param arr the array to push items to.
  * @param args the items to be added.
  */
-export declare function push(arr: any[], ...args: any[]): IArrayResult;
+export declare function push(arr: any[], ...args: any[]): {
+    array: any[];
+    val: number;
+};
 /**
  * Shift
  * Shifts/removes first element in array.
@@ -113,7 +119,10 @@ export declare function push(arr: any[], ...args: any[]): IArrayResult;
  *
  * @param arr the array to shift value from.
  */
-export declare function shift(arr: any[]): IArrayResult;
+export declare function shift(arr: any[]): {
+    array: any[];
+    val: any;
+};
 /**
  * Splice
  * Non mutating way of splicing an array.
@@ -124,7 +133,10 @@ export declare function shift(arr: any[]): IArrayResult;
  * @param remove the count to be spliced (default: 1)
  * @param items additional items to be concatenated.
  */
-export declare function splice(arr: any[], start?: number, remove?: number, ...items: any[]): IArrayResult;
+export declare function splice(arr: any[], start?: number, remove?: number, ...items: any[]): {
+    array: any[];
+    val: any[];
+};
 /**
  * Unshift
  * Unshifts a value to an array in a non mutable way.

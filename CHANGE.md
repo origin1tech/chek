@@ -2,9 +2,11 @@
 
 List of changes.
 
-### 06.15.2018 (v1.2.0)
+### 06.15.2018 (v1.2.0-v1.2.1)
 
 Immutable array methods should return object with both the resulting array and the value or length where applicable. This is a modest breaking change and hence why the minor version to 1.2.x
+
+Deprecate IArrayResult interface instead imply return values rather than a return val of type any.
 
 ### 06.14.2018 (v1.1.17-v1.1.18)
 

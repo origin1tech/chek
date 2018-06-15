@@ -240,7 +240,7 @@ export function last<T>(arr: any[]): T {
  *
  * @param arr the array to pop value from.
  */
-export function pop(arr: any[]): IArrayResult {
+export function pop(arr: any[]) {
 
   return {
     array: arr.slice(0, arr.length - 1),
@@ -256,7 +256,7 @@ export function pop(arr: any[]): IArrayResult {
  * @param arr the array to push items to.
  * @param args the items to be added.
  */
-export function push(arr: any[], ...args: any[]): IArrayResult {
+export function push(arr: any[], ...args: any[]) {
   arr = arr.concat(flatten(...args));
   return {
     array: arr,
@@ -272,7 +272,7 @@ export function push(arr: any[], ...args: any[]): IArrayResult {
  *
  * @param arr the array to shift value from.
  */
-export function shift(arr: any[]): IArrayResult {
+export function shift(arr: any[]) {
   const shifted = splice(arr, 0, 1);
   return {
     array: shifted.array,
@@ -290,7 +290,7 @@ export function shift(arr: any[]): IArrayResult {
  * @param remove the count to be spliced (default: 1)
  * @param items additional items to be concatenated.
  */
-export function splice(arr: any[], start?: number, remove?: number, ...items: any[]): IArrayResult {
+export function splice(arr: any[], start?: number, remove?: number, ...items: any[]) {
 
   start = start || 0;
 
