@@ -206,7 +206,7 @@ export function first<T>(arr: any[]): T {
  */
 /* istanbul ignore next */
 export function includes(arr: string | any[], value: any, transform?: Transform): boolean {
-  return contains(arr, value);
+  return contains(arr, value, transform);
 }
 
 /**
@@ -219,7 +219,7 @@ export function includes(arr: string | any[], value: any, transform?: Transform)
  */
 /* istanbul ignore next */
 export function includesAny(arr: string | any[], compare: string | any[], transform?: Transform): boolean {
-  return containsAny(arr, compare);
+  return containsAny(arr, compare, transform);
 }
 
 /**
@@ -242,11 +242,8 @@ export function last<T>(arr: any[]): T {
  */
 export function pop(arr: any[]): IArrayResult {
 
-  const value = arr[arr.length - 1];
-  const popped = splice(arr, 0, arr.length - 1);
-
   return {
-    result: popped.val,
+    array: arr.slice(0, arr.length - 1),
     val: last(arr)
   };
 
@@ -262,7 +259,7 @@ export function pop(arr: any[]): IArrayResult {
 export function push(arr: any[], ...args: any[]): IArrayResult {
   arr = arr.concat(flatten(...args));
   return {
-    result: arr,
+    array: arr,
     val: arr.length
   };
 }
@@ -278,7 +275,7 @@ export function push(arr: any[], ...args: any[]): IArrayResult {
 export function shift(arr: any[]): IArrayResult {
   const shifted = splice(arr, 0, 1);
   return {
-    result: shifted.result,
+    array: shifted.array,
     val: arr[0]
   };
 }
@@ -300,7 +297,6 @@ export function splice(arr: any[], start?: number, remove?: number, ...items: an
   let head = arr.slice(0, start);
   let tail = arr.slice(start);
   let removed = [];
-  let result;
 
   if (remove) {
     removed = tail.slice(0, remove);
@@ -316,7 +312,7 @@ export function splice(arr: any[], start?: number, remove?: number, ...items: an
   }
 
   return {
-    result: arr,
+    array: arr,
     val: removed
   };
 
@@ -334,7 +330,7 @@ export function unshift(arr: any[], ...items: any[]): IArrayResult {
   arr = arr.concat(flatten(items));
 
   return {
-    result: arr,
+    array: arr,
     val: arr.length
   };
 

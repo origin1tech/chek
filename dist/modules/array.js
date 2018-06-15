@@ -199,7 +199,7 @@ exports.first = first;
  */
 /* istanbul ignore next */
 function includes(arr, value, transform) {
-    return contains(arr, value);
+    return contains(arr, value, transform);
 }
 exports.includes = includes;
 /**
@@ -212,7 +212,7 @@ exports.includes = includes;
  */
 /* istanbul ignore next */
 function includesAny(arr, compare, transform) {
-    return containsAny(arr, compare);
+    return containsAny(arr, compare, transform);
 }
 exports.includesAny = includesAny;
 /**
@@ -233,10 +233,8 @@ exports.last = last;
  * @param arr the array to pop value from.
  */
 function pop(arr) {
-    var value = arr[arr.length - 1];
-    var popped = splice(arr, 0, arr.length - 1);
     return {
-        result: popped.val,
+        array: arr.slice(0, arr.length - 1),
         val: last(arr)
     };
 }
@@ -255,7 +253,7 @@ function push(arr) {
     }
     arr = arr.concat(flatten.apply(void 0, args));
     return {
-        result: arr,
+        array: arr,
         val: arr.length
     };
 }
@@ -271,7 +269,7 @@ exports.push = push;
 function shift(arr) {
     var shifted = splice(arr, 0, 1);
     return {
-        result: shifted.result,
+        array: shifted.array,
         val: arr[0]
     };
 }
@@ -295,7 +293,6 @@ function splice(arr, start, remove) {
     var head = arr.slice(0, start);
     var tail = arr.slice(start);
     var removed = [];
-    var result;
     if (remove) {
         removed = tail.slice(0, remove);
         tail = tail.slice(remove);
@@ -308,7 +305,7 @@ function splice(arr, start, remove) {
         arr = head.concat(items).concat(tail);
     }
     return {
-        result: arr,
+        array: arr,
         val: removed
     };
 }
@@ -327,7 +324,7 @@ function unshift(arr) {
     }
     arr = arr.concat(flatten(items));
     return {
-        result: arr,
+        array: arr,
         val: arr.length
     };
 }

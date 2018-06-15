@@ -10,7 +10,7 @@ export interface IMetadata {
 }
 
 export interface IArrayResult {
-  result: any[];
+  array: any[];
   val: any;
 }
 

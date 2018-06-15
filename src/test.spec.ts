@@ -29,13 +29,6 @@ const extObj = {
   active: true
 };
 
-const qsObj = {
-  person: {
-    name: 'james',
-    nickname: 'jimmy',
-    langs: ['c', 'java', 'go', 'node']
-  }
-};
 
 const nested = {
   name: 'Julie',
@@ -163,21 +156,21 @@ describe('Chek', () => {
   });
 
   it('should Push value to array.', () => {
-    assert.deepEqual(ck.push([1, 2, 3], 4).result, [1, 2, 3, 4]);
-    assert.deepEqual(ck.push([1, 2, 3], 4, 5, 6).result, [1, 2, 3, 4, 5, 6]);
+    assert.deepEqual(ck.push([1, 2, 3], 4).array, [1, 2, 3, 4]);
+    assert.deepEqual(ck.push([1, 2, 3], 4, 5, 6).array, [1, 2, 3, 4, 5, 6]);
   });
 
   it('should Shift value from array.', () => {
     const shiftArr = [1, 2, 3];
     const shiftVal = ck.shift(shiftArr);
     assert.equal(ck.shift([1, 2, 3]).val, 1);
-    assert.deepEqual(ck.shift([1, 2, 3]).result, [2, 3]);
+    assert.deepEqual(ck.shift([1, 2, 3]).array, [2, 3]);
   });
 
   it('should Splice value from array.', () => {
     assert.deepEqual(ck.splice([1, 2, 3, 4, 5], 1).val, [2, 3, 4, 5]);
     assert.deepEqual(ck.splice([1, 2, 3, 4, 5], 2, 1).val, [3]);
-    assert.deepEqual(ck.splice([1, 2, 4, 5], 2, 0, 3).result, [1, 2, 3, 4, 5]);
+    assert.deepEqual(ck.splice([1, 2, 4, 5], 2, 0, 3).array, [1, 2, 3, 4, 5]);
   });
 
   it('should Unshift value from array.', () => {
