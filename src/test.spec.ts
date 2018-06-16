@@ -489,6 +489,20 @@ describe('Chek', () => {
     assert.isFalse(ck.has(obj, 'tags[2][0].bad'));
   });
 
+  it('should Omit properties from string, array or object', () => {
+    const str = 'Chek is pretty cool.';
+    assert.equal(ck.omit(str, 'cool'), 'Chek is pretty.');
+    const arr = ['one', 'two', 'three'];
+    assert.deepEqual(ck.omit(arr, ['two']), ['one', 'three']);
+    const obj = { name: 'Joe', blogs: { blog1: 'Title' }, category: 'Movies' };
+    assert.deepEqual(ck.omit(obj, 'blogs.blog1'), { name: 'Joe', blogs: {}, category: 'Movies' });
+  });
+
+  it('should Pick values by property.', () => {
+    const obj = { name: 'Sally', phones: { home: '8885551212', mobile: '8775551212' } };
+    assert.deepEqual(ck.pick(obj, ['phones.home', 'phones.mobile']), { phones: { home: '8885551212', mobile: '8775551212' } });
+  });
+
   it('should Push a value to an object key.', () => {
     const obj: any = {
       tags: 'java'

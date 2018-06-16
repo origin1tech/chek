@@ -1,14 +1,21 @@
 import { IMap, IDateFormat } from '../interfaces';
 /**
  * To Array
- * Converts value to array or converts object to array where
- * key will be inserted into object as $id: 'your object key'
- * or converts 'one, two, three' to ['one', 'two', 'three']
+ * Converts value to array with optional default value.
  *
  * @param val the value to convert to array.
  * @param def optional default value on null or error.
  */
-export declare function toArray<T>(val: any, id?: string | T[], def?: T[]): T[];
+export declare function toArray<T>(val: any, def?: T[]): T[];
+/**
+ * Converts object to array where a key will be inserted
+ * into the object as $id: 'your defined id'.
+ *
+ * @param val the value to convert to array.
+ * @param id optional id for converting object to an array.
+ * @param def optional default value on null or error.
+ */
+export declare function toArray<T>(val: any, id: string, def?: T[]): T[];
 /**
  * To Boolean
  * Converts value if not boolean to boolean.

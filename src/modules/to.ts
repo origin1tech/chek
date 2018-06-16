@@ -11,13 +11,23 @@ declare var window;
 
 /**
  * To Array
- * Converts value to array or converts object to array where
- * key will be inserted into object as $id: 'your object key'
- * or converts 'one, two, three' to ['one', 'two', 'three']
+ * Converts value to array with optional default value.
  *
  * @param val the value to convert to array.
  * @param def optional default value on null or error.
  */
+export function toArray<T>(val: any, def?: T[]): T[];
+
+/**
+ * Converts object to array where a key will be inserted
+ * into the object as $id: 'your defined id'.
+ *
+ * @param val the value to convert to array.
+ * @param id optional id for converting object to an array.
+ * @param def optional default value on null or error.
+ */
+export function toArray<T>(val: any, id: string, def?: T[]): T[];
+
 export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
 
   if (isArray(id)) {
@@ -51,10 +61,12 @@ export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
           const tmp = {};
           tmp[(id as string)] = p;
           const obj = Object.assign({}, cur, tmp);
-          arr.push(obj);
+          arr = push(arr, obj).array;
+          // arr.push(obj);
         }
         else {
-          arr.push(val);
+          arr = push(arr, val).array;
+          // arr.push(val);
         }
       }
     }
@@ -69,6 +81,7 @@ export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
   }
 
   return [val];
+
 }
 
 /**

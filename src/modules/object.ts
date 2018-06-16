@@ -161,13 +161,14 @@ function _put<T>(obj: any, key: string | string[], val: any): T {
 
 /**
  * Assign
- * Convenience wrapper to Object.assign.
+ * Convenience wrapper to Object.assign falls back to extend
+ * which is NOT a polyfill fyi.
  *
  * @param obj object to assign.
  * @param args additional source object.
  */
 export function assign<T>(obj: any, ...args: any[]): T {
-  if (Object['assign'])
+  if (Object.prototype.hasOwnProperty('assign'))
     return Object.assign(obj, ...args) as T;
   return extend(obj, ...args) as T;
 }
@@ -266,35 +267,48 @@ export function clone<T>(obj: any, json?: boolean): T {
 }
 
 /**
- * Extend
- * Extends objects similar to Object.assign
- * with the exception that undefined values are ignored.
+ * Extend properties between target/source objects. This is NOT
+ * a deep copy.
  *
  * NOTE: use Object.assign if available!!
  *
- * @example
- * extend({ name: 'Bob', active: true }, { active: undefined })
- * results in:
- * { name: 'Bob', active: true }
+ * @example extend({ name: 'Bob', active: true }, { active: undefined })
  *
  * @param obj primary target object.
  * @param args additional source objects to merge with target.
  */
+export function extend<T>(obj: any, ...args: any[]): T;
+
+/**
+ * Extend properties between target/source objects. This is NOT
+ * a deep copy.
+ *
+ * NOTE: use Object.assign if available!!
+ *
+ * @example extend(true, { name: 'Bob' }, { nested: { key: 'value' } })
+ *
+ * @param shallow when true only extends top level.
+ * @param obj primary target object.
+ * @param args additional source objects to merge with target.
+ */
+export function extend<T>(shallow: boolean, obj: any, ...args: any[]): T;
+
 export function extend<T>(obj: any, ...args: any[]): T {
 
   let shallow = false;
   let dest: any = obj;
 
-  // Determin if is shallow.
+  // Determine if is shallow.
   if (isBoolean(dest)) {
     shallow = dest;
     if (!args.length)
       return {} as T;
     // get first arg as destination.
-    dest = args.shift();
+    dest = args[0];
+    args = args.slice(1);
   }
 
-  // If not an object return null.
+  // If not an object return.
   if (!isObject(dest))
     return dest;
 
@@ -390,15 +404,14 @@ export function reverse<T>(obj: any): T {
   if (isString(obj)) {
     let i = obj.toString().length;
     let tmpStr: any = '';
-    while (i--) {
+    while (i--)
       tmpStr += obj[i];
-    }
     return tmpStr as T;
   }
 
   // Reverse an object.
   let result: any = {};
-  for (let p in obj) {
+  for (const p in obj) {
     if (isObject(obj[p]))
       continue;
     result[obj[p]] = p;
@@ -436,5 +449,84 @@ export function create<T>(obj?: any) {
   return Object.create(obj || null);
 }
 
+/**
+ * Omits characters or words from strings, removes
+ * trailing whitespace before punctuation and also double spaces.
+ *
+ * @param str the string to omit chars from.
+ * @param chars the characters or words to be omitted.
+ */
+export function omit<T>(str: string, chars: string | string[]): T;
+
+/**
+ * Omits a value from an array.
+ *
+ * @param arr the array to be filtered.
+ * @param elements the elements to be removed.
+ */
+export function omit<T>(arr: any[], elements: any | any[]): T;
+
+/**
+ * Omits properties from an object, supports dot notation nested removals.
+ *
+ * @example .omit({ name: 'bob', blogs: { blog1: 'Title }}, ['blogs.blog1']);
+ *
+ * @param obj the object to remove properties from.
+ * @param props the properties to be removed.
+ * @param immutable when true object is first cloned to not mutated source.
+ */
+export function omit<T>(obj: object, props: string | string[], immutable?: boolean): T;
+
+export function omit<T>(obj: any, props: any | any[], immutable?: boolean): T {
+
+  props = toArray(props, []);
+
+  if (!isValue(obj) || (!isArray(obj) && !isObject(obj) && !isString(obj)) || !props || !props.length)
+    return obj;
+
+  props = toArray<string>(props);
+
+  // Note replaces double spaces only after
+  // removing props from string. Also removes
+  // space if trailed by any of the following
+  // punctuation: .!?;,:
+  if (isString(obj)) {
+    return props.reduce((a, c) => {
+      if ((c instanceof RegExp))
+        return a.replace(c, '');
+      a = (a.slice(0, a.indexOf(c)) + a.slice(a.indexOf(c) + c.length)).replace(/\s{2}/, ' ');
+      a = a.replace(/\s[.!?;,:]/, a.slice(a.length - 1));
+      return a;
+    }, obj);
+  }
+
+  if (isArray(obj))
+    return obj.filter(v => !~props.indexOf(v));
+
+  if (!immutable)
+    return props.reduce((a, c) => del(a, c), obj);
+
+  return props.reduce((a, c) => del(a, c, true), obj);
+
+}
+
+/**
+ * Picks values from object by property name.
+ *
+ * @param obj the object to pick from.
+ * @param props the properties to be picked.
+ */
+export function pick<T>(obj: any, props: string | string[]): T {
+
+  props = toArray(props, []);
+
+  if (!isValue(obj) || !isObject(obj) || !props || !props.length)
+    return obj;
+
+  return props.reduce((a, c) => {
+    return set(a, c, get(obj, c, undefined));
+  }, {}) as T;
+
+}
 
 

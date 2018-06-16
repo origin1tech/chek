@@ -309,7 +309,16 @@
 							<td>has</td><td>obj: any, key: string</td><td>boolean</td><td>Checks if object has property path.</td>
 						</tr>
 						<tr>
+							<td>omit</td><td>obj: any, props: any | any[], immutable?: boolean</td><td>T</td><td>Omits values from string or arrays or omits from object by property name.</td>
+						</tr>
+						<tr>
 							<td>reverse</td><td>obj: any</td><td>T</td><td>Reverses an object { error: 0 } becomes { 0: &#39;error&#39; }.</td>
+						</tr>
+						<tr>
+							<td>pick</td><td>obj: any, props: string | string[]</td><td>T</td><td>Picks properties from object by property name.</td>
+						</tr>
+						<tr>
+							<td>put</td><td>obj: any, key: string | string[], val: any, immutable?: boolean</td><td>T</td><td>Pushes value to a property if not an array converts to array.</td>
 						</tr>
 						<tr>
 							<td>set</td><td>obj: any, key: string | string[], val: any, immutable?: boolean</td><td>T</td><td>Sets object value using dot notation optional immutable result.</td>

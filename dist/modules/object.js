@@ -119,7 +119,8 @@ function _put(obj, key, val) {
 }
 /**
  * Assign
- * Convenience wrapper to Object.assign.
+ * Convenience wrapper to Object.assign falls back to extend
+ * which is NOT a polyfill fyi.
  *
  * @param obj object to assign.
  * @param args additional source object.
@@ -129,7 +130,7 @@ function assign(obj) {
     for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i];
     }
-    if (Object['assign'])
+    if (Object.prototype.hasOwnProperty('assign'))
         return Object.assign.apply(Object, [obj].concat(args));
     return extend.apply(void 0, [obj].concat(args));
 }
@@ -215,21 +216,6 @@ function clone(obj, json) {
     return _clone(obj);
 }
 exports.clone = clone;
-/**
- * Extend
- * Extends objects similar to Object.assign
- * with the exception that undefined values are ignored.
- *
- * NOTE: use Object.assign if available!!
- *
- * @example
- * extend({ name: 'Bob', active: true }, { active: undefined })
- * results in:
- * { name: 'Bob', active: true }
- *
- * @param obj primary target object.
- * @param args additional source objects to merge with target.
- */
 function extend(obj) {
     var args = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -237,15 +223,16 @@ function extend(obj) {
     }
     var shallow = false;
     var dest = obj;
-    // Determin if is shallow.
+    // Determine if is shallow.
     if (is_1.isBoolean(dest)) {
         shallow = dest;
         if (!args.length)
             return {};
         // get first arg as destination.
-        dest = args.shift();
+        dest = args[0];
+        args = args.slice(1);
     }
-    // If not an object return null.
+    // If not an object return.
     if (!is_1.isObject(dest))
         return dest;
     var i = 0;
@@ -320,9 +307,8 @@ function reverse(obj) {
     if (is_1.isString(obj)) {
         var i = obj.toString().length;
         var tmpStr = '';
-        while (i--) {
+        while (i--)
             tmpStr += obj[i];
-        }
         return tmpStr;
     }
     // Reverse an object.
@@ -363,4 +349,44 @@ function create(obj) {
     return Object.create(obj || null);
 }
 exports.create = create;
+function omit(obj, props, immutable) {
+    props = to_1.toArray(props, []);
+    if (!is_1.isValue(obj) || (!is_1.isArray(obj) && !is_1.isObject(obj) && !is_1.isString(obj)) || !props || !props.length)
+        return obj;
+    props = to_1.toArray(props);
+    // Note replaces double spaces only after
+    // removing props from string. Also removes
+    // space if trailed by any of the following
+    // punctuation: .!?;,:
+    if (is_1.isString(obj)) {
+        return props.reduce(function (a, c) {
+            if ((c instanceof RegExp))
+                return a.replace(c, '');
+            a = (a.slice(0, a.indexOf(c)) + a.slice(a.indexOf(c) + c.length)).replace(/\s{2}/, ' ');
+            a = a.replace(/\s[.!?;,:]/, a.slice(a.length - 1));
+            return a;
+        }, obj);
+    }
+    if (is_1.isArray(obj))
+        return obj.filter(function (v) { return !~props.indexOf(v); });
+    if (!immutable)
+        return props.reduce(function (a, c) { return del(a, c); }, obj);
+    return props.reduce(function (a, c) { return del(a, c, true); }, obj);
+}
+exports.omit = omit;
+/**
+ * Picks values from object by property name.
+ *
+ * @param obj the object to pick from.
+ * @param props the properties to be picked.
+ */
+function pick(obj, props) {
+    props = to_1.toArray(props, []);
+    if (!is_1.isValue(obj) || !is_1.isObject(obj) || !props || !props.length)
+        return obj;
+    return props.reduce(function (a, c) {
+        return set(a, c, get(obj, c, undefined));
+    }, {});
+}
+exports.pick = pick;
 //# sourceMappingURL=object.js.map
