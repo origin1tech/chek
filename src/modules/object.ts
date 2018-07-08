@@ -4,6 +4,7 @@ import { keys, contains } from './array';
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isValue } from './is';
 import { split } from './string';
 import { toArray } from './to';
+import * as objAssign from 'object-assign';
 
 /**
  * Match Index
@@ -160,17 +161,15 @@ function _put<T>(obj: any, key: string | string[], val: any): T {
 }
 
 /**
- * Assign
- * Convenience wrapper to Object.assign falls back to extend
- * which is NOT a polyfill fyi.
+ * Uses Object.assign if available or falls back to polyfill.
  *
  * @param obj object to assign.
  * @param args additional source object.
  */
 export function assign<T>(obj: any, ...args: any[]): T {
-  if (Object.prototype.hasOwnProperty('assign'))
+  if (Object.assign)
     return Object.assign(obj, ...args) as T;
-  return extend(obj, ...args) as T;
+  return objAssign(obj, ...args) as T;
 }
 
 /**
@@ -183,7 +182,7 @@ export function assign<T>(obj: any, ...args: any[]): T {
  */
 export function del<T>(obj: any, key: string | string[], immutable?: boolean): T {
   if (immutable)
-    return _del<T>(clone(obj), key);
+    return _del<T>(assign({}, obj), key);
   return _del<T>(obj, key);
 }
 
@@ -196,7 +195,7 @@ export function del<T>(obj: any, key: string | string[], immutable?: boolean): T
  * @param def a default value to set if not exists.
  */
 export function get<T>(obj: any, key: string | string[], def?: any): T {
-  let result = _get<T>(clone(obj), key);
+  let result = _get<T>(assign({}, obj), key);
   if (!isValue(result) && def) {
     _set(obj, key, def);
     result = def;
@@ -216,7 +215,7 @@ export function has(obj: any, key: string | string[]): boolean {
   if (!isObject(obj) || (!isArray(key) && !isString(key)))
     return false;
 
-  obj = clone(obj);
+  obj = assign({}, obj);
 
   let props: string[] = isArray(key) ? <string[]>key : split(key);
 
@@ -378,7 +377,7 @@ export function extend<T>(obj: any, ...args: any[]): T {
  */
 export function put<T>(obj: any, key: string | string[], val: any, immutable?: boolean) {
   if (immutable)
-    return _put<T>(clone(obj), key, val);
+    return _put<T>(assign({}, obj), key, val);
   return _put<T>(obj, key, val);
 }
 
@@ -434,7 +433,7 @@ export function reverse<T>(obj: any): T {
  */
 export function set<T>(obj: any, key: string | string[], val: any, immutable?: boolean): T {
   if (immutable)
-    return _set<T>(clone(obj), key, val);
+    return _set<T>(assign({}, obj), key, val);
   return _set<T>(obj, key, val);
 }
 

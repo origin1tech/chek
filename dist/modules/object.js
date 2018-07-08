@@ -5,6 +5,7 @@ var array_1 = require("./array");
 var is_1 = require("./is");
 var string_1 = require("./string");
 var to_1 = require("./to");
+var objAssign = require("object-assign");
 /**
  * Match Index
  * @private
@@ -118,9 +119,7 @@ function _put(obj, key, val) {
     return _set(obj, key, cur.concat(val));
 }
 /**
- * Assign
- * Convenience wrapper to Object.assign falls back to extend
- * which is NOT a polyfill fyi.
+ * Uses Object.assign if available or falls back to polyfill.
  *
  * @param obj object to assign.
  * @param args additional source object.
@@ -130,9 +129,9 @@ function assign(obj) {
     for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i];
     }
-    if (Object.prototype.hasOwnProperty('assign'))
+    if (Object.assign)
         return Object.assign.apply(Object, [obj].concat(args));
-    return extend.apply(void 0, [obj].concat(args));
+    return objAssign.apply(void 0, [obj].concat(args));
 }
 exports.assign = assign;
 /**
@@ -145,7 +144,7 @@ exports.assign = assign;
  */
 function del(obj, key, immutable) {
     if (immutable)
-        return _del(clone(obj), key);
+        return _del(assign({}, obj), key);
     return _del(obj, key);
 }
 exports.del = del;
@@ -158,7 +157,7 @@ exports.del = del;
  * @param def a default value to set if not exists.
  */
 function get(obj, key, def) {
-    var result = _get(clone(obj), key);
+    var result = _get(assign({}, obj), key);
     if (!is_1.isValue(result) && def) {
         _set(obj, key, def);
         result = def;
@@ -176,7 +175,7 @@ exports.get = get;
 function has(obj, key) {
     if (!is_1.isObject(obj) || (!is_1.isArray(key) && !is_1.isString(key)))
         return false;
-    obj = clone(obj);
+    obj = assign({}, obj);
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
         var prop = props.shift(), match = matchIndex(prop);
@@ -285,7 +284,7 @@ exports.extend = extend;
  */
 function put(obj, key, val, immutable) {
     if (immutable)
-        return _put(clone(obj), key, val);
+        return _put(assign({}, obj), key, val);
     return _put(obj, key, val);
 }
 exports.put = put;
@@ -335,7 +334,7 @@ exports.reverse = reverse;
  */
 function set(obj, key, val, immutable) {
     if (immutable)
-        return _set(clone(obj), key, val);
+        return _set(assign({}, obj), key, val);
     return _set(obj, key, val);
 }
 exports.set = set;

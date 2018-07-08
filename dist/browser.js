@@ -938,7 +938,7 @@ function isWindows() {
 exports.isWindows = isWindows;
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":17,"buffer":14,"fs":13}],8:[function(require,module,exports){
+},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":18,"buffer":14,"fs":13}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _clone = require("lodash.clone");
@@ -946,6 +946,7 @@ var array_1 = require("./array");
 var is_1 = require("./is");
 var string_1 = require("./string");
 var to_1 = require("./to");
+var objAssign = require("object-assign");
 /**
  * Match Index
  * @private
@@ -1059,9 +1060,7 @@ function _put(obj, key, val) {
     return _set(obj, key, cur.concat(val));
 }
 /**
- * Assign
- * Convenience wrapper to Object.assign falls back to extend
- * which is NOT a polyfill fyi.
+ * Uses Object.assign if available or falls back to polyfill.
  *
  * @param obj object to assign.
  * @param args additional source object.
@@ -1071,9 +1070,9 @@ function assign(obj) {
     for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i];
     }
-    if (Object.prototype.hasOwnProperty('assign'))
+    if (Object.assign)
         return Object.assign.apply(Object, [obj].concat(args));
-    return extend.apply(void 0, [obj].concat(args));
+    return objAssign.apply(void 0, [obj].concat(args));
 }
 exports.assign = assign;
 /**
@@ -1086,7 +1085,7 @@ exports.assign = assign;
  */
 function del(obj, key, immutable) {
     if (immutable)
-        return _del(clone(obj), key);
+        return _del(assign({}, obj), key);
     return _del(obj, key);
 }
 exports.del = del;
@@ -1099,7 +1098,7 @@ exports.del = del;
  * @param def a default value to set if not exists.
  */
 function get(obj, key, def) {
-    var result = _get(clone(obj), key);
+    var result = _get(assign({}, obj), key);
     if (!is_1.isValue(result) && def) {
         _set(obj, key, def);
         result = def;
@@ -1117,7 +1116,7 @@ exports.get = get;
 function has(obj, key) {
     if (!is_1.isObject(obj) || (!is_1.isArray(key) && !is_1.isString(key)))
         return false;
-    obj = clone(obj);
+    obj = assign({}, obj);
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
         var prop = props.shift(), match = matchIndex(prop);
@@ -1226,7 +1225,7 @@ exports.extend = extend;
  */
 function put(obj, key, val, immutable) {
     if (immutable)
-        return _put(clone(obj), key, val);
+        return _put(assign({}, obj), key, val);
     return _put(obj, key, val);
 }
 exports.put = put;
@@ -1276,7 +1275,7 @@ exports.reverse = reverse;
  */
 function set(obj, key, val, immutable) {
     if (immutable)
-        return _set(clone(obj), key, val);
+        return _set(assign({}, obj), key, val);
     return _set(obj, key, val);
 }
 exports.set = set;
@@ -1331,7 +1330,7 @@ function pick(obj, props) {
 }
 exports.pick = pick;
 
-},{"./array":3,"./is":7,"./string":9,"./to":10,"lodash.clone":16}],9:[function(require,module,exports){
+},{"./array":3,"./is":7,"./string":9,"./to":10,"lodash.clone":16,"object-assign":17}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var is_1 = require("./is");
@@ -5913,6 +5912,98 @@ module.exports = clone;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],17:[function(require,module,exports){
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+'use strict';
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],18:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 

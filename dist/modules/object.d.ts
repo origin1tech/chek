@@ -1,7 +1,5 @@
 /**
- * Assign
- * Convenience wrapper to Object.assign falls back to extend
- * which is NOT a polyfill fyi.
+ * Uses Object.assign if available or falls back to polyfill.
  *
  * @param obj object to assign.
  * @param args additional source object.

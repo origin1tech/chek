@@ -1,6 +1,6 @@
 {
   "name": "chek",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Minimal utility for checking types, working with arrays and objects.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -51,7 +51,8 @@
     "uglify-js": "^3.0.24"
   },
   "dependencies": {
-    "lodash.clone": "^4.5.0"
+    "lodash.clone": "^4.5.0",
+    "object-assign": "^4.1.1"
   },
   "nyc": {
     "include": [

@@ -2,8 +2,11 @@
 
 List of changes.
 
-### 07.06.2018 (v1.2.3-v1.2.5)
+### 07.06.2018 (v1.2.3-v1.2.6)
 
+Opted to just use Object.assign and poly instead of clone for get, set, del. The problem is lodash.clone does not support some objects. Cloning will return an empty object. Since get, set, del etc are typically used for simple objects and largely object literals decided to focus on that requirement over dealing with lodash.clone unsupported objects.
+
++ **object** favor assign instead of clone for get, set etc. lodash.clone can return empty.
 + **get** fixed issue where picking values in object returned undefined in some cases.
 + **clone** chek has one dep "clone" change from npm package clone to lodash.clone.
 + **keys** not sure how this even happened but was ignoring non plain objects.
