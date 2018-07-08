@@ -1,5 +1,5 @@
 
-import * as _clone from 'clone';
+import * as _clone from 'lodash.clone';
 import { keys, contains } from './array';
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isValue } from './is';
 import { split } from './string';
@@ -212,7 +212,6 @@ export function get<T>(obj: any, key: string | string[], def?: any): T {
  * @param key the key to be found.
  */
 export function has(obj: any, key: string | string[]): boolean {
-
 
   if (!isObject(obj) || (!isArray(key) && !isString(key)))
     return false;
