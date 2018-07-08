@@ -217,13 +217,13 @@ describe('Chek', () => {
     assert.equal(ck.tryRequire('unknown'), null);
     assert.deepEqual(ck.tryRequire('unknown', {}), {});
     assert.isFunction(ck.tryRequire('path').resolve);
-    assert.isFunction(ck.tryRequire('clone', null, true));
+    assert.isFunction(ck.tryRequire('lodash.clone', null, true));
   });
 
   it('should Try to Require a Root module safely.', () => {
     assert.equal(ck.tryRootRequire('unknown'), null);
     assert.deepEqual(ck.tryRootRequire('unknown', {}), {});
-    assert.isFunction(ck.tryRootRequire('clone'));
+    assert.isFunction(ck.tryRootRequire('lodash.clone'));
   });
 
   // IS CHEKS
@@ -458,9 +458,6 @@ describe('Chek', () => {
     const jsonSrc: any = { name: 'bob' };
     const jsonClone: any = ck.clone(jsonSrc, true);
     assert.deepEqual(jsonSrc, jsonClone);
-    // jsonClone.nickname = 'bobby';
-    // assert.notEqual(jsonSrc.nickname, jsonClone.nickname);
-
   });
 
   it('should Extend objects from objects.', () => {

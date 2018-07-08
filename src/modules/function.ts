@@ -56,8 +56,7 @@ export function tryWrap(fn: Function, ...args: any[]) {
 /**
  * Try Require
  * Tries to require a module returns null
- * if cannot require or empty object if safe
- * flag is provided.
+ * if cannot require or empty object.
  *
  * @param name the name of module to try and require.
  * @param def optional default value on null.

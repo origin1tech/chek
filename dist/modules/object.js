@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var _clone = require("lodash.clone");
+var _clone = require("clone");
 var array_1 = require("./array");
 var is_1 = require("./is");
 var string_1 = require("./string");

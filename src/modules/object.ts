@@ -1,5 +1,5 @@
 
-import * as _clone from 'lodash.clone';
+import * as _clone from 'clone';
 import { keys, contains } from './array';
 import { isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isValue } from './is';
 import { split } from './string';
