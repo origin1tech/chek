@@ -7,3 +7,4 @@ temp.js
 test.ts
 temp.ts
 .nyc_output/
+wercker.yml

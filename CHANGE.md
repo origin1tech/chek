@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 07.06.2018 (v1.2.3)
+
++ **get** fixed issue where picking values in object returned undefined in some cases.
+
 ### 06.15.2018 (v1.2.0-v1.2.2)
 
 Immutable array methods should return object with both the resulting array and the value or length where applicable. This is a modest breaking change and hence why the minor version to 1.2.x

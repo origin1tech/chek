@@ -196,7 +196,7 @@ export function del<T>(obj: any, key: string | string[], immutable?: boolean): T
  * @param def a default value to set if not exists.
  */
 export function get<T>(obj: any, key: string | string[], def?: any): T {
-  let result = _get<T>(assign({}, obj), key);
+  let result = _get<T>(clone(obj), key);
   if (!isValue(result) && def) {
     _set(obj, key, def);
     result = def;
@@ -217,7 +217,7 @@ export function has(obj: any, key: string | string[]): boolean {
   if (!isObject(obj) || (!isArray(key) && !isString(key)))
     return false;
 
-  obj = assign({}, obj);
+  obj = clone(obj);
 
   let props: string[] = isArray(key) ? <string[]>key : split(key);
 
