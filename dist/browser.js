@@ -184,7 +184,7 @@ exports.duplicates = duplicates;
  * @param obj the object to parse keys.
  */
 function keys(obj) {
-    if (!is_1.isPlainObject(obj))
+    if (!is_1.isObject(obj))
         return [];
     return Object.keys(obj);
 }

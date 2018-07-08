@@ -2,10 +2,11 @@
 
 List of changes.
 
-### 07.06.2018 (v1.2.3-v1.2.4)
+### 07.06.2018 (v1.2.3-v1.2.5)
 
 + **get** fixed issue where picking values in object returned undefined in some cases.
 + **clone** chek has one dep "clone" change from npm package clone to lodash.clone.
++ **keys** not sure how this even happened but was ignoring non plain objects.
 
 ### 06.15.2018 (v1.2.0-v1.2.2)
 

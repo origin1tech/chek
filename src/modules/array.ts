@@ -1,6 +1,6 @@
 
 import { IMap, IArrayResult, IComparatorPrimer, IComparatorOptions, IComparator, IComparatorField, Transform } from '../interfaces';
-import { isArray, isEqual, isPlainObject, isValue, isString, isFunction, isNumber } from './is';
+import { isArray, isEqual, isPlainObject, isValue, isString, isFunction, isNumber, isObject } from './is';
 
 function defComparator(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 function normComparator<T>(primer?: IComparatorPrimer, order?: string | number | boolean) {
@@ -154,7 +154,7 @@ export function duplicates(arr: any[], value: any, breakable?: boolean): number 
  * @param obj the object to parse keys.
  */
 export function keys(obj: IMap<any>): string[] {
-  if (!isPlainObject(obj))
+  if (!isObject(obj))
     return [];
   return Object.keys(obj);
 }
