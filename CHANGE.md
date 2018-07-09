@@ -2,6 +2,10 @@
 
 List of changes.
 
+### 07.07.2018 (v1.2.9)
+
+Update .gitignore .npmignore.
+
 ### 07.07.2018 (v1.2.3-v1.2.8)
 
 Opted to just use Object.assign and poly instead of clone for get, set, del. The problem is clone does not support some objects. Cloning will return an empty object or even error. Since get, set, del etc are typically used for simple objects and largely object literals decided to focus on that requirement over dealing with unsupported objects.
