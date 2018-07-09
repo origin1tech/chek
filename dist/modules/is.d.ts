@@ -221,6 +221,11 @@ export declare function isType(val: any, Type: any): boolean;
  */
 export declare function isUndefined(val: any): boolean;
 /**
+ * Checks if is undefined or null value.
+ * @param val the value to inspect.
+ */
+export declare function isUndefinedOrNull(val: any): boolean;
+/**
  * Is Unique
  * Tests if the value is unique in the collection.
  *

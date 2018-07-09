@@ -36,7 +36,7 @@ export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
   }
 
   if (!isValue(val))
-    return toDefault(null, def);
+    return toDefault(null, def || []);
 
   if (isArray(val))
     return val;

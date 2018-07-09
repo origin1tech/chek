@@ -901,6 +901,14 @@ function isUndefined(val) {
 }
 exports.isUndefined = isUndefined;
 /**
+ * Checks if is undefined or null value.
+ * @param val the value to inspect.
+ */
+function isUndefinedOrNull(val) {
+    return isUndefined(val) || isNull(val);
+}
+exports.isUndefinedOrNull = isUndefinedOrNull;
+/**
  * Is Unique
  * Tests if the value is unique in the collection.
  *
@@ -1619,7 +1627,7 @@ function toArray(val, id, def) {
         id = undefined;
     }
     if (!is_1.isValue(val))
-        return toDefault(null, def);
+        return toDefault(null, def || []);
     if (is_1.isArray(val))
         return val;
     var ARRAY_LIKE_EXP = /^(.+(,|\||\s).+){1,}$/;

@@ -434,6 +434,14 @@ export function isUndefined(val: any) {
 }
 
 /**
+ * Checks if is undefined or null value.
+ * @param val the value to inspect.
+ */
+export function isUndefinedOrNull(val: any) {
+  return isUndefined(val) || isNull(val);
+}
+
+/**
  * Is Unique
  * Tests if the value is unique in the collection.
  *

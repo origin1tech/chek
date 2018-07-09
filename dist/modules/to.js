@@ -12,7 +12,7 @@ function toArray(val, id, def) {
         id = undefined;
     }
     if (!is_1.isValue(val))
-        return toDefault(null, def);
+        return toDefault(null, def || []);
     if (is_1.isArray(val))
         return val;
     var ARRAY_LIKE_EXP = /^(.+(,|\||\s).+){1,}$/;
