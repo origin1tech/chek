@@ -1,6 +1,6 @@
 {
   "name": "chek",
-  "version": "1.2.10",
+  "version": "1.3.0",
   "description": "Minimal utility for checking types, working with arrays and objects.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -33,22 +33,22 @@
   },
   "homepage": "https://github.com/origin1tech/chek#readme",
   "devDependencies": {
-    "@types/chai": "^4.1.3",
+    "@types/chai": "^4.1.4",
     "@types/clone": "^0.1.30",
-    "@types/mocha": "^5.2.0",
-    "@types/node": "^8.10.17",
+    "@types/mocha": "^5.2.4",
+    "@types/node": "^8.10.21",
     "browserify": "^14.4.0",
     "chai": "^4.1.2",
     "deep-freeze": "0.0.1",
     "del": "^3.0.0",
     "mocha": "^5.2.0",
-    "moment": "^2.22.1",
-    "nyc": "^11.0.3",
-    "ts-node": "^6.1.1",
+    "moment": "^2.22.2",
+    "nyc": "^11.9.0",
+    "ts-node": "^6.2.0",
     "tslint": "^5.10.0",
     "typedoc": "^0.7.1",
     "typescript": "^2.9.2",
-    "uglify-js": "^3.0.24"
+    "uglify-js": "^3.4.4"
   },
   "dependencies": {
     "clone": "^2.1.1",

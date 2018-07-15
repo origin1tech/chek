@@ -217,13 +217,13 @@ describe('Chek', () => {
     assert.equal(ck.tryRequire('unknown'), null);
     assert.deepEqual(ck.tryRequire('unknown', {}), {});
     assert.isFunction(ck.tryRequire('path').resolve);
-    assert.isFunction(ck.tryRequire('lodash.clone', null, true));
+    assert.isFunction(ck.tryRequire('clone', null, true));
   });
 
   it('should Try to Require a Root module safely.', () => {
     assert.equal(ck.tryRootRequire('unknown'), null);
     assert.deepEqual(ck.tryRootRequire('unknown', {}), {});
-    assert.isFunction(ck.tryRootRequire('lodash.clone'));
+    assert.isFunction(ck.tryRootRequire('clone'));
   });
 
   // IS CHEKS
@@ -634,10 +634,10 @@ describe('Chek', () => {
     assert.equal(ck.toArray([]).length, 0);
     assert.deepEqual(ck.toArray(null), []);
     assert.deepEqual(ck.toArray('test'), ['test']);
-    assert.deepEqual(ck.toArray(obj), objArr);
-    assert.deepEqual(ck.toArray(obj, []), objArr);
-    assert.deepEqual(ck.toArray({ 100: 'one' }), <any[]>[{ 100: 'one' }]);
-    assert.deepEqual(ck.toArray({ 100: { name: 'jeff' } }), <any[]>[{ $id: '100', name: 'jeff' }]);
+    assert.deepEqual(ck.toArray(obj, '$id'), objArr);
+    // assert.deepEqual(ck.toArray(obj, []), objArr);
+    assert.deepEqual(ck.toArray({ 100: 'one' }, '$id'), <any[]>[{ 100: 'one' }]);
+    assert.deepEqual(ck.toArray({ 100: { name: 'jeff' } }, '$id'), <any[]>[{ $id: '100', name: 'jeff' }]);
     assert.deepEqual(ck.toArray({ 100: { name: 'jeff' } }, 'key'), <any[]>[{ key: '100', name: 'jeff' }]);
     assert.deepEqual(ck.toArray('one, two, three'), ['one', 'two', 'three']);
 

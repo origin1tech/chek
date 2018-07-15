@@ -16,12 +16,8 @@ function toArray(val, id, def) {
     if (is_1.isArray(val))
         return val;
     var ARRAY_LIKE_EXP = /^(.+(,|\||\s).+){1,}$/;
-    if (is_1.isArray(id)) {
-        def = id;
-        id = undefined;
-    }
-    id = id || '$id';
-    if (is_1.isPlainObject(val)) {
+    // id = id || '$id';
+    if (is_1.isPlainObject(val) && id) {
         var arr = [];
         for (var p in val) {
             if (val.hasOwnProperty(p)) {

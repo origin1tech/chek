@@ -2,6 +2,12 @@
 
 List of changes.
 
+### 07.07.2018 (v1.3.0)
+
+BREAKING CHANGE in 1.3.0 for "toArray". In previous versions to array when called on an object would break out properties into key/val with an "$id" property. This is still possible but "$id" is no longer defaulted for objects in favor of being able to convert obj to [obj] which was NOT previously possible.
+
++ **toArray** when calling to array for object shouldn't auto breakout to array require id to be passed.
+
 ### 07.07.2018 (v1.2.9-v1.2.10)
 
 Update .gitignore .npmignore, fix issue with test.

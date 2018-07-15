@@ -43,14 +43,9 @@ export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
 
   const ARRAY_LIKE_EXP = /^(.+(,|\||\s).+){1,}$/;
 
-  if (isArray(id)) {
-    def = <any>id;
-    id = undefined;
-  }
+  // id = id || '$id';
 
-  id = id || '$id';
-
-  if (isPlainObject(val)) {
+  if (isPlainObject(val) && id) {
 
     let arr = [];
 
