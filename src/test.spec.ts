@@ -632,7 +632,7 @@ describe('Chek', () => {
       { $id: '102', name: 'Frank', age: 23 }
     ];
     assert.equal(ck.toArray([]).length, 0);
-    assert.equal(ck.toArray(null), null);
+    assert.deepEqual(ck.toArray(null), []);
     assert.deepEqual(ck.toArray('test'), ['test']);
     assert.deepEqual(ck.toArray(obj), objArr);
     assert.deepEqual(ck.toArray(obj, []), objArr);

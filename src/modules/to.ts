@@ -2,7 +2,7 @@
 import { IMap, IDateFormat } from '../interfaces';
 import { keys, push, contains } from './array';
 import { fromEpoch } from './from';
-import { isValue, isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isNull, isInfinite, isDate, isFloat, isInteger, isRegExp, isBrowser, isNumber } from './is';
+import { isValue, isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isNull, isInfinite, isDate, isFloat, isInteger, isRegExp, isBrowser, isNumber, isEmpty } from './is';
 import { clone, set, extend, del } from './object';
 import { tryWrap } from './function';
 import { split } from './string';
@@ -62,11 +62,9 @@ export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
           tmp[(id as string)] = p;
           const obj = Object.assign({}, cur, tmp);
           arr = push(arr, obj).array;
-          // arr.push(obj);
         }
         else {
           arr = push(arr, val).array;
-          // arr.push(val);
         }
       }
     }
@@ -179,7 +177,7 @@ export function toDate(val: any, format?: string | IDateFormat | Date, def?: Dat
  * @param def an optional default value to be returned.
  */
 export function toDefault(val: any, def?: any) {
-  if (isValue(val))
+  if (isValue(val) && !(isEmpty(val) && !isEmpty(def)))
     return val;
   return isValue(def) ? def : null;
 }

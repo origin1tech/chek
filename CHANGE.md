@@ -2,9 +2,9 @@
 
 List of changes.
 
-### 07.07.2018 (v1.2.9)
+### 07.07.2018 (v1.2.9-v1.2.10)
 
-Update .gitignore .npmignore.
+Update .gitignore .npmignore, fix issue with test.
 
 ### 07.07.2018 (v1.2.3-v1.2.8)
 

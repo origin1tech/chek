@@ -31,11 +31,9 @@ function toArray(val, id, def) {
                     tmp[id] = p;
                     var obj = Object.assign({}, cur, tmp);
                     arr = array_1.push(arr, obj).array;
-                    // arr.push(obj);
                 }
                 else {
                     arr = array_1.push(arr, val).array;
-                    // arr.push(val);
                 }
             }
         }
@@ -132,7 +130,7 @@ exports.toDate = toDate;
  * @param def an optional default value to be returned.
  */
 function toDefault(val, def) {
-    if (is_1.isValue(val))
+    if (is_1.isValue(val) && !(is_1.isEmpty(val) && !is_1.isEmpty(def)))
         return val;
     return is_1.isValue(def) ? def : null;
 }
