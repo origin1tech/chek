@@ -1034,8 +1034,8 @@ function _set(obj, key, val) {
         return null;
     var props = string_1.split(key);
     /* istanbul ignore if */
-    if (!is_1.isValue(val))
-        val = {};
+    // if (!isValue(val))
+    //   val = {};
     var prop = props.shift();
     var match = matchIndex(prop);
     var next = obj[prop];
@@ -1332,7 +1332,10 @@ function pick(obj, props) {
     if (!is_1.isValue(obj) || !is_1.isObject(obj) || !props || !props.length)
         return obj;
     return props.reduce(function (a, c) {
-        return set(a, c, get(obj, c, undefined));
+        var val = get(obj, c, undefined);
+        if (is_1.isUndefined(val))
+            return a;
+        return set(a, c, val);
     }, {});
 }
 exports.pick = pick;

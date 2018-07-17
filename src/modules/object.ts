@@ -112,8 +112,8 @@ function _set<T>(obj: any, key: string | string[], val: any): T {
   let props: string[] = split(key);
 
   /* istanbul ignore if */
-  if (!isValue(val))
-    val = {};
+  // if (!isValue(val))
+  //   val = {};
 
   const prop = props.shift();
   const match = matchIndex(prop);
@@ -522,7 +522,10 @@ export function pick<T>(obj: any, props: string | string[]): T {
     return obj;
 
   return props.reduce((a, c) => {
-    return set(a, c, get(obj, c, undefined));
+    const val = get(obj, c, undefined);
+    if (isUndefined(val))
+      return a;
+    return set(a, c, val);
   }, {}) as T;
 
 }

@@ -2,6 +2,11 @@
 
 List of changes.
 
+### 07.16.2018 (v1.3.1)
+
++ **pick** pick should not return undefined values when picking from source object.
++ **set** bug in set after last refactor values set to empty object on undefined not sure how we missed that one.
+
 ### 07.07.2018 (v1.3.0)
 
 BREAKING CHANGE in 1.3.0 for "toArray". In previous versions to array when called on an object would break out properties into key/val with an "$id" property. This is still possible but "$id" is no longer defaulted for objects in favor of being able to convert obj to [obj] which was NOT previously possible.
