@@ -229,7 +229,7 @@ export function includesAny(arr: string | any[], compare: string | any[], transf
  * @param arr the array to get last element.
  */
 export function last<T>(arr: any[]): T {
-  return arr[arr.length - 1];
+  return (arr && arr[arr.length - 1]) || undefined;
 }
 
 // NOTE: the following are immutable methods.
@@ -244,7 +244,7 @@ export function pop(arr: any[]) {
 
   return {
     array: arr.slice(0, arr.length - 1),
-    val: last(arr)
+    val: arr[arr.length - 1]
   };
 
 }

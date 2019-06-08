@@ -222,7 +222,7 @@ exports.includesAny = includesAny;
  * @param arr the array to get last element.
  */
 function last(arr) {
-    return arr[arr.length - 1];
+    return (arr && arr[arr.length - 1]) || undefined;
 }
 exports.last = last;
 // NOTE: the following are immutable methods.
@@ -235,7 +235,7 @@ exports.last = last;
 function pop(arr) {
     return {
         array: arr.slice(0, arr.length - 1),
-        val: last(arr)
+        val: arr[arr.length - 1]
     };
 }
 exports.pop = pop;
