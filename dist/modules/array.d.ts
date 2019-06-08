@@ -98,7 +98,7 @@ export declare function last<T>(arr: any[]): T;
  */
 export declare function pop(arr: any[]): {
     array: any[];
-    val: {};
+    val: unknown;
 };
 /**
  * Push

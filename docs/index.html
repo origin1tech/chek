@@ -73,21 +73,18 @@
 				<p>The end game is simple. Have about 90% or so coverage for common tasks preventing the need for a larger footprint.</p>
 				<p>Comes with 100% test coverage out of the gate. Some handy methods like push, splice, shift, unshfit and so on that handle immutability as well as other methods where applicable.</p>
 				<h2 id="installation">Installation</h2>
-				<pre><code class="lang-sh">npm install chek -s
-</code></pre>
+				<pre><code class="language-sh">npm install chek -s</code></pre>
 				<h2 id="usage">Usage</h2>
 				<p><strong>Using Typescript</strong></p>
-				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> ck <span class="hljs-keyword">from</span> <span class="hljs-string">'chek'</span>; <span class="hljs-comment">// or import { isString, slugify } from 'chek';</span>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> ck <span class="hljs-keyword">from</span> <span class="hljs-string">'chek'</span>; <span class="hljs-comment">// or import { isString, slugify } from 'chek';</span>
 
 <span class="hljs-keyword">let</span> slug = <span class="hljs-string">'i can Do zAT'</span>;
 <span class="hljs-keyword">if</span> (ck.isString(slug))
-  slug = ck.slugify(slug) <span class="hljs-comment">// result: 'i-can-do-zat';</span>
-</code></pre>
+  slug = ck.slugify(slug) <span class="hljs-comment">// result: 'i-can-do-zat';</span></code></pre>
 				<p><strong>Using ES5</strong></p>
-				<pre><code class="lang-js"><span class="hljs-keyword">const</span> ck = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chek'</span>);
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> ck = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chek'</span>);
 
-<span class="hljs-comment">// same as above.</span>
-</code></pre>
+<span class="hljs-comment">// same as above.</span></code></pre>
 				<h2 id="methods">Methods</h2>
 				<p>Methods are broken into several categories. Some have only a method or two and we&#39;ll likely expand a little on some. Have <strong>any suggestions</strong> be sure to post an issue we&#39;re all ears. Not prideful help out we all win!</p>
 				<ul>
@@ -312,7 +309,7 @@
 							<td>omit</td><td>obj: any, props: any | any[], immutable?: boolean</td><td>T</td><td>Omits values from string or arrays or omits from object by property name.</td>
 						</tr>
 						<tr>
-							<td>reverse</td><td>obj: any</td><td>T</td><td>Reverses an object { error: 0 } becomes { 0: &#39;error&#39; }.</td>
+							<td>reverse</td><td>obj: any</td><td>T</td><td>Reverses an object { error: 0 } becomes { 0: 'error' }.</td>
 						</tr>
 						<tr>
 							<td>pick</td><td>obj: any, props: string | string[]</td><td>T</td><td>Picks properties from object by property name.</td>
@@ -368,7 +365,7 @@
 							<td>uppercase</td><td>val: string</td><td>string</td><td>Converts a string to UPPERCASE.</td>
 						</tr>
 						<tr>
-							<td>uuid</td><td>n/a</td><td>string</td><td>Creates a uuid using &quot;performance&quot; if available.</td>
+							<td>uuid</td><td>n/a</td><td>string</td><td>Creates a uuid using "performance" if available.</td>
 						</tr>
 					</tbody>
 				</table>
@@ -409,7 +406,7 @@
 							<td>toMap</td><td>val: any, id?: string | IMap<any>, def?: IMap<any></td><td>T</td><td>Converts to arrays and srings to an object map (see examples in method).</td>
 						</tr>
 						<tr>
-							<td>toNested</td><td>val: IMap<any>, def?: IMap<any></td><td>T</td><td>Converts object from &quot;toUnnested&quot; to a nested object.</td>
+							<td>toNested</td><td>val: IMap<any>, def?: IMap<any></td><td>T</td><td>Converts object from "toUnnested" to a nested object.</td>
 						</tr>
 						<tr>
 							<td>toNumber</td><td>val: any, def?: number</td><td>number</td><td>Converts to a number.</td>
