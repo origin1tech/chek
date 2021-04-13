@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.fromJSON = exports.fromEpoch = void 0;
 var is_1 = require("./is");
 var function_1 = require("./function");
 var to_1 = require("./to");

@@ -38,7 +38,7 @@ export function noopIf(fn?: any) {
  * @param fn the parse method to be called in try/parse block.
  * @param args arguments to pass to above method.
  */
-export function tryWrap(fn: Function, ...args: any[]) {
+export function tryWrap(fn: (...args: any[]) => any, ...args: any[]) {
 
   return function (def?: any) {
     try {

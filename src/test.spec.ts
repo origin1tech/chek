@@ -360,7 +360,7 @@ describe('Chek', () => {
 
   it('should check if is Promise', () => {
     const prom = new Promise((resolve, reject) => {
-      resolve();
+      resolve(null);
     });
     assert.equal(ck.isPromise(prom), true);
   });

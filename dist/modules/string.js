@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.uuid = exports.uppercase = exports.titlecase = exports.slugify = exports.split = exports.padValues = exports.padRight = exports.padLeft = exports.lowercase = exports.capitalize = exports.decamelcase = exports.camelcase = void 0;
 var is_1 = require("./is");
 var to_1 = require("./to");
 /**
@@ -167,7 +168,6 @@ function split(val, chars) {
     // default characters.
     var defChars = ['/', '.', ',', ';', '|'];
     var char;
-    var arr;
     chars = chars ? to_1.toArray(chars) : defChars;
     // if no char iterate defaults.
     var i = 0;
@@ -179,7 +179,7 @@ function split(val, chars) {
     }
     if (!is_1.isValue(char))
         return [val];
-    arr = val.split(char).map(function (v) { return v.trim(); });
+    var arr = val.split(char).map(function (v) { return v.trim(); });
     // If empty remove first element.
     // this happens when splitting on
     // char and is first char in string.

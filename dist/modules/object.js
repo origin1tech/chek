@@ -1,5 +1,11 @@
 "use strict";
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.pick = exports.omit = exports.create = exports.set = exports.reverse = exports.put = exports.extend = exports.clone = exports.has = exports.get = exports.del = exports.assign = void 0;
 var _clone = require("clone");
 var array_1 = require("./array");
 var is_1 = require("./is");
@@ -15,7 +21,7 @@ var objAssign = require("object-assign");
 function matchIndex(prop) {
     if (!prop || !/\[\d+\]/.test(prop))
         return false;
-    var prefix = prop.match(/[^\[]+/i);
+    var prefix = prop.match(/[^[]+/i);
     var idx;
     var indices = prop.match(/\d+/g);
     if (!indices)
@@ -61,8 +67,8 @@ function _get(obj, key) {
         return null;
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
-        var prop = props.shift(), match = void 0;
-        match = matchIndex(prop);
+        var prop = props.shift();
+        var match = matchIndex(prop);
         if (match) {
             /* istanbul ignore next  */
             if (!is_1.isUndefined(obj[match.name])) {
@@ -116,7 +122,7 @@ function _put(obj, key, val) {
     var cur = to_1.toArray(get(obj, key), []);
     if (!is_1.isArray(val))
         val = [val];
-    return _set(obj, key, cur.concat(val));
+    return _set(obj, key, __spreadArray(__spreadArray([], cur), val));
 }
 /**
  * Uses Object.assign if available or falls back to polyfill.
@@ -130,8 +136,8 @@ function assign(obj) {
         args[_i - 1] = arguments[_i];
     }
     if (Object.assign)
-        return Object.assign.apply(Object, [obj].concat(args));
-    return objAssign.apply(void 0, [obj].concat(args));
+        return Object.assign.apply(Object, __spreadArray([obj], args));
+    return objAssign.apply(void 0, __spreadArray([obj], args));
 }
 exports.assign = assign;
 /**
@@ -178,7 +184,8 @@ function has(obj, key) {
     obj = assign({}, obj);
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
-        var prop = props.shift(), match = matchIndex(prop);
+        var prop = props.shift();
+        var match = matchIndex(prop);
         if (!props.length) { // no more props chek path.
             var _keys = array_1.keys(obj);
             if (match) {

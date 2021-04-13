@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.unshift = exports.splice = exports.shift = exports.push = exports.pop = exports.last = exports.includesAny = exports.includes = exports.first = exports.flatten = exports.keys = exports.duplicates = exports.containsAny = exports.contains = exports.orderBy = void 0;
 var is_1 = require("./is");
 function defComparator(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 function normComparator(primer, order) {

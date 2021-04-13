@@ -1,11 +1,11 @@
 
-import { IMap, IArrayResult, IComparatorPrimer, IComparatorOptions, IComparator, IComparatorField, Transform } from '../interfaces';
+import { IMap, IArrayResult, IComparatorPrimer, IComparatorOptions, IComparator, IComparatorField, Transform } from '../types';
 import { isArray, isEqual, isPlainObject, isValue, isString, isFunction, isNumber, isObject } from './is';
 
 function defComparator(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 function normComparator<T>(primer?: IComparatorPrimer, order?: string | number | boolean) {
   let comp = defComparator;
-  let reverse = false;
+  const reverse = false;
   if (primer)
     comp = (a, b) => defComparator(primer(a), primer(b));
   if (order && /^(desc|descending|-1|true)/.test(order + ''))
@@ -294,7 +294,7 @@ export function splice(arr: any[], start?: number, remove?: number, ...items: an
 
   start = start || 0;
 
-  let head = arr.slice(0, start);
+  const head = arr.slice(0, start);
   let tail = arr.slice(start);
   let removed = [];
 

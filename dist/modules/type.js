@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getType = exports.castType = void 0;
 var is_1 = require("./is");
 var to_1 = require("./to");
 var function_1 = require("./function");

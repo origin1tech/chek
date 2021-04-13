@@ -4,16 +4,17 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Chek</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for Chek">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -51,12 +50,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1> Chek</h1>
+			<h1>Chek</h1>
 		</div>
 	</div>
 </header>
@@ -72,20 +66,29 @@
 				<p>Nothing special just a nice little toolkit preventing the need for large libs like Lodash or Underscore (both great of course).</p>
 				<p>The end game is simple. Have about 90% or so coverage for common tasks preventing the need for a larger footprint.</p>
 				<p>Comes with 100% test coverage out of the gate. Some handy methods like push, splice, shift, unshfit and so on that handle immutability as well as other methods where applicable.</p>
-				<h2 id="installation">Installation</h2>
-				<pre><code class="language-sh">npm install chek -s</code></pre>
-				<h2 id="usage">Usage</h2>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-sh"><span style="color: #000000">npm install chek -s</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
 				<p><strong>Using Typescript</strong></p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> ck <span class="hljs-keyword">from</span> <span class="hljs-string">'chek'</span>; <span class="hljs-comment">// or import { isString, slugify } from 'chek';</span>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">ck</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;chek&#039;</span><span style="color: #000000">; </span><span style="color: #008000">// or import { isString, slugify } from &#039;chek&#039;;</span>
 
-<span class="hljs-keyword">let</span> slug = <span class="hljs-string">'i can Do zAT'</span>;
-<span class="hljs-keyword">if</span> (ck.isString(slug))
-  slug = ck.slugify(slug) <span class="hljs-comment">// result: 'i-can-do-zat';</span></code></pre>
+<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">slug</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;i can Do zAT&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">ck</span><span style="color: #000000">.</span><span style="color: #795E26">isString</span><span style="color: #000000">(</span><span style="color: #001080">slug</span><span style="color: #000000">))</span>
+<span style="color: #000000">  </span><span style="color: #001080">slug</span><span style="color: #000000"> = </span><span style="color: #001080">ck</span><span style="color: #000000">.</span><span style="color: #795E26">slugify</span><span style="color: #000000">(</span><span style="color: #001080">slug</span><span style="color: #000000">) </span><span style="color: #008000">// result: &#039;i-can-do-zat&#039;;</span>
+</code></pre>
 				<p><strong>Using ES5</strong></p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> ck = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chek'</span>);
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ck</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;chek&#039;</span><span style="color: #000000">);</span>
 
-<span class="hljs-comment">// same as above.</span></code></pre>
-				<h2 id="methods">Methods</h2>
+<span style="color: #008000">// same as above.</span>
+</code></pre>
+				<a href="#methods" id="methods" style="color: inherit; text-decoration: none;">
+					<h2>Methods</h2>
+				</a>
 				<p>Methods are broken into several categories. Some have only a method or two and we&#39;ll likely expand a little on some. Have <strong>any suggestions</strong> be sure to post an issue we&#39;re all ears. Not prideful help out we all win!</p>
 				<ul>
 					<li><strong>array</strong>         - things like contains, containsAny, duplicates.</li>
@@ -98,7 +101,9 @@
 					<li><strong>type</strong>          - handles getting and casting types.</li>
 				</ul>
 				<p><strong>Please Note the following tables are here for convenience you should ALWAYS reference the &quot;docs&quot; below for updated method signatues, there&#39;s only so much time in the day.</strong></p>
-				<h2 id="array">Array</h2>
+				<a href="#array" id="array" style="color: inherit; text-decoration: none;">
+					<h2>Array</h2>
+				</a>
 				<table>
 					<thead>
 						<tr>
@@ -147,7 +152,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<h2 id="from">From</h2>
+				<a href="#from" id="from" style="color: inherit; text-decoration: none;">
+					<h2>From</h2>
+				</a>
 				<table>
 					<thead>
 						<tr>
@@ -163,7 +170,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<h2 id="function">Function</h2>
+				<a href="#function" id="function" style="color: inherit; text-decoration: none;">
+					<h2>Function</h2>
+				</a>
 				<table>
 					<caption>CHEK FUNCTION</caption>
 					<thead>
@@ -189,7 +198,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<h2 id="is">Is</h2>
+				<a href="#is" id="is" style="color: inherit; text-decoration: none;">
+					<h2>Is</h2>
+				</a>
 				<table>
 					<caption>CHEK IS</caption>
 					<thead>
@@ -281,7 +292,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<h2 id="object">Object</h2>
+				<a href="#object" id="object" style="color: inherit; text-decoration: none;">
+					<h2>Object</h2>
+				</a>
 				<table>
 					<caption>CHEK OBJECT</caption>
 					<thead>
@@ -322,7 +335,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<h2 id="string">String</h2>
+				<a href="#string" id="string" style="color: inherit; text-decoration: none;">
+					<h2>String</h2>
+				</a>
 				<table>
 					<caption>CHEK STRING</caption>
 					<thead>
@@ -369,7 +384,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<h2 id="to">To</h2>
+				<a href="#to" id="to" style="color: inherit; text-decoration: none;">
+					<h2>To</h2>
+				</a>
 				<table>
 					<caption>CHEK TO</caption>
 					<thead>
@@ -425,7 +442,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<h2 id="type">Type</h2>
+				<a href="#type" id="type" style="color: inherit; text-decoration: none;">
+					<h2>Type</h2>
+				</a>
 				<table>
 					<caption>CHEK TYPE</caption>
 					<thead>
@@ -442,60 +461,363 @@
 						</tr>
 					</tbody>
 				</table>
-				<h2 id="docs">Docs</h2>
+				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
+					<h2>Docs</h2>
+				</a>
 				<p>See <a href="https://origin1tech.github.io/chek/">https://origin1tech.github.io/chek/</a></p>
-				<h2 id="changes">Changes</h2>
+				<a href="#changes" id="changes" style="color: inherit; text-decoration: none;">
+					<h2>Changes</h2>
+				</a>
 				<p>See <a href="CHANGE.md">CHANGE.md</a></p>
-				<h2 id="license">License</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
 				<p>See <a href="License">LICENSE</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_chek_.html">"chek"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_interfaces_.html">"interfaces"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_array_.html">"modules/array"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_constant_.html">"modules/constant"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_from_.html">"modules/from"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_function_.html">"modules/function"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_is_.html">"modules/is"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_object_.html">"modules/object"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_string_.html">"modules/string"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_to_.html">"modules/to"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_modules_type_.html">"modules/type"</a>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/default.html">default</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iarrayresult.html" class="tsd-kind-icon">IArray<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/idateformat.html" class="tsd-kind-icon">IDate<wbr>Format</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/imap.html" class="tsd-kind-icon">IMap</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/imetadata.html" class="tsd-kind-icon">IMetadata</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#icomparator" class="tsd-kind-icon">IComparator</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#icomparatorfield" class="tsd-kind-icon">IComparator<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#icomparatoroptions" class="tsd-kind-icon">IComparator<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#icomparatororder" class="tsd-kind-icon">IComparator<wbr>Order</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#icomparatorprimer" class="tsd-kind-icon">IComparator<wbr>Primer</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#icomparatortuple" class="tsd-kind-icon">IComparator<wbr>Tuple</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#transform" class="tsd-kind-icon">Transform</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#assign" class="tsd-kind-icon">assign</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#camelcase" class="tsd-kind-icon">camelcase</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#capitalize" class="tsd-kind-icon">capitalize</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#casttype" class="tsd-kind-icon">cast<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#clone" class="tsd-kind-icon">clone</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#contains" class="tsd-kind-icon">contains</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#containsany" class="tsd-kind-icon">contains<wbr>Any</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#create" class="tsd-kind-icon">create</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#decamelcase" class="tsd-kind-icon">decamelcase</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#del" class="tsd-kind-icon">del</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#duplicates" class="tsd-kind-icon">duplicates</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#extend" class="tsd-kind-icon">extend</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#first" class="tsd-kind-icon">first</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#flatten" class="tsd-kind-icon">flatten</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#fromepoch" class="tsd-kind-icon">from<wbr>Epoch</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#fromjson" class="tsd-kind-icon">fromJSON</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#get" class="tsd-kind-icon">get</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#gettype" class="tsd-kind-icon">get<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#has" class="tsd-kind-icon">has</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#includes" class="tsd-kind-icon">includes</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#includesany" class="tsd-kind-icon">includes<wbr>Any</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isarray" class="tsd-kind-icon">is<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isboolean" class="tsd-kind-icon">is<wbr>Boolean</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isbrowser" class="tsd-kind-icon">is<wbr>Browser</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isbuffer" class="tsd-kind-icon">is<wbr>Buffer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isdate" class="tsd-kind-icon">is<wbr>Date</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isdebug" class="tsd-kind-icon">is<wbr>Debug</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isdirectory" class="tsd-kind-icon">is<wbr>Directory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isdocker" class="tsd-kind-icon">is<wbr>Docker</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isempty" class="tsd-kind-icon">is<wbr>Empty</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isequal" class="tsd-kind-icon">is<wbr>Equal</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#iserror" class="tsd-kind-icon">is<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isfile" class="tsd-kind-icon">is<wbr>File</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isfloat" class="tsd-kind-icon">is<wbr>Float</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isfunction" class="tsd-kind-icon">is<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isinfinite" class="tsd-kind-icon">is<wbr>Infinite</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isinspect" class="tsd-kind-icon">is<wbr>Inspect</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isinteger" class="tsd-kind-icon">is<wbr>Integer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#ismoment" class="tsd-kind-icon">is<wbr>Moment</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isnode" class="tsd-kind-icon">is<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isnull" class="tsd-kind-icon">is<wbr>Null</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isnumber" class="tsd-kind-icon">is<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isobject" class="tsd-kind-icon">is<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isplainobject" class="tsd-kind-icon">is<wbr>Plain<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#ispromise" class="tsd-kind-icon">is<wbr>Promise</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isregexp" class="tsd-kind-icon">is<wbr>Reg<wbr>Exp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isroot" class="tsd-kind-icon">is<wbr>Root</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isstring" class="tsd-kind-icon">is<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#issymbol" class="tsd-kind-icon">is<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#istruthy" class="tsd-kind-icon">is<wbr>Truthy</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#istype" class="tsd-kind-icon">is<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isundefined" class="tsd-kind-icon">is<wbr>Undefined</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isundefinedornull" class="tsd-kind-icon">is<wbr>Undefined<wbr>OrNull</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isunique" class="tsd-kind-icon">is<wbr>Unique</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#isvalue" class="tsd-kind-icon">is<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#iswindows" class="tsd-kind-icon">is<wbr>Windows</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#keys" class="tsd-kind-icon">keys</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#last" class="tsd-kind-icon">last</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#lowercase" class="tsd-kind-icon">lowercase</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#noop" class="tsd-kind-icon">noop</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#noopif" class="tsd-kind-icon">noop<wbr>If</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#omit" class="tsd-kind-icon">omit</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#orderby" class="tsd-kind-icon">order<wbr>By</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#padleft" class="tsd-kind-icon">pad<wbr>Left</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#padright" class="tsd-kind-icon">pad<wbr>Right</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#padvalues" class="tsd-kind-icon">pad<wbr>Values</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#pick" class="tsd-kind-icon">pick</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#pop" class="tsd-kind-icon">pop</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#push" class="tsd-kind-icon">push</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#put" class="tsd-kind-icon">put</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#reverse" class="tsd-kind-icon">reverse</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#set" class="tsd-kind-icon">set</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#shift" class="tsd-kind-icon">shift</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#slugify" class="tsd-kind-icon">slugify</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#splice" class="tsd-kind-icon">splice</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#split" class="tsd-kind-icon">split</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#titlecase" class="tsd-kind-icon">titlecase</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#toarray" class="tsd-kind-icon">to<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#toboolean" class="tsd-kind-icon">to<wbr>Boolean</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#todate" class="tsd-kind-icon">to<wbr>Date</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#todefault" class="tsd-kind-icon">to<wbr>Default</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#toepoch" class="tsd-kind-icon">to<wbr>Epoch</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#tofloat" class="tsd-kind-icon">to<wbr>Float</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#tointeger" class="tsd-kind-icon">to<wbr>Integer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#tojson" class="tsd-kind-icon">toJSON</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#tomap" class="tsd-kind-icon">to<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#tonested" class="tsd-kind-icon">to<wbr>Nested</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#tonumber" class="tsd-kind-icon">to<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#toregexp" class="tsd-kind-icon">to<wbr>Reg<wbr>Exp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#tostr" class="tsd-kind-icon">to<wbr>Str</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#tounnested" class="tsd-kind-icon">to<wbr>Unnested</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#towindow" class="tsd-kind-icon">to<wbr>Window</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#tryrequire" class="tsd-kind-icon">try<wbr>Require</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#tryrootrequire" class="tsd-kind-icon">try<wbr>Root<wbr>Require</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#trywrap" class="tsd-kind-icon">try<wbr>Wrap</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#unshift" class="tsd-kind-icon">unshift</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#uppercase" class="tsd-kind-icon">uppercase</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#uuid" class="tsd-kind-icon">uuid</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -506,65 +828,15 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

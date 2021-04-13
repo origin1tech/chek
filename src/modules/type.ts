@@ -48,7 +48,7 @@ export function castType<T>(val: any, type: any, def?: any): T {
 
       type = type.toLowerCase();
 
-      let func = toMap[type];
+      const func = toMap[type];
 
       if (func)
         return func(val);

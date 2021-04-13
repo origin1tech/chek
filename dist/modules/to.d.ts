@@ -1,4 +1,4 @@
-import { IMap, IDateFormat } from '../interfaces';
+import { IMap, IDateFormat } from '../types';
 /**
  * To Array
  * Converts value to array with optional default value.

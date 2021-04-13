@@ -1,7 +1,7 @@
 import { isArray, isEmpty, isFunction, isString, isValue, isBoolean } from './is';
 import { toDefault, toArray } from './to';
 
-declare var performance;
+declare const performance;
 
 /**
  * Camelcase
@@ -26,7 +26,7 @@ export function camelcase(val: string): string {
  * @param val the value to de-camelize.
  * @param separator the separator char once decamelized.
  */
-export function decamelcase(val: string, separator: string = '-') {
+export function decamelcase(val: string, separator = '-') {
   if (!isValue(val))
     return null;
   return val
@@ -184,9 +184,9 @@ export function split(val: string | string[], chars?: string | string[] | boolea
     return null;
 
   // default characters.
-  let defChars = ['/', '.', ',', ';', '|'];
+  const defChars = ['/', '.', ',', ';', '|'];
   let char;
-  let arr;
+
   chars = chars ? toArray<string>(chars) : defChars;
 
   // if no char iterate defaults.
@@ -201,7 +201,7 @@ export function split(val: string | string[], chars?: string | string[] | boolea
   if (!isValue(char))
     return [<string>val];
 
-  arr = (val as string).split(<string>char).map(v => v.trim());
+  const arr = (val as string).split(<string>char).map(v => v.trim());
 
   // If empty remove first element.
   // this happens when splitting on

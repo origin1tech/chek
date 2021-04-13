@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isWindows = exports.isValue = exports.isUnique = exports.isUndefinedOrNull = exports.isUndefined = exports.isType = exports.isTruthy = exports.isSymbol = exports.isString = exports.isRoot = exports.isRegExp = exports.isPromise = exports.isPlainObject = exports.isObject = exports.isMoment = exports.isNumber = exports.isNull = exports.isNode = exports.isInteger = exports.isInspect = exports.isInfinite = exports.isFunction = exports.isFloat = exports.isDocker = exports.isDirectory = exports.isFile = exports.isError = exports.isEqual = exports.isEmpty = exports.isDebug = exports.isDate = exports.isBuffer = exports.isBrowser = exports.isBoolean = exports.isArray = void 0;
 var constant_1 = require("./constant");
 var to_1 = require("./to");
 var function_1 = require("./function");

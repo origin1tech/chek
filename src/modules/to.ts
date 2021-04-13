@@ -1,5 +1,5 @@
 
-import { IMap, IDateFormat } from '../interfaces';
+import { IMap, IDateFormat } from '../types';
 import { keys, push, contains } from './array';
 import { fromEpoch } from './from';
 import { isValue, isArray, isString, isUndefined, isPlainObject, isBoolean, isObject, isNull, isInfinite, isDate, isFloat, isInteger, isRegExp, isBrowser, isNumber, isEmpty } from './is';
@@ -7,7 +7,7 @@ import { clone, set, extend, del } from './object';
 import { tryWrap } from './function';
 import { split } from './string';
 
-declare var window;
+declare const window;
 
 /**
  * To Array
@@ -49,7 +49,7 @@ export function toArray<T>(val: any, id?: string | T[], def?: T[]): T[] {
 
     let arr = [];
 
-    for (let p in val) {
+    for (const p in val) {
       if (val.hasOwnProperty(p)) {
         const cur = val[p];
         if (isPlainObject(cur)) {
@@ -140,7 +140,7 @@ export function toDate(val: any, format?: string | IDateFormat | Date, def?: Dat
   }
 
   function parseDate() {
-    let epoch = Date.parse(val);
+    const epoch = Date.parse(val);
     if (!isNaN(epoch)) {
       let date = fromEpoch(epoch);
       if (opts) {
@@ -287,7 +287,7 @@ export function toMap<T>(val: any, id?: string | IMap<any>, def?: IMap<any>): T 
 
   const exp = /(\/|\.|,|;|\|)/g;
   let i = 0;
-  let obj: any = {};
+  const obj: any = {};
 
   if (isString(val)) {
 
@@ -310,7 +310,7 @@ export function toMap<T>(val: any, id?: string | IMap<any>, def?: IMap<any>): T 
       obj[i] = val[i];
     }
     else if (isPlainObject(val[i])) {
-      let itm = Object.assign({}, val[i]);
+      const itm = Object.assign({}, val[i]);
       const key = itm[id] ? itm[id] : i;
       obj[key] = itm[id] ? del(itm, id) : itm;
     }
@@ -331,7 +331,7 @@ export function toMap<T>(val: any, id?: string | IMap<any>, def?: IMap<any>): T 
 export function toNested<T>(val: IMap<any>, def?: IMap<any>): T {
   function nest(src) {
     const dest = {};
-    for (let p in src) {
+    for (const p in src) {
       if (src.hasOwnProperty(p))
         if (/\./g.test(p))
           set(dest, p, src[p]);
@@ -418,7 +418,7 @@ export function toUnnested<T>(obj: IMap<any>, prefix?: boolean | IMap<any>, def?
 
   function unnest(src, dest, pre) {
     dest = dest || {};
-    for (let p in src) {
+    for (const p in src) {
       if (dupes > 0)
         return;
       if (src.hasOwnProperty(p)) {

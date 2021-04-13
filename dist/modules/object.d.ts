@@ -126,7 +126,7 @@ export declare function omit<T>(arr: any[], elements: any | any[]): T;
  * @param props the properties to be removed.
  * @param immutable when true object is first cloned to not mutated source.
  */
-export declare function omit<T>(obj: object, props: string | string[], immutable?: boolean): T;
+export declare function omit<T>(obj: Record<string, unknown>, props: string | string[], immutable?: boolean): T;
 /**
  * Picks values from object by property name.
  *

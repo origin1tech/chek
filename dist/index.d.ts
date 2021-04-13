@@ -1,4 +1,5 @@
-export * from './interfaces';
+import * as chek from './chek';
+export * from './types';
 export * from './modules/array';
 export * from './modules/constant';
 export * from './modules/from';
@@ -8,3 +9,4 @@ export * from './modules/object';
 export * from './modules/string';
 export * from './modules/to';
 export * from './modules/type';
+export default chek;

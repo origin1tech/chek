@@ -3,8 +3,8 @@ import { toBoolean, toEpoch } from './to';
 import { tryWrap } from './function';
 import { keys, duplicates } from './array';
 
-declare var v8debug;
-declare var window;
+declare const v8debug;
+declare const window;
 
 let existsSync, statSync, readFileSync;
 

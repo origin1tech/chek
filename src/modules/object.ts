@@ -15,7 +15,7 @@ import * as objAssign from 'object-assign';
 function matchIndex(prop) {
   if (!prop || !/\[\d+\]/.test(prop))
     return false;
-  const prefix = prop.match(/[^\[]+/i);
+  const prefix = prop.match(/[^[]+/i);
   let idx;
   const indices = prop.match(/\d+/g);
   if (!indices)
@@ -72,14 +72,13 @@ function _get<T>(obj: any, key: string | string[]): T {
   if (!isObject(obj) || (!isArray(key) && !isString(key)))
     return null;
 
-  let props: string[] = isArray(key) ? <string[]>key : split(key);
+  const props: string[] = isArray(key) ? <string[]>key : split(key);
 
   while (props.length && obj) {
 
-    let prop = props.shift(),
-      match;
+    const prop = props.shift();
 
-    match = matchIndex(prop);
+   const match = matchIndex(prop);
 
     if (match) {
       /* istanbul ignore next  */
@@ -109,7 +108,7 @@ function _set<T>(obj: any, key: string | string[], val: any): T {
   if (arguments.length !== 3 || !isObject(obj) || (!isArray(key) && !isString(key)))
     return null;
 
-  let props: string[] = split(key);
+  const props: string[] = split(key);
 
   /* istanbul ignore if */
   // if (!isValue(val))
@@ -217,12 +216,12 @@ export function has(obj: any, key: string | string[]): boolean {
 
   obj = assign({}, obj);
 
-  let props: string[] = isArray(key) ? <string[]>key : split(key);
+  const props: string[] = isArray(key) ? <string[]>key : split(key);
 
   while (props.length && obj) {
 
-    let prop = props.shift(),
-      match = matchIndex(prop);
+    const prop = props.shift();
+    const match = matchIndex(prop);
 
     if (!props.length) { // no more props chek path.
       const _keys = keys(obj);
@@ -319,7 +318,7 @@ export function extend<T>(obj: any, ...args: any[]): T {
     if (!isObject(src))
       src = {};
 
-    for (let p in src) {
+    for (const p in src) {
 
       if (src.hasOwnProperty(p)) {
 
@@ -408,7 +407,7 @@ export function reverse<T>(obj: any): T {
   }
 
   // Reverse an object.
-  let result: any = {};
+  const result: any = {};
   for (const p in obj) {
     if (isObject(obj[p]))
       continue;
@@ -473,7 +472,7 @@ export function omit<T>(arr: any[], elements: any | any[]): T;
  * @param props the properties to be removed.
  * @param immutable when true object is first cloned to not mutated source.
  */
-export function omit<T>(obj: object, props: string | string[], immutable?: boolean): T;
+export function omit<T>(obj: Record<string, unknown>, props: string | string[], immutable?: boolean): T;
 
 export function omit<T>(obj: any, props: any | any[], immutable?: boolean): T {
 

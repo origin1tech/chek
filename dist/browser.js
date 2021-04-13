@@ -1,42 +1,59 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./modules/array"));
-__export(require("./modules/constant"));
-__export(require("./modules/from"));
-__export(require("./modules/function"));
-__export(require("./modules/is"));
-__export(require("./modules/object"));
-__export(require("./modules/string"));
-__export(require("./modules/to"));
-__export(require("./modules/type"));
+__exportStar(require("./modules/array"), exports);
+__exportStar(require("./modules/constant"), exports);
+__exportStar(require("./modules/from"), exports);
+__exportStar(require("./modules/function"), exports);
+__exportStar(require("./modules/is"), exports);
+__exportStar(require("./modules/object"), exports);
+__exportStar(require("./modules/string"), exports);
+__exportStar(require("./modules/to"), exports);
+__exportStar(require("./modules/type"), exports);
 
 },{"./modules/array":3,"./modules/constant":4,"./modules/from":5,"./modules/function":6,"./modules/is":7,"./modules/object":8,"./modules/string":9,"./modules/to":10,"./modules/type":11}],2:[function(require,module,exports){
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /* Import all methods in case need to add to window */
 var chek = require("./chek");
 /* istanbul ignore if */
 chek.toWindow('chek', chek, ['tryRequire', 'isNode']);
-__export(require("./modules/array"));
-__export(require("./modules/constant"));
-__export(require("./modules/from"));
-__export(require("./modules/function"));
-__export(require("./modules/is"));
-__export(require("./modules/object"));
-__export(require("./modules/string"));
-__export(require("./modules/to"));
-__export(require("./modules/type"));
+__exportStar(require("./types"), exports);
+__exportStar(require("./modules/array"), exports);
+__exportStar(require("./modules/constant"), exports);
+__exportStar(require("./modules/from"), exports);
+__exportStar(require("./modules/function"), exports);
+__exportStar(require("./modules/is"), exports);
+__exportStar(require("./modules/object"), exports);
+__exportStar(require("./modules/string"), exports);
+__exportStar(require("./modules/to"), exports);
+__exportStar(require("./modules/type"), exports);
+exports.default = chek;
 
-},{"./chek":1,"./modules/array":3,"./modules/constant":4,"./modules/from":5,"./modules/function":6,"./modules/is":7,"./modules/object":8,"./modules/string":9,"./modules/to":10,"./modules/type":11}],3:[function(require,module,exports){
+},{"./chek":1,"./modules/array":3,"./modules/constant":4,"./modules/from":5,"./modules/function":6,"./modules/is":7,"./modules/object":8,"./modules/string":9,"./modules/to":10,"./modules/type":11,"./types":12}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.unshift = exports.splice = exports.shift = exports.push = exports.pop = exports.last = exports.includesAny = exports.includes = exports.first = exports.flatten = exports.keys = exports.duplicates = exports.containsAny = exports.contains = exports.orderBy = void 0;
 var is_1 = require("./is");
 function defComparator(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 function normComparator(primer, order) {
@@ -370,11 +387,13 @@ exports.unshift = unshift;
 },{"./is":7}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.toStr = void 0;
 exports.toStr = Object.prototype.toString;
 
 },{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.fromJSON = exports.fromEpoch = void 0;
 var is_1 = require("./is");
 var function_1 = require("./function");
 var to_1 = require("./to");
@@ -406,6 +425,7 @@ exports.fromJSON = fromJSON;
 },{"./function":6,"./is":7,"./to":10}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.tryRootRequire = exports.tryRequire = exports.tryWrap = exports.noopIf = exports.noop = void 0;
 var is_1 = require("./is");
 var to_1 = require("./to");
 /* istanbul ignore next */
@@ -500,9 +520,10 @@ function tryRootRequire(name, def) {
 exports.tryRootRequire = tryRootRequire;
 
 },{"./is":7,"./to":10}],7:[function(require,module,exports){
-(function (process,Buffer){
+(function (process,Buffer){(function (){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isWindows = exports.isValue = exports.isUnique = exports.isUndefinedOrNull = exports.isUndefined = exports.isType = exports.isTruthy = exports.isSymbol = exports.isString = exports.isRoot = exports.isRegExp = exports.isPromise = exports.isPlainObject = exports.isObject = exports.isMoment = exports.isNumber = exports.isNull = exports.isNode = exports.isInteger = exports.isInspect = exports.isInfinite = exports.isFunction = exports.isFloat = exports.isDocker = exports.isDirectory = exports.isFile = exports.isError = exports.isEqual = exports.isEmpty = exports.isDebug = exports.isDate = exports.isBuffer = exports.isBrowser = exports.isBoolean = exports.isArray = void 0;
 var constant_1 = require("./constant");
 var to_1 = require("./to");
 var function_1 = require("./function");
@@ -944,10 +965,16 @@ function isWindows() {
 }
 exports.isWindows = isWindows;
 
-}).call(this,require('_process'),require("buffer").Buffer)
-},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":18,"buffer":14,"fs":13}],8:[function(require,module,exports){
+}).call(this)}).call(this,require('_process'),require("buffer").Buffer)
+},{"./array":3,"./constant":4,"./function":6,"./to":10,"_process":19,"buffer":15,"fs":14}],8:[function(require,module,exports){
 "use strict";
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.pick = exports.omit = exports.create = exports.set = exports.reverse = exports.put = exports.extend = exports.clone = exports.has = exports.get = exports.del = exports.assign = void 0;
 var _clone = require("clone");
 var array_1 = require("./array");
 var is_1 = require("./is");
@@ -963,7 +990,7 @@ var objAssign = require("object-assign");
 function matchIndex(prop) {
     if (!prop || !/\[\d+\]/.test(prop))
         return false;
-    var prefix = prop.match(/[^\[]+/i);
+    var prefix = prop.match(/[^[]+/i);
     var idx;
     var indices = prop.match(/\d+/g);
     if (!indices)
@@ -1009,8 +1036,8 @@ function _get(obj, key) {
         return null;
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
-        var prop = props.shift(), match = void 0;
-        match = matchIndex(prop);
+        var prop = props.shift();
+        var match = matchIndex(prop);
         if (match) {
             /* istanbul ignore next  */
             if (!is_1.isUndefined(obj[match.name])) {
@@ -1064,7 +1091,7 @@ function _put(obj, key, val) {
     var cur = to_1.toArray(get(obj, key), []);
     if (!is_1.isArray(val))
         val = [val];
-    return _set(obj, key, cur.concat(val));
+    return _set(obj, key, __spreadArray(__spreadArray([], cur), val));
 }
 /**
  * Uses Object.assign if available or falls back to polyfill.
@@ -1078,8 +1105,8 @@ function assign(obj) {
         args[_i - 1] = arguments[_i];
     }
     if (Object.assign)
-        return Object.assign.apply(Object, [obj].concat(args));
-    return objAssign.apply(void 0, [obj].concat(args));
+        return Object.assign.apply(Object, __spreadArray([obj], args));
+    return objAssign.apply(void 0, __spreadArray([obj], args));
 }
 exports.assign = assign;
 /**
@@ -1126,7 +1153,8 @@ function has(obj, key) {
     obj = assign({}, obj);
     var props = is_1.isArray(key) ? key : string_1.split(key);
     while (props.length && obj) {
-        var prop = props.shift(), match = matchIndex(prop);
+        var prop = props.shift();
+        var match = matchIndex(prop);
         if (!props.length) { // no more props chek path.
             var _keys = array_1.keys(obj);
             if (match) {
@@ -1340,9 +1368,10 @@ function pick(obj, props) {
 }
 exports.pick = pick;
 
-},{"./array":3,"./is":7,"./string":9,"./to":10,"clone":15,"object-assign":17}],9:[function(require,module,exports){
+},{"./array":3,"./is":7,"./string":9,"./to":10,"clone":16,"object-assign":18}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.uuid = exports.uppercase = exports.titlecase = exports.slugify = exports.split = exports.padValues = exports.padRight = exports.padLeft = exports.lowercase = exports.capitalize = exports.decamelcase = exports.camelcase = void 0;
 var is_1 = require("./is");
 var to_1 = require("./to");
 /**
@@ -1510,7 +1539,6 @@ function split(val, chars) {
     // default characters.
     var defChars = ['/', '.', ',', ';', '|'];
     var char;
-    var arr;
     chars = chars ? to_1.toArray(chars) : defChars;
     // if no char iterate defaults.
     var i = 0;
@@ -1522,7 +1550,7 @@ function split(val, chars) {
     }
     if (!is_1.isValue(char))
         return [val];
-    arr = val.split(char).map(function (v) { return v.trim(); });
+    var arr = val.split(char).map(function (v) { return v.trim(); });
     // If empty remove first element.
     // this happens when splitting on
     // char and is first char in string.
@@ -1618,6 +1646,7 @@ exports.uuid = uuid;
 },{"./is":7,"./to":10}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.toWindow = exports.toUnnested = exports.toString = exports.toRegExp = exports.toNumber = exports.toNested = exports.toMap = exports.toInteger = exports.toJSON = exports.toFloat = exports.toEpoch = exports.toDefault = exports.toDate = exports.toBoolean = exports.toArray = void 0;
 var array_1 = require("./array");
 var from_1 = require("./from");
 var is_1 = require("./is");
@@ -2041,6 +2070,7 @@ exports.toWindow = toWindow;
 },{"./array":3,"./from":5,"./function":6,"./is":7,"./object":8,"./string":9}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getType = exports.castType = void 0;
 var is_1 = require("./is");
 var to_1 = require("./to");
 var function_1 = require("./function");
@@ -2177,6 +2207,10 @@ function getType(val, strict, def) {
 exports.getType = getType;
 
 },{"./function":6,"./is":7,"./to":10}],12:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+
+},{}],13:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -2244,7 +2278,8 @@ function toByteArray (b64) {
     ? validLen - 4
     : validLen
 
-  for (var i = 0; i < len; i += 4) {
+  var i
+  for (i = 0; i < len; i += 4) {
     tmp =
       (revLookup[b64.charCodeAt(i)] << 18) |
       (revLookup[b64.charCodeAt(i + 1)] << 12) |
@@ -2329,10 +2364,10 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],13:[function(require,module,exports){
-
 },{}],14:[function(require,module,exports){
-(function (Buffer){
+
+},{}],15:[function(require,module,exports){
+(function (Buffer){(function (){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -4111,9 +4146,9 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-}).call(this,require("buffer").Buffer)
-},{"base64-js":12,"buffer":14,"ieee754":16}],15:[function(require,module,exports){
-(function (Buffer){
+}).call(this)}).call(this,require("buffer").Buffer)
+},{"base64-js":13,"buffer":15,"ieee754":17}],16:[function(require,module,exports){
+(function (Buffer){(function (){
 var clone = (function() {
 'use strict';
 
@@ -4220,7 +4255,13 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     } else if (clone.__isDate(parent)) {
       child = new Date(parent.getTime());
     } else if (useBuffer && Buffer.isBuffer(parent)) {
-      child = new Buffer(parent.length);
+      if (Buffer.allocUnsafe) {
+        // Node.js >= 4.5.0
+        child = Buffer.allocUnsafe(parent.length);
+      } else {
+        // Older Node.js versions
+        child = new Buffer(parent.length);
+      }
       parent.copy(child);
       return child;
     } else if (_instanceof(parent, Error)) {
@@ -4366,8 +4407,8 @@ if (typeof module === 'object' && module.exports) {
   module.exports = clone;
 }
 
-}).call(this,require("buffer").Buffer)
-},{"buffer":14}],16:[function(require,module,exports){
+}).call(this)}).call(this,require("buffer").Buffer)
+},{"buffer":15}],17:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -4453,7 +4494,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -4545,7 +4586,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 

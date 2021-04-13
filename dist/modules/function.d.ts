@@ -29,7 +29,7 @@ export declare function noopIf(fn?: any): any;
  * @param fn the parse method to be called in try/parse block.
  * @param args arguments to pass to above method.
  */
-export declare function tryWrap(fn: Function, ...args: any[]): (def?: any) => any;
+export declare function tryWrap(fn: (...args: any[]) => any, ...args: any[]): (def?: any) => any;
 /**
  * Try Require
  * Tries to require a module returns null

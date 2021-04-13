@@ -1,4 +1,4 @@
-import { IMap, IArrayResult, IComparatorField, Transform } from '../interfaces';
+import { IMap, IArrayResult, IComparatorField, Transform } from '../types';
 /**
  * Orders arrays of objects by property, falls back to .sort() if not fields are specified.
  *
